@@ -78,16 +78,17 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:layout_marginRight="8dp"
                 android:layout_weight="1"
                 android:background="@drawable/selector_stroke"
                 android:clickable="true"
+                android:id="@+id/btlogin"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:padding="16dp">
@@ -101,42 +102,34 @@
                     android:textColor="@color/textcolor"
                     android:textSize="14dp" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:id="@+id/btlogin"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/selector_transparan" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
+                android:id="@+id/lanjut"
                 android:layout_weight="1"
-                android:background="@drawable/selector_login"
+                android:clickable="true"
+                android:background="@drawable/selector_lanjut"
                 android:orientation="vertical"
-                android:padding="14dp">
+                android:padding="16dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:clickable="true"
                     android:drawableLeft="@drawable/ic_belanja"
                     android:drawablePadding="16dp"
                     android:gravity="center"
                     android:text="Lanjut Belanja"
                     android:textColor="@color/putih_tetap"
                     android:textSize="14dp" />
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:id="@+id/lanjut"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/selector_transparan" />
-            </LinearLayout>
+
+              </LinearLayout>
         </LinearLayout>
+
 
 
     </LinearLayout>
