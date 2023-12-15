@@ -1,7 +1,9 @@
 package com.bospintar.cashier.activity;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -48,8 +50,7 @@ public class Histori extends AppCompatActivity implements SwipeRefreshLayout.OnR
     String xidpetugas,xnama_petugas,xalamat_petugas,xnohp,xlevel,xidtoko,xnama_toko,xalamat_toko,xstatus_toko,xketnota,xnohp_toko;
 
     TextView caribydate,txttotalkeuangan,txttotalpengeluaran,txttotalpenjualan,txttotalhutang;
-    String _dari,_sampai;
-    String stspembayaran="semua";
+    String stspembayaran,_dari,_sampai;
     ArrayList<Mhome> arraylist = new ArrayList<>();
     public static final String TAG_RESULTS = "penjualan_petugas";
     public static final String TAG_VALUE = "status";
@@ -64,8 +65,8 @@ public class Histori extends AppCompatActivity implements SwipeRefreshLayout.OnR
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
-        bacaPreferensi();
 
+        bacaPreferensi();
         caribydate=findViewById(R.id.caribydate);
         txttotalkeuangan= findViewById(R.id.txttotalkeuangan);
         txttotalpengeluaran= findViewById(R.id.txttotalpengeluaran);
@@ -74,6 +75,7 @@ public class Histori extends AppCompatActivity implements SwipeRefreshLayout.OnR
         swipe = findViewById(R.id.swipe_refreshdata);
         _dari=sdcurrentdate.format(new Date());
         _sampai=sdcurrentdate.format(new Date());
+        callData("semua",_dari,_sampai);
 
         caribydate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -185,7 +187,14 @@ public class Histori extends AppCompatActivity implements SwipeRefreshLayout.OnR
         rcList.setAdapter(adapter);
         swipe.setOnRefreshListener(this);
 
-        callData(stspembayaran,_dari,_sampai);
+        ImageView btBack=findViewById(R.id.bt_back);
+        btBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+
         swipe.post(new Runnable() {
                        @Override
                        public void run() {
@@ -195,6 +204,7 @@ public class Histori extends AppCompatActivity implements SwipeRefreshLayout.OnR
                    }
         );
     }
+
 
     private void callData(final String xstspembayaran, String xdari, String xsampai) {
         arraylist.clear();
@@ -234,11 +244,10 @@ public class Histori extends AppCompatActivity implements SwipeRefreshLayout.OnR
                         Double xtotal = Double.parseDouble(jObj.getString("total_penjualan"));
                         Double xpengeluaran = Double.parseDouble(jObj.getString("total_pengeluaran"));
                         Double xutang = Double.parseDouble(jObj.getString("hutang"));
-                        Double xtotalkas = Double.parseDouble(jObj.getString("total_kas"));
                         txttotalpenjualan.setText("Rp" + rupiahFormat.format(xtotal));
                         txttotalpengeluaran.setText("Rp" + rupiahFormat.format(xpengeluaran));
                         txttotalhutang.setText("Rp" + rupiahFormat.format(xutang));
-                        txttotalkeuangan.setText("Rp" + rupiahFormat.format(xtotalkas));
+                        txttotalkeuangan.setText("Rp" + rupiahFormat.format(xtotal-xpengeluaran));
 
 
                     } else {
@@ -310,5 +319,11 @@ public class Histori extends AppCompatActivity implements SwipeRefreshLayout.OnR
     @Override
     public void onRefresh() {
         callData(stspembayaran,_dari,_sampai);
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        finish();
     }
 }

@@ -815,8 +815,6 @@ public interface OnBluetoothPermissionsGranted {
     }
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(TransaksiDetailActivity.this, ProdukTransaksi.class);
-        startActivity(intent);
         finish();
     }
 

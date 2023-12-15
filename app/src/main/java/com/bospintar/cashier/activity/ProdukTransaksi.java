@@ -74,7 +74,6 @@ public class ProdukTransaksi extends AppCompatActivity implements SwipeRefreshLa
             public void onClick(View v) {
                 Intent intent = new Intent(ProdukTransaksi.this, TransaksiDetailActivity.class);
                 startActivity(intent);
-                finish();
             }
         });
 
@@ -96,9 +95,7 @@ public class ProdukTransaksi extends AppCompatActivity implements SwipeRefreshLa
         btBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ProdukTransaksi.this, Menu.class);
-                startActivity(intent);
-                finish();
+               onBackPressed();
             }
         });
 
@@ -273,6 +270,8 @@ public class ProdukTransaksi extends AppCompatActivity implements SwipeRefreshLa
 
     @Override
     public void onBackPressed() {
+        startActivity(new Intent(getApplicationContext(), Menu.class));
+
         finish();
     }
 

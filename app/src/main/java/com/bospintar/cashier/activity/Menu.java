@@ -106,7 +106,6 @@ public class Menu extends AppCompatActivity implements SwipeRefreshLayout.OnRefr
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), Histori.class));
-                finish();
             }
         });
         produk.setOnClickListener(new View.OnClickListener() {
@@ -114,6 +113,7 @@ public class Menu extends AppCompatActivity implements SwipeRefreshLayout.OnRefr
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), Produk.class));
                 finish();
+
             }
         });
 
@@ -129,6 +129,7 @@ public class Menu extends AppCompatActivity implements SwipeRefreshLayout.OnRefr
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), ProdukTransaksi.class));
                 finish();
+
             }
         });
         pengeluaran.setOnClickListener(new View.OnClickListener() {
@@ -136,6 +137,7 @@ public class Menu extends AppCompatActivity implements SwipeRefreshLayout.OnRefr
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), Pengeluaran.class));
                 finish();
+
             }
         });
         callData();
@@ -282,6 +284,7 @@ public class Menu extends AppCompatActivity implements SwipeRefreshLayout.OnRefr
             public void onClick(View v) {
                 startActivity(new Intent(Menu.this, Pelanggan.class));
                 finish();
+
             }
         });
         pegawai.setOnClickListener(new View.OnClickListener() {
@@ -289,6 +292,7 @@ public class Menu extends AppCompatActivity implements SwipeRefreshLayout.OnRefr
             public void onClick(View v) {
                 startActivity(new Intent(Menu.this, Petugas.class));
                 finish();
+
             }
         });
         pengeluaran.setOnClickListener(new View.OnClickListener() {
@@ -297,6 +301,7 @@ public class Menu extends AppCompatActivity implements SwipeRefreshLayout.OnRefr
                 Intent intent = new Intent(Menu.this, Pengeluaran.class);
                 startActivity(intent);
                 finish();
+
             }
         });
 

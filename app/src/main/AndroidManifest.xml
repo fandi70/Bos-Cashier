@@ -23,29 +23,42 @@
         tools:targetApi="31">
         <activity
             android:name=".activity.Produk_Add"
+            android:theme="@style/themeutamabg"
+
             android:exported="false" />
         <activity
             android:name=".activity.Produk"
+            android:theme="@style/themeutamabg"
             android:exported="false" />
         <activity
             android:name=".activity.ProdukCoba"
             android:exported="false" />
         <activity
             android:name=".activity.Petugas"
+            android:theme="@style/themeutamabg"
+
             android:exported="false" />
         <activity
             android:name=".activity.Pelanggan"
+            android:theme="@style/themeutamabg"
+
             android:exported="false" />
         <activity
             android:name=".activity.Pengeluaran"
+            android:theme="@style/themeutamabg"
+
             android:exported="false" />
         <activity
             android:name=".activity.TransaksiCetakActivity"
+            android:theme="@style/themeutamabg"
+
             android:exported="false" />
 
 
         <activity
             android:name=".activity.Petugas_Add"
+            android:theme="@style/themeutamabg"
+
             android:exported="false" />
         <activity
             android:name=".activity.ProdukTransaksi"

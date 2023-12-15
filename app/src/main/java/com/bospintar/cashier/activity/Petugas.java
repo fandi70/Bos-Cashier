@@ -173,4 +173,11 @@ public class Petugas extends AppCompatActivity implements SwipeRefreshLayout.OnR
     public void onRefresh() {
         callData();
     }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(getApplicationContext(), Menu.class));
+
+        finish();
+    }
 }
