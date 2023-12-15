@@ -376,27 +376,32 @@
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-
-    <TextView
-        android:id="@+id/bttransaksi"
+    <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/selector_transaksi"
-        android:clickable="true"
-        android:drawableLeft="@drawable/ic_transaksi_button"
-        android:drawablePadding="8dp"
-        android:gravity="center"
-        android:paddingLeft="44dp"
-        android:paddingTop="16dp"
-        android:paddingRight="44dp"
-        android:paddingBottom="16dp"
-        android:text="Transaksi"
-        android:textColor="@color/putih_tetap"
-        android:textSize="14dp"
-        android:textStyle="bold" />
+        android:layout_margin="16dp"
+        android:foregroundGravity="center"
+        app:cardCornerRadius="50dp"
+        app:cardElevation="4dp">
 
+        <TextView
+            android:id="@+id/bttransaksi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_transaksi"
+            android:clickable="true"
+            android:drawableLeft="@drawable/ic_transaksi_button"
+            android:drawablePadding="8dp"
+            android:gravity="center"
+            android:paddingLeft="44dp"
+            android:paddingTop="16dp"
+            android:paddingRight="44dp"
+            android:paddingBottom="16dp"
+            android:text="Transaksi"
+            android:textColor="@color/putih_tetap"
+            android:textSize="14dp"
+            android:textStyle="bold" />
+    </androidx.cardview.widget.CardView>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -317,8 +317,6 @@ public class TransaksiCetakActivity extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(getApplicationContext(), ProdukTransaksi.class));
-
         finish();
     }
     private void bacaPreferensi() {

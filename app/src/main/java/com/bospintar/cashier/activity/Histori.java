@@ -323,7 +323,6 @@ public class Histori extends AppCompatActivity implements SwipeRefreshLayout.OnR
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(getApplicationContext(), ProdukTransaksi.class));
 
         finish();
     }

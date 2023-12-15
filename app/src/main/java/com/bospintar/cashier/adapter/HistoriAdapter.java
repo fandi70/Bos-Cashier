@@ -92,7 +92,6 @@ public class HistoriAdapter extends RecyclerView.Adapter<HistoriAdapter.MyViewHo
                 Intent kotak = new Intent(mContext, TransaksiCetakActivity.class);
                 kotak.putExtra("id",arrayJenis.get(position).getId());
                 mContext.startActivity(kotak);
-                ((Histori)mContext).finish();
 
             }
         });

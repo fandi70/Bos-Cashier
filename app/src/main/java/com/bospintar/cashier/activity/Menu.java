@@ -106,7 +106,6 @@ public class Menu extends AppCompatActivity implements SwipeRefreshLayout.OnRefr
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), Histori.class));
-                finish();
             }
         });
         produk.setOnClickListener(new View.OnClickListener() {
@@ -277,18 +276,23 @@ public class Menu extends AppCompatActivity implements SwipeRefreshLayout.OnRefr
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Menu.this, Produk.class));
+                finish();
             }
         });
         pelanggan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Menu.this, Pelanggan.class));
+                finish();
+
             }
         });
         pegawai.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Menu.this, Petugas.class));
+                finish();
+
             }
         });
         pengeluaran.setOnClickListener(new View.OnClickListener() {
@@ -296,6 +300,8 @@ public class Menu extends AppCompatActivity implements SwipeRefreshLayout.OnRefr
             public void onClick(View v) {
                 Intent intent = new Intent(Menu.this, Pengeluaran.class);
                 startActivity(intent);
+                finish();
+
             }
         });
 
