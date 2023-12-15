@@ -9,6 +9,7 @@
         <entry key="..\:/kara/MyCashier/app/src/main/res/drawable/bg_stroke_white.xml" value="0.1" />
         <entry key="..\:/kara/MyCashier/app/src/main/res/drawable/ic_arrow.xml" value="0.1635" />
         <entry key="..\:/kara/MyCashier/app/src/main/res/drawable/ic_bg_card_ts_bawah.xml" value="0.1635" />
+        <entry key="..\:/kara/MyCashier/app/src/main/res/drawable/ic_done.xml" value="0.1645" />
         <entry key="..\:/kara/MyCashier/app/src/main/res/drawable/ic_switch_off.xml" value="0.1635" />
         <entry key="..\:/kara/MyCashier/app/src/main/res/drawable/selector_checkout.xml" value="0.116" />
         <entry key="..\:/kara/MyCashier/app/src/main/res/drawable/selector_radio.xml" value="0.1" />
@@ -53,17 +54,10 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
-  </component>
-  <component name="VisualizationToolProject">
-    <option name="state">
-      <ProjectState>
-        <option name="scale" value="0.5499316005471956" />
-      </ProjectState>
-    </option>
   </component>
 </project>
