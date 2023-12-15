@@ -39,10 +39,13 @@
         <entry key="..\:/kara/MyCashier/app/src/main/res/layout/activity_splash.xml" value="0.16614583333333333" />
         <entry key="..\:/kara/MyCashier/app/src/main/res/layout/activity_transaksi.xml" value="0.25" />
         <entry key="..\:/kara/MyCashier/app/src/main/res/layout/activity_transaksi_detail.xml" value="0.33" />
+        <entry key="..\:/kara/MyCashier/app/src/main/res/layout/detail_transaksi.xml" value="0.20416666666666666" />
         <entry key="..\:/kara/MyCashier/app/src/main/res/layout/dialog_search_customer.xml" value="0.33" />
         <entry key="..\:/kara/MyCashier/app/src/main/res/layout/item_add_grosir.xml" value="0.33" />
         <entry key="..\:/kara/MyCashier/app/src/main/res/layout/item_layout.xml" value="0.1" />
         <entry key="..\:/kara/MyCashier/app/src/main/res/layout/item_loading.xml" value="0.1" />
+        <entry key="..\:/kara/MyCashier/app/src/main/res/layout/item_pending.xml" value="0.20416666666666666" />
+        <entry key="..\:/kara/MyCashier/app/src/main/res/layout/item_popuppending.xml" value="0.20416666666666666" />
         <entry key="..\:/kara/MyCashier/app/src/main/res/layout/item_transaksi_detail.xml" value="0.20416666666666666" />
         <entry key="..\:/kara/MyCashier/app/src/main/res/layout/list_item_card_details.xml" value="0.115625" />
       </map>
