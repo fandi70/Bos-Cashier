@@ -44,8 +44,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-//okokok
+
 //coba keren evan
+//coba
 public class Menu extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
     TextView txtnamapetugas, produktransaksi;
     String xidpetugas, xnama_petugas, xalamat_petugas, xnohp, xlevel, xidtoko, xnama_toko, xalamat_toko, xstatus_toko, xketnota, xnohp_toko;
@@ -99,6 +100,7 @@ public class Menu extends AppCompatActivity implements SwipeRefreshLayout.OnRefr
                 startActivity(new Intent(getApplicationContext(), Produk.class));
             }
         });
+
         pegawai.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -239,6 +241,12 @@ public class Menu extends AppCompatActivity implements SwipeRefreshLayout.OnRefr
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Menu.this, Produk.class));
+            }
+        });
+        pelanggan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Menu.this, Pelanggan.class));
             }
         });
         pegawai.setOnClickListener(new View.OnClickListener() {
