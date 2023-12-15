@@ -46,6 +46,7 @@ import java.util.Locale;
 import java.util.Map;
 
 //coba tes
+//coba sambel
 public class Menu extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
     TextView txtnamapetugas, produktransaksi;
     String xidpetugas, xnama_petugas, xalamat_petugas, xnohp, xlevel, xidtoko, xnama_toko, xalamat_toko, xstatus_toko, xketnota, xnohp_toko;
