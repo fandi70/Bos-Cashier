@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/background"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context=".activity.Menu">
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -187,10 +187,26 @@
                         android:orientation="vertical"
                         android:padding="4dp">
 
-                        <ImageView
+
+                        <RelativeLayout
                             android:layout_width="58dp"
-                            android:layout_height="58dp"
-                            android:src="@drawable/ic_menu_product" />
+                            android:layout_height="58dp">
+
+                            <ImageView
+                                android:id="@+id/lockproduk"
+                                android:layout_width="58dp"
+                                android:layout_height="58dp"
+                                android:layout_centerInParent="true"
+                                android:src="@drawable/ic_menu_product_lock" />
+
+                            <ImageView
+                                android:id="@+id/imgproduk"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:src="@drawable/ic_lock" />
+
+                        </RelativeLayout>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -215,13 +231,13 @@
                         <ImageView
                             android:layout_width="58dp"
                             android:layout_height="58dp"
-                            android:src="@drawable/ic_menu_pegawai" />
+                            android:src="@drawable/ic_menu_pelanggan" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="4dp"
-                            android:text="Pegawai"
+                            android:text="Pelanggan"
                             android:textColor="@color/textcolor"
                             android:textSize="12dp" />
                     </LinearLayout>
@@ -262,10 +278,26 @@
                         android:orientation="vertical"
                         android:padding="4dp">
 
-                        <ImageView
+
+                        <RelativeLayout
                             android:layout_width="58dp"
-                            android:layout_height="58dp"
-                            android:src="@drawable/ic_menu_lainnya" />
+                            android:layout_height="58dp">
+
+                            <ImageView
+                                android:id="@+id/locklainnya"
+                                android:layout_width="58dp"
+                                android:layout_height="58dp"
+                                android:layout_centerInParent="true"
+                                android:src="@drawable/ic_menu_lainnya_lock" />
+
+                            <ImageView
+                                android:id="@+id/imglainnya"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:src="@drawable/ic_lock" />
+
+                        </RelativeLayout>
 
                         <TextView
                             android:layout_width="wrap_content"
