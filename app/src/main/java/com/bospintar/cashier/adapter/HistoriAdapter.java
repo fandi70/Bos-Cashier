@@ -17,9 +17,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bospintar.cashier.R;
+import com.bospintar.cashier.activity.Histori;
 import com.bospintar.cashier.activity.Menu;
 import com.bospintar.cashier.activity.TransaksiCetakActivity;
-import com.bospintar.cashier.activity.TransaksiDetailActivity;
 import com.bospintar.cashier.model.Mhome;
 
 import java.text.DecimalFormat;
@@ -29,7 +29,7 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> {
+public class HistoriAdapter extends RecyclerView.Adapter<HistoriAdapter.MyViewHolder> {
     private ArrayList<Mhome> arrayJenis;
     private Context mContext;
     private ArrayList<Mhome> arraylist;
@@ -53,7 +53,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> 
         }
     }
 
-    public HomeAdapter(ArrayList<Mhome> arrayJenis, Context context) {
+    public HistoriAdapter(ArrayList<Mhome> arrayJenis, Context context) {
         this.arrayJenis = arrayJenis;
         this.mContext = context;
         this.arraylist = new ArrayList<>();
@@ -66,15 +66,15 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> 
 
     @NonNull
     @Override
-    public HomeAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public HistoriAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.activity_home_item, parent, false);
-        return new HomeAdapter.MyViewHolder(itemView);
+        return new HistoriAdapter.MyViewHolder(itemView);
     }
 
     @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(@NonNull final HomeAdapter.MyViewHolder holder, @SuppressLint("RecyclerView") final int position) {
+    public void onBindViewHolder(@NonNull final HistoriAdapter.MyViewHolder holder, @SuppressLint("RecyclerView") final int position) {
         double amount =Double.parseDouble(arrayJenis.get(position).getTotalbayar());
         DecimalFormat rupiahFormat = (DecimalFormat) NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
         rupiahFormat.setParseBigDecimal(true);
@@ -92,7 +92,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> 
                 Intent kotak = new Intent(mContext, TransaksiCetakActivity.class);
                 kotak.putExtra("id",arrayJenis.get(position).getId());
                 mContext.startActivity(kotak);
-                ((Menu)mContext).finish();
+                ((Histori)mContext).finish();
 
             }
         });

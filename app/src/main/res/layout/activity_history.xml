@@ -60,7 +60,24 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/txttotalhutang"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="8dp"
+                        android:text="Rp 0"
+                        android:textColor="@color/putih_tetap"
+                        android:textSize="24dp"
+                        android:textStyle="bold" />
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="8dp"
+                        android:text="Total Hutang"
+                        android:textColor="@color/putih_tetap"
+                        android:textSize="14dp"
+                        android:textStyle="bold" />
                     <TextView
                         android:id="@+id/txttotalkeuangan"
                         android:layout_width="wrap_content"

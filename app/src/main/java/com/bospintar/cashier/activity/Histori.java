@@ -27,7 +27,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.bospintar.cashier.R;
-import com.bospintar.cashier.adapter.HomeAdapter;
+import com.bospintar.cashier.adapter.HistoriAdapter;
 import com.bospintar.cashier.app.AppController;
 import com.bospintar.cashier.model.Mhome;
 import com.bospintar.cashier.server.URL_SERVER;
@@ -49,14 +49,14 @@ import java.util.Map;
 public class Histori extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
     String xidpetugas,xnama_petugas,xalamat_petugas,xnohp,xlevel,xidtoko,xnama_toko,xalamat_toko,xstatus_toko,xketnota,xnohp_toko;
 
-    TextView caribydate,txttotalkeuangan,txttotalpengeluaran,txttotalpenjualan;
+    TextView caribydate,txttotalkeuangan,txttotalpengeluaran,txttotalpenjualan,txttotalhutang;
     String stspembayaran,_dari,_sampai;
     ArrayList<Mhome> arraylist = new ArrayList<>();
     public static final String TAG_RESULTS = "penjualan_petugas";
     public static final String TAG_VALUE = "status";
     String tag_json_obj = "json_obj_req";
     SwipeRefreshLayout swipe;
-    HomeAdapter adapter;
+    HistoriAdapter adapter;
     RecyclerView rcList;
     DecimalFormat rupiahFormat = (DecimalFormat) NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
     SimpleDateFormat sdcurrentdate = new SimpleDateFormat("yyyy-MM-dd", new Locale("id", "ID"));
@@ -71,10 +71,11 @@ public class Histori extends AppCompatActivity implements SwipeRefreshLayout.OnR
         txttotalkeuangan= findViewById(R.id.txttotalkeuangan);
         txttotalpengeluaran= findViewById(R.id.txttotalpengeluaran);
         txttotalpenjualan= findViewById(R.id.txttotalpenjualan);
+        txttotalhutang=findViewById(R.id.txttotalhutang);
         swipe = findViewById(R.id.swipe_refreshdata);
         _dari=sdcurrentdate.format(new Date());
         _sampai=sdcurrentdate.format(new Date());
-        callData("lunas",_dari,_sampai);
+        callData("semua",_dari,_sampai);
 
         caribydate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -178,7 +179,7 @@ public class Histori extends AppCompatActivity implements SwipeRefreshLayout.OnR
                 });
             }
         });
-        adapter = new HomeAdapter(arraylist, this);
+        adapter = new HistoriAdapter(arraylist, this);
         rcList = findViewById(R.id.rcList);
         final GridLayoutManager mLayoutManager = new GridLayoutManager(this, 1);
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -236,15 +237,16 @@ public class Histori extends AppCompatActivity implements SwipeRefreshLayout.OnR
                                     data.getString("statusbayar"), data.getString("idtoko"));
                             arraylist.add(wp);
                         }
-                        adapter = new HomeAdapter(arraylist, Histori.this);
+                        adapter = new HistoriAdapter(arraylist, Histori.this);
                         rcList.setAdapter(adapter);
                         rupiahFormat.setParseBigDecimal(true);
                         rupiahFormat.applyPattern("#,##0");
                         Double xtotal = Double.parseDouble(jObj.getString("total_penjualan"));
                         Double xpengeluaran = Double.parseDouble(jObj.getString("total_pengeluaran"));
+                        Double xutang = Double.parseDouble(jObj.getString("hutang"));
                         txttotalpenjualan.setText("Rp" + rupiahFormat.format(xtotal));
                         txttotalpengeluaran.setText("Rp" + rupiahFormat.format(xpengeluaran));
-
+                        txttotalhutang.setText("Rp" + rupiahFormat.format(xutang));
                         txttotalkeuangan.setText("Rp" + rupiahFormat.format(xtotal-xpengeluaran));
 
 
@@ -257,6 +259,7 @@ public class Histori extends AppCompatActivity implements SwipeRefreshLayout.OnR
                         txttotalpengeluaran.setText("Rp0");
 
                         txttotalkeuangan.setText("Rp0");
+                        txttotalhutang.setText("Rp0");
 
                     }
 
