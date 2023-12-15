@@ -317,26 +317,27 @@ public class TransaksiDetailActivity extends AppCompatActivity {
                         if(Integer.parseInt(String.valueOf(kbayar))<Integer.parseInt(String.valueOf(ktotal))){
                             Toast.makeText(TransaksiDetailActivity.this, "Pembayaran Kurang", Toast.LENGTH_SHORT).show();
                         }else{
-                            new SweetAlertDialog(TransaksiDetailActivity.this, SweetAlertDialog.WARNING_TYPE)
-                                    .setTitleText("Informasi")
-                                    .setContentText("Apakah Transaksi Mau Dicetak?")
-                                    .setConfirmText("Iya")
-                                    .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                                        @Override
-                                        public void onClick(SweetAlertDialog sDialog) {
-                                            sDialog.dismissWithAnimation();
-                                            simpanserver("selesai");
-                                            printBluetooth();
-                                        }
-                                    }).setCancelText("Tidak")
-                                    .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                                        @Override
-                                        public void onClick(SweetAlertDialog sweetAlertDialog) {
-                                            sweetAlertDialog.dismissWithAnimation();
-                                            simpanserver("selesai");
-                                        }
-                                    })
-                                    .show();
+                            simpanserver("selesai");
+//                            new SweetAlertDialog(TransaksiDetailActivity.this, SweetAlertDialog.WARNING_TYPE)
+//                                    .setTitleText("Informasi")
+//                                    .setContentText("Apakah Transaksi Mau Dicetak?")
+//                                    .setConfirmText("Iya")
+//                                    .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+//                                        @Override
+//                                        public void onClick(SweetAlertDialog sDialog) {
+//                                            sDialog.dismissWithAnimation();
+//                                            simpanserver("selesai");
+//                                            printBluetooth();
+//                                        }
+//                                    }).setCancelText("Tidak")
+//                                    .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+//                                        @Override
+//                                        public void onClick(SweetAlertDialog sweetAlertDialog) {
+//                                            sweetAlertDialog.dismissWithAnimation();
+//                                            simpanserver("selesai");
+//                                        }
+//                                    })
+//                                    .show();
 
                         }
                     }
@@ -624,10 +625,12 @@ public class TransaksiDetailActivity extends AppCompatActivity {
                 try {
                     JSONObject jObj = new JSONObject(response);
                     int value = jObj.getInt("success");
+                    int id = jObj.getInt("idtransaksi");
 
                     if (value == 1) {
                         Toast.makeText(TransaksiDetailActivity.this, "Sukses", Toast.LENGTH_SHORT).show();
                         if (statuspending.equals("selesai") ){
+
                             startActivity(new Intent(TransaksiDetailActivity.this, ProdukTransaksi.class));
                             finish();
                         }else if(statuspending.equals("pending")){
