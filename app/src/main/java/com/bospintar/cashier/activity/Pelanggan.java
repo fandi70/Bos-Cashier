@@ -152,9 +152,7 @@ public class Pelanggan extends AppCompatActivity implements SwipeRefreshLayout.O
         btBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Pelanggan.this, Menu.class);
-                startActivity(intent);
-                finish();
+               onBackPressed();
             }
         });
 
@@ -419,6 +417,7 @@ public class Pelanggan extends AppCompatActivity implements SwipeRefreshLayout.O
     }
     @Override
     public void onBackPressed() {
+        startActivity(new Intent(getApplicationContext(), Menu.class));
 
         finish();
     }

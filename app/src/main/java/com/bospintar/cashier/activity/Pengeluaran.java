@@ -166,9 +166,7 @@ public class Pengeluaran extends AppCompatActivity implements SwipeRefreshLayout
         btBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Pengeluaran.this, Menu.class);
-                startActivity(intent);
-                finish();
+                onBackPressed();
             }
         });
 
@@ -485,6 +483,7 @@ public class Pengeluaran extends AppCompatActivity implements SwipeRefreshLayout
     }
     @Override
     public void onBackPressed() {
+        startActivity(new Intent(getApplicationContext(), Menu.class));
 
         finish();
     }

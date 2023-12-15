@@ -81,9 +81,7 @@ public class TransaksiCetakActivity extends AppCompatActivity {
         btBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(TransaksiCetakActivity.this, Menu.class);
-                startActivity(intent);
-                finish();
+               onBackPressed();
             }
         });
         total=findViewById(R.id.total);
@@ -319,8 +317,8 @@ public class TransaksiCetakActivity extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(TransaksiCetakActivity.this, ProdukTransaksi.class);
-        startActivity(intent);
+        startActivity(new Intent(getApplicationContext(), ProdukTransaksi.class));
+
         finish();
     }
     private void bacaPreferensi() {

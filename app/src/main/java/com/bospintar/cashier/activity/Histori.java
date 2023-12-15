@@ -1,7 +1,9 @@
 package com.bospintar.cashier.activity;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -63,6 +65,7 @@ public class Histori extends AppCompatActivity implements SwipeRefreshLayout.OnR
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
+
         bacaPreferensi();
         caribydate=findViewById(R.id.caribydate);
         txttotalkeuangan= findViewById(R.id.txttotalkeuangan);
@@ -183,6 +186,14 @@ public class Histori extends AppCompatActivity implements SwipeRefreshLayout.OnR
         rcList.setAdapter(adapter);
         swipe.setOnRefreshListener(this);
 
+        ImageView btBack=findViewById(R.id.bt_back);
+        btBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+
         swipe.post(new Runnable() {
                        @Override
                        public void run() {
@@ -192,6 +203,7 @@ public class Histori extends AppCompatActivity implements SwipeRefreshLayout.OnR
                    }
         );
     }
+
 
     private void callData(final String xstspembayaran, String xdari, String xsampai) {
         arraylist.clear();
@@ -304,5 +316,12 @@ public class Histori extends AppCompatActivity implements SwipeRefreshLayout.OnR
     @Override
     public void onRefresh() {
         callData(stspembayaran,_dari,_sampai);
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(getApplicationContext(), ProdukTransaksi.class));
+
+        finish();
     }
 }
