@@ -44,7 +44,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-
+//okokok
 //coba keren evan
 public class Menu extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
     TextView txtnamapetugas, produktransaksi;
