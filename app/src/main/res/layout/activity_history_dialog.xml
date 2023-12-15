@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@color/utama"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+<!---->
+            <TextView
+                android:id="@+id/txt_judul"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="16dp"
+                android:text="Cari History Penjualan"
+                android:textColor="@color/putih_tetap"
+                android:textSize="14dp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/bt_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerInParent="true"
+                android:background="@drawable/selector_transparan"
+                android:clickable="true"
+                android:padding="16dp"
+                android:src="@drawable/ic_baseline_close_24" />
+
+        </RelativeLayout>
+
+        <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@drawable/bg_bottom_corner_utama" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:background="@drawable/bg_edittext_white"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginRight="8dp"
+                            android:layout_marginBottom="16dp"
+                            android:orientation="horizontal">
+
+                            <EditText
+                                android:id="@+id/edt_dari"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="8dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/bg_edittext_white"
+                                android:drawableRight="@drawable/ic_search"
+                                android:drawablePadding="18dp"
+                                android:hint="Dari..."
+                                android:padding="18dp"
+                                android:textColorHint="@color/hint"
+                                android:textSize="14dp" />
+
+                            <EditText
+                                android:id="@+id/edt_sampai"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="8dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/bg_edittext_white"
+                                android:drawableRight="@drawable/ic_search"
+                                android:drawablePadding="18dp"
+                                android:hint="Sampai..."
+                                android:padding="18dp"
+                                android:textColorHint="@color/hint"
+                                android:textSize="14dp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:padding="10dp">
+
+
+                            <RadioGroup
+                                android:id="@+id/opsistatuspembayaranAdd"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <RadioButton
+                                    android:id="@+id/semua"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:buttonTint="@color/utama"
+                                    android:text="Semua"
+                                    android:textColor="@color/textcolor"
+                                    android:textSize="10sp" />
+
+                                <RadioButton
+                                    android:id="@+id/lunas"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:buttonTint="@color/utama"
+                                    android:text="Lunas"
+                                    android:textColor="@color/textcolor"
+                                    android:textSize="10sp" />
+
+                                <RadioButton
+                                    android:id="@+id/utang"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:buttonTint="@color/utama"
+                                    android:text="Utang"
+                                    android:textColor="@color/textcolor"
+                                    android:textSize="10sp" />
+
+
+                            </RadioGroup>
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/btlogin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:background="@drawable/selector_login"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:padding="18dp"
+                    android:text="Terapkan"
+                    android:textColor="@color/putih_tetap"
+                    android:textSize="14dp"
+                    android:textStyle="bold" />
+
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+

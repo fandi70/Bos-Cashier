@@ -147,15 +147,15 @@ public abstract class AsyncEscPosPrint extends AsyncTask<AsyncEscPosPrinter, Int
 
         switch (result.getPrinterStatus()) {
             case AsyncEscPosPrint.FINISH_SUCCESS:
-                new AlertDialog.Builder(context)
-                        .setTitle("Success")
-                        .setMessage("Congratulation ! The texts are printed !")
-                        .show();
+//                new AlertDialog.Builder(context)
+//                        .setTitle("Success")
+//                        .setMessage("Congratulation ! The texts are printed !")
+//                        .show();
                 break;
             case AsyncEscPosPrint.FINISH_NO_PRINTER:
                 new AlertDialog.Builder(context)
                         .setTitle("No printer")
-                        .setMessage("The application can't find any printer connected.")
+                        .setMessage("Koneksi kurang Stabil.")
                         .show();
                 break;
             case AsyncEscPosPrint.FINISH_PRINTER_DISCONNECTED:

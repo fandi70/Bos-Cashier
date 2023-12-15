@@ -625,13 +625,14 @@ public class TransaksiDetailActivity extends AppCompatActivity {
                 try {
                     JSONObject jObj = new JSONObject(response);
                     int value = jObj.getInt("success");
-                    int id = jObj.getInt("idtransaksi");
+                    String ssid = jObj.getString("idtransaksi");
 
                     if (value == 1) {
                         Toast.makeText(TransaksiDetailActivity.this, "Sukses", Toast.LENGTH_SHORT).show();
                         if (statuspending.equals("selesai") ){
-
-                            startActivity(new Intent(TransaksiDetailActivity.this, ProdukTransaksi.class));
+                            Intent kotak = new Intent(TransaksiDetailActivity.this, TransaksiCetakActivity.class);
+                            kotak.putExtra("id",ssid);
+                            startActivity(kotak);
                             finish();
                         }else if(statuspending.equals("pending")){
                             startActivity(new Intent(TransaksiDetailActivity.this, ProdukTransaksi.class));

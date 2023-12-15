@@ -27,7 +27,7 @@
                 android:padding="2dp"
                 android:text="GALON 19 Liter"
                 android:textColor="@color/textcolor"
-                android:textSize="14dp"
+                android:textSize="12dp"
                 android:textStyle="bold" />
 
             <LinearLayout
@@ -43,7 +43,7 @@
                     android:padding="2dp"
                     android:text="Rp 500.000"
                     android:textColor="@color/textcolor"
-                    android:textSize="14dp" />
+                    android:textSize="12dp" />
 
                 <TextView
                     android:id="@+id/txtjumlah"
@@ -54,7 +54,7 @@
                     android:paddingRight="16dp"
                     android:text="X 5"
                     android:textColor="@color/textcolor"
-                    android:textSize="14dp" />
+                    android:textSize="12dp" />
 
 
             </LinearLayout>
@@ -78,7 +78,7 @@
                     android:padding="2dp"
                     android:text="Total Pesanan"
                     android:textColor="@color/hint"
-                    android:textSize="14dp" />
+                    android:textSize="12dp" />
 
                 <TextView
                     android:id="@+id/txttotal"
@@ -88,7 +88,7 @@
                     android:padding="2dp"
                     android:text="Rp 300.000"
                     android:textColor="@color/utama"
-                    android:textSize="14dp"
+                    android:textSize="12dp"
                     android:textStyle="bold" />
             </LinearLayout>
 
