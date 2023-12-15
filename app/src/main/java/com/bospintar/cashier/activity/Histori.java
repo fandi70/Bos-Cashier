@@ -48,7 +48,8 @@ public class Histori extends AppCompatActivity implements SwipeRefreshLayout.OnR
     String xidpetugas,xnama_petugas,xalamat_petugas,xnohp,xlevel,xidtoko,xnama_toko,xalamat_toko,xstatus_toko,xketnota,xnohp_toko;
 
     TextView caribydate,txttotalkeuangan,txttotalpengeluaran,txttotalpenjualan,txttotalhutang;
-    String stspembayaran,_dari,_sampai;
+    String _dari,_sampai;
+    String stspembayaran="semua";
     ArrayList<Mhome> arraylist = new ArrayList<>();
     public static final String TAG_RESULTS = "penjualan_petugas";
     public static final String TAG_VALUE = "status";
@@ -64,6 +65,7 @@ public class Histori extends AppCompatActivity implements SwipeRefreshLayout.OnR
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
         bacaPreferensi();
+
         caribydate=findViewById(R.id.caribydate);
         txttotalkeuangan= findViewById(R.id.txttotalkeuangan);
         txttotalpengeluaran= findViewById(R.id.txttotalpengeluaran);
@@ -72,7 +74,6 @@ public class Histori extends AppCompatActivity implements SwipeRefreshLayout.OnR
         swipe = findViewById(R.id.swipe_refreshdata);
         _dari=sdcurrentdate.format(new Date());
         _sampai=sdcurrentdate.format(new Date());
-        callData("semua",_dari,_sampai);
 
         caribydate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -184,6 +185,7 @@ public class Histori extends AppCompatActivity implements SwipeRefreshLayout.OnR
         rcList.setAdapter(adapter);
         swipe.setOnRefreshListener(this);
 
+        callData(stspembayaran,_dari,_sampai);
         swipe.post(new Runnable() {
                        @Override
                        public void run() {
@@ -232,10 +234,11 @@ public class Histori extends AppCompatActivity implements SwipeRefreshLayout.OnR
                         Double xtotal = Double.parseDouble(jObj.getString("total_penjualan"));
                         Double xpengeluaran = Double.parseDouble(jObj.getString("total_pengeluaran"));
                         Double xutang = Double.parseDouble(jObj.getString("hutang"));
+                        Double xtotalkas = Double.parseDouble(jObj.getString("total_kas"));
                         txttotalpenjualan.setText("Rp" + rupiahFormat.format(xtotal));
                         txttotalpengeluaran.setText("Rp" + rupiahFormat.format(xpengeluaran));
                         txttotalhutang.setText("Rp" + rupiahFormat.format(xutang));
-                        txttotalkeuangan.setText("Rp" + rupiahFormat.format(xtotal-xpengeluaran));
+                        txttotalkeuangan.setText("Rp" + rupiahFormat.format(xtotalkas));
 
 
                     } else {
