@@ -3,56 +3,141 @@
     xmlns:aapt="http://schemas.android.com/aapt"
     xmlns:sweet="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#FFF"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text=".:: DETAIL ::."
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="15dp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/txtpesan"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:padding="30sp"
-        android:text="teytytywyw"
-        android:textColor="#c61515"
-        android:textSize="19sp"
-        android:visibility="gone" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_top_corner"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <View
+            android:layout_width="72sp"
+            android:layout_height="3dp"
+            android:layout_margin="8dp"
+            android:background="@drawable/line_corner" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="16dp"
+            android:text="Detail Transaksi"
+            android:textColor="@color/textcolor"
+            android:textSize="14dp"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_margin="8dp"
+            android:background="@color/hint0" />
+
+        <TextView
+            android:id="@+id/txtpesan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="30sp"
+            android:text="teytytywyw"
+            android:textColor="#c61515"
+            android:textSize="19sp"
+            android:visibility="gone" />
 
         <LinearLayout
-            android:id="@+id/liKosong"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
+            android:layout_weight="1"
             android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="Tidak ada data"
-                android:textColor="#636262" />
+            <LinearLayout
+                android:id="@+id/liKosong"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tidak ada data"
+                    android:textColor="@color/textcolor"
+                    android:textSize="14dp" />
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
         </LinearLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rcList"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="8dp"
+                android:layout_weight="1"
+                android:background="@drawable/selector_stroke"
+                android:clickable="true"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/baseline_local_printshop_black"
+                    android:drawablePadding="16dp"
+                    android:text="Cetak"
+                    android:textColor="@color/textcolor"
+                    android:textSize="14dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:id="@+id/btlogin"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/selector_transparan" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:layout_weight="1"
+                android:background="@drawable/selector_login"
+                android:orientation="vertical"
+                android:padding="14dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:clickable="true"
+                    android:drawableLeft="@drawable/ic_belanja"
+                    android:drawablePadding="16dp"
+                    android:gravity="center"
+                    android:text="Lanjut Belanja"
+                    android:textColor="@color/putih_tetap"
+                    android:textSize="14dp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:id="@+id/lanjut"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/selector_transparan" />
+            </LinearLayout>
+        </LinearLayout>
+
+
     </LinearLayout>
 </LinearLayout>
