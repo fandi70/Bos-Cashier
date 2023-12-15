@@ -2,7 +2,7 @@ package com.bospintar.cashier.model;
 
 public class Mpelanggan {
     private String id , nama, alamat,nohp,idtoko;
-
+//
 
     public Mpelanggan(String id, String nama, String alamat, String nohp, String idtoko) {
         this.id = id;
