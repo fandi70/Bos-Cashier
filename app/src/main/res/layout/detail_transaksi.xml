@@ -52,7 +52,7 @@
                 android:layout_height="51dp"
                 android:background="@drawable/bg_bottom_corner_utama" />
 
-            <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fillViewport="true">
@@ -100,7 +100,7 @@
                             android:paddingBottom="8dp">
 
                             <TextView
-                                android:id="@+id/tgl"
+                                android:id="@+id/namakasir"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
@@ -109,7 +109,7 @@
                                 android:textSize="14dp" />
 
                             <TextView
-                                android:id="@+id/notransaksi"
+                                android:id="@+id/nohpkasir"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="#23211"
@@ -271,7 +271,7 @@
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/notransaksi"
+                                android:id="@+id/notatransaksi"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="#23211"
@@ -292,13 +292,13 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Waktu Pesanan"
+                                android:text="Metode Pembayaran"
                                 android:textColor="@color/hint"
                                 android:textSize="14dp"
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/waktupesan"
+                                android:id="@+id/metodepembayaran"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="02 Desember 2022 22:00"
@@ -319,13 +319,13 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Waktu Pesanan Selesai"
+                                android:text="Status Pembayaran"
                                 android:textColor="@color/hint"
                                 android:textSize="14dp"
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/waktupesan"
+                                android:id="@+id/statuspembayaran"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="02 Desember 2022 22:00"
@@ -342,7 +342,7 @@
                             android:orientation="vertical">
 
                             <LinearLayout
-                                android:id="@+id/btlogin"
+                                android:id="@+id/btcetak"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="16dp"
@@ -375,13 +375,14 @@
                                 android:padding="16dp">
 
                                 <TextView
+                                    android:id="@+id/transaksibaru"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
                                     android:drawableLeft="@drawable/ic_belanja"
                                     android:drawablePadding="16dp"
                                     android:gravity="center"
-                                    android:text="Lanjut Belanja"
+                                    android:text="Transaksi Baru"
                                     android:textColor="@color/putih_tetap"
                                     android:textSize="14dp" />
 

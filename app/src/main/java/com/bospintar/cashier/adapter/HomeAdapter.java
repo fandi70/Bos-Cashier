@@ -2,6 +2,7 @@ package com.bospintar.cashier.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
@@ -16,6 +17,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bospintar.cashier.R;
+import com.bospintar.cashier.activity.Menu;
+import com.bospintar.cashier.activity.TransaksiCetakActivity;
+import com.bospintar.cashier.activity.TransaksiDetailActivity;
 import com.bospintar.cashier.model.Mhome;
 
 import java.text.DecimalFormat;
@@ -85,8 +89,10 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> 
         holder.btpindah.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                ((Pengeluaran)mContext).onClick(arrayJenis.get(position).getId().toString(),arrayJenis.get(position).getKeterangan().toString(),"Rp"+formattedRupiah);
-
+                Intent kotak = new Intent(mContext, TransaksiCetakActivity.class);
+                kotak.putExtra("id",arrayJenis.get(position).getId());
+                mContext.startActivity(kotak);
+                ((Menu)mContext).finish();
 
             }
         });
