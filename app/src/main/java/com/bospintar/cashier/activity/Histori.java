@@ -72,7 +72,7 @@ public class Histori extends AppCompatActivity implements SwipeRefreshLayout.OnR
         swipe = findViewById(R.id.swipe_refreshdata);
         _dari=sdcurrentdate.format(new Date());
         _sampai=sdcurrentdate.format(new Date());
-        callData("lunas",_dari,_sampai);
+        callData("semua",_dari,_sampai);
 
         caribydate.setOnClickListener(new View.OnClickListener() {
             @Override
