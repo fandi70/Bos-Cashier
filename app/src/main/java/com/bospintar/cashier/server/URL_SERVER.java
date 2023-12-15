@@ -17,6 +17,7 @@ public class URL_SERVER {
     public static final String CPELANGGANEDIT  = link+"editpelanggan.php";
 //
     public static final String CPELANGGAN  = link+"getpelanggan.php";
+    public static final String CHISTORYBYDATE  = link+"gethistoritransaksi.php";
 
     public static final String Ccetakdetailtransaksi  = link+"getdetailtransaksi.php";
     public static final String Ctimp  = link+"gettemp.php";

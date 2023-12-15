@@ -259,6 +259,7 @@ public class Pengeluaran extends AppCompatActivity implements SwipeRefreshLayout
                 params.put("keterangan", _keterangan);
                 params.put("nominal", hargabeli.toString());
                 params.put("idtoko",xidtoko);
+                params.put("idpetugas",xidpetugas);
                 return params;
             }
         };
@@ -419,6 +420,7 @@ public class Pengeluaran extends AppCompatActivity implements SwipeRefreshLayout
                 params.put("dari", tanggalpjfrom);
                 params.put("sampai", tanggalpjto);
                 params.put("idtoko", xidtoko);
+                params.put("idpetugas", xidpetugas);
 
                 return params;
             }
