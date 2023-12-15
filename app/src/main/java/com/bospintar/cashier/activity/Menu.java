@@ -230,11 +230,11 @@ public class Menu extends AppCompatActivity implements SwipeRefreshLayout.OnRefr
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.fragment_dialog);
 
-        produk = findViewById(R.id.ln_produk);
-        pegawai = findViewById(R.id.ln_pegawai);
-        pengeluaran = findViewById(R.id.ln_pengeluaran);
-        pelanggan = findViewById(R.id.ln_pelanggan);
-        laporan = findViewById(R.id.ln_laporan);
+        produk = dialog.findViewById(R.id.ln_produk);
+        pegawai = dialog.findViewById(R.id.ln_pegawai);
+        pengeluaran = dialog.findViewById(R.id.ln_pengeluaran);
+        pelanggan = dialog.findViewById(R.id.ln_pelanggan);
+        laporan = dialog.findViewById(R.id.ln_laporan);
         produk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
