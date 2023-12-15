@@ -627,7 +627,13 @@ public class TransaksiDetailActivity extends AppCompatActivity {
 
                     if (value == 1) {
                         Toast.makeText(TransaksiDetailActivity.this, "Sukses", Toast.LENGTH_SHORT).show();
-
+                        if (statuspending.equals("selesai") ){
+                            startActivity(new Intent(TransaksiDetailActivity.this, ProdukTransaksi.class));
+                            finish();
+                        }else if(statuspending.equals("pending")){
+                            startActivity(new Intent(TransaksiDetailActivity.this, ProdukTransaksi.class));
+                            finish();
+                        }
 
                     } else {
                         Toast.makeText(TransaksiDetailActivity.this, "Gagal", Toast.LENGTH_SHORT).show();

@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bospintar.cashier.R;
+import com.bospintar.cashier.activity.Pelanggan;
 import com.bospintar.cashier.model.Mpelanggan;
 import java.util.ArrayList;
 import java.util.Locale;
@@ -74,6 +75,7 @@ public class PelangganAdapter extends RecyclerView.Adapter<PelangganAdapter.MyVi
         holder.btpindah.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ((Pelanggan)mContext).onClick(arrayJenis.get(position).getId().toString(),arrayJenis.get(position).getNama().toString(),arrayJenis.get(position).getAlamat().toString(),arrayJenis.get(position).getNohp().toString());
 
 
             }
