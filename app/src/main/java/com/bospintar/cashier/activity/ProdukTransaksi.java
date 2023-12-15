@@ -46,7 +46,7 @@ import java.util.Locale;
 import java.util.Map;
 
 public class ProdukTransaksi extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
-    String xidpetugas,xnama_petugas,xalamat_petugas,xnohp,xlevel,xidtoko,xnama_toko,xalamat_toko,xstatus_toko,xketnota,xnohp_toko;
+    String xidpetugas, xnama_petugas, xalamat_petugas, xnohp, xlevel, xidtoko, xnama_toko, xalamat_toko, xstatus_toko, xketnota, xnohp_toko;
     public static final String TAG_RESULTS = "produk";
     public static final String TAG_VALUE = "status";
     private static final String TAG_SUCCESS = "total";
@@ -59,6 +59,7 @@ public class ProdukTransaksi extends AppCompatActivity implements SwipeRefreshLa
     double total;
     ImageView btBack;
     DecimalFormat rupiahFormat = (DecimalFormat) NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
+    TextView txtnotif;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +67,7 @@ public class ProdukTransaksi extends AppCompatActivity implements SwipeRefreshLa
         setContentView(R.layout.activity_transaksi);
         bacaPreferensi();
         swipe = (SwipeRefreshLayout) findViewById(R.id.swipe_refreshdatahistorykegiatan);
-        btBack=findViewById(R.id.bt_back);
+        btBack = findViewById(R.id.bt_back);
         TextView btcekout = findViewById(R.id.btcekout);
         btcekout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,6 +87,7 @@ public class ProdukTransaksi extends AppCompatActivity implements SwipeRefreshLa
             }
         });
 
+        txtnotif = findViewById(R.id.txtnotif);
         rcList = findViewById(R.id.rcList);
         final GridLayoutManager mLayoutManager = new GridLayoutManager(this, 1);
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -131,6 +133,7 @@ public class ProdukTransaksi extends AppCompatActivity implements SwipeRefreshLa
 
 
     }
+
     private void callData() {
         arraylist.clear();
         swipe.setRefreshing(true);
@@ -146,18 +149,19 @@ public class ProdukTransaksi extends AppCompatActivity implements SwipeRefreshLa
                         arraylist.clear();
                         TextView txtTotal = findViewById(R.id.txtTotal);
                         TextView btcekout = findViewById(R.id.btcekout);
-                        total=Double.parseDouble(jObj.getString("total"));
+                        total = Double.parseDouble(jObj.getString("total"));
                         rupiahFormat.setParseBigDecimal(true);
                         rupiahFormat.applyPattern("#,##0");
-                        txtTotal.setText("Rp"+rupiahFormat.format(total));
-                        btcekout.setText("Checkout ("+jObj.getString("totalitem")+")");
+                        txtTotal.setText("Rp" + rupiahFormat.format(total));
+                        btcekout.setText("Checkout (" + jObj.getString("totalitem") + ")");
+                        txtnotif.setText(jObj.getString("pending"));
                         String getObject = jObj.getString(TAG_RESULTS);
                         JSONArray jsonArray = new JSONArray(getObject);
 
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject data = jsonArray.getJSONObject(i);
                             Mproduk wp = new Mproduk(data.getString("id"), data.getString("nama"), data.getString("hargajual"),
-                                    data.getString("hargabeli"), data.getString("grosir"),data.getString("stok"),data.getString("satuan"),data.getString("isi_stok"));
+                                    data.getString("hargabeli"), data.getString("grosir"), data.getString("stok"), data.getString("satuan"), data.getString("isi_stok"));
                             arraylist.add(wp);
 
                         }
@@ -178,7 +182,7 @@ public class ProdukTransaksi extends AppCompatActivity implements SwipeRefreshLa
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(),"Koneksi Lemah", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Koneksi Lemah", Toast.LENGTH_SHORT).show();
                 swipe.setRefreshing(false);
             }
         }) {
@@ -194,7 +198,8 @@ public class ProdukTransaksi extends AppCompatActivity implements SwipeRefreshLa
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(jArr, tag_json_obj);
     }
-    public void tambahData(String idbarang,String namabarang) {
+
+    public void tambahData(String idbarang, String namabarang) {
         pDialog = new ProgressDialog(ProdukTransaksi.this);
         pDialog.setCancelable(false);
         pDialog.setMessage("Loading...");
@@ -210,14 +215,14 @@ public class ProdukTransaksi extends AppCompatActivity implements SwipeRefreshLa
                     if (value == 1) {
                         Toast.makeText(ProdukTransaksi.this, namabarang, Toast.LENGTH_SHORT).show();
                         TextView txtTotal = findViewById(R.id.txtTotal);
-                        total=Double.parseDouble(jObj.getString("total"));
+                        total = Double.parseDouble(jObj.getString("total"));
                         rupiahFormat.setParseBigDecimal(true);
                         rupiahFormat.applyPattern("#,##0");
-                        txtTotal.setText("Rp"+rupiahFormat.format(total));
+                        txtTotal.setText("Rp" + rupiahFormat.format(total));
                         TextView btcekout = findViewById(R.id.btcekout);
-                        btcekout.setText("Checkout ("+jObj.getString("totalitem")+")");
+                        btcekout.setText("Checkout (" + jObj.getString("totalitem") + ")");
                     } else {
-                        Toast.makeText(ProdukTransaksi.this,"Gagal", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ProdukTransaksi.this, "Gagal", Toast.LENGTH_SHORT).show();
 
                     }
                 } catch (JSONException e) {
@@ -248,26 +253,29 @@ public class ProdukTransaksi extends AppCompatActivity implements SwipeRefreshLa
         };
         AppController.getInstance().addToRequestQueue(strReq, tag_json_obj);
     }
+
     private void bacaPreferensi() {
 
         SharedPreferences pref = getSharedPreferences("akun", MODE_PRIVATE);
         xidpetugas = pref.getString("idpetugas", "0");
         xnama_petugas = pref.getString("nama_petugas", "0");
         xalamat_petugas = pref.getString("alamat_petugas", "0");
-        xnohp= pref.getString("nohp", "0");
-        xlevel= pref.getString("level", "0");
-        xidtoko= pref.getString("idtoko", "0");
-        xnama_toko= pref.getString("nama_toko", "0");
-        xalamat_toko= pref.getString("alamat_toko", "0");
-        xstatus_toko= pref.getString("status_toko", "0");
-        xketnota= pref.getString("ketnota", "0");
-        xnohp_toko=pref.getString("nohp_toko","0");
+        xnohp = pref.getString("nohp", "0");
+        xlevel = pref.getString("level", "0");
+        xidtoko = pref.getString("idtoko", "0");
+        xnama_toko = pref.getString("nama_toko", "0");
+        xalamat_toko = pref.getString("alamat_toko", "0");
+        xstatus_toko = pref.getString("status_toko", "0");
+        xketnota = pref.getString("ketnota", "0");
+        xnohp_toko = pref.getString("nohp_toko", "0");
 
     }
+
     @Override
     public void onBackPressed() {
         finish();
     }
+
     @Override
     public void onRefresh() {
         callData();

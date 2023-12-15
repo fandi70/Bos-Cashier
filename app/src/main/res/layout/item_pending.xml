@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:sweet="http://schemas.android.com/apk/res-auto" xmlns:aapt="http://schemas.android.com/aapt" android:orientation="vertical" android:id="@+id/btpindah" android:background="@drawable/selector_transparan" android:layout_width="match_parent" android:layout_height="wrap_content">
+    <LinearLayout android:orientation="horizontal" android:padding="8dp" android:layout_width="match_parent" android:layout_height="wrap_content">
+        <LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_weight="1">
+            <TextView android:textSize="14dp" android:textStyle="bold" android:textColor="@color/textcolor" android:id="@+id/txtnama" android:padding="2dp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="GALON 19 Liter"/>
+            <LinearLayout android:orientation="horizontal" android:layout_width="match_parent" android:layout_height="wrap_content">
+                <TextView android:textSize="14dp" android:textColor="@color/textcolor" android:id="@+id/txtharga" android:padding="2dp" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Rp 500.000" android:layout_weight="1"/>
+                <TextView android:textSize="14dp" android:textColor="@color/textcolor" android:id="@+id/txttgl" android:padding="2dp" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Rp 500.000" android:layout_weight="1"/>
+                <LinearLayout android:orientation="horizontal" android:background="@drawable/bg_stroke_white" android:layout_width="wrap_content" android:layout_height="wrap_content">
+                    <TextView android:textSize="14dp" android:textColor="@color/hint" android:id="@+id/plus" android:background="@drawable/selector_transparan" android:padding="4dp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text=" + "/>
+                </LinearLayout>
+            </LinearLayout>
+            <View android:background="@color/background" android:layout_width="match_parent" android:layout_height="1dp" android:layout_margin="4dp"/>
+        </LinearLayout>
+    </LinearLayout>
+    <View android:background="@color/background" android:layout_width="match_parent" android:layout_height="1dp" android:layout_margin="8dp"/>
+</LinearLayout>

@@ -36,6 +36,7 @@
         <activity
             android:name=".activity.Pengeluaran"
             android:exported="false" />
+
         <activity
             android:name=".activity.Petugas_Add"
             android:exported="false" />

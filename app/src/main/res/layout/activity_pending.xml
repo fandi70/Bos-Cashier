@@ -98,7 +98,15 @@
                             android:background="@drawable/bg_edittext_white"
                             android:orientation="vertical">
 
-
+                            <TextView
+                                android:id="@+id/txtpesan"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:padding="5dp"
+                                android:textSize="14dp"
+                                android:visibility="gone"
+                                android:textStyle="bold" />
                             <androidx.recyclerview.widget.RecyclerView
                                 android:id="@+id/recyclerView"
                                 android:layout_width="match_parent"
