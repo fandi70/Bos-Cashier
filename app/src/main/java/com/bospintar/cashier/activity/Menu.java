@@ -163,7 +163,7 @@ public class Menu extends AppCompatActivity implements SwipeRefreshLayout.OnRefr
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject data = jsonArray.getJSONObject(i);
 
-                            Mhome wp = new Mhome(data.getString("id"), data.getString("nota"), data.getString("totalbayar"), data.getString("tanggal"),
+                            Mhome wp = new Mhome(data.getString("id"), data.getString("idpetugas"),data.getString("nota"), data.getString("totalbayar"), data.getString("tanggal"),
                                     data.getString("statusbayar"), data.getString("idtoko"));
                             arraylist.add(wp);
                         }

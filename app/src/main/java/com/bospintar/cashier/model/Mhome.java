@@ -1,11 +1,12 @@
 package com.bospintar.cashier.model;
 
 public class Mhome {
-    private String id,nota , totalbayar, tanggal,jbayar,idtoko;
+    private String id,idpetugas,nota , totalbayar, tanggal,jbayar,idtoko;
 
 
-    public Mhome(String id,String nota, String totalbayar, String tanggal, String jbayar, String idtoko) {
+    public Mhome(String id,String idpetugas,String nota, String totalbayar, String tanggal, String jbayar, String idtoko) {
         this.id = id;
+        this.idpetugas = idpetugas;
         this.nota = nota;
         this.totalbayar=totalbayar;
         this.tanggal = tanggal;
