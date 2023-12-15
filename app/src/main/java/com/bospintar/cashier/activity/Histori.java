@@ -238,6 +238,14 @@ public class Histori extends AppCompatActivity implements SwipeRefreshLayout.OnR
 
                     } else {
                         Toast.makeText(Histori.this, "Kosong", Toast.LENGTH_SHORT).show();
+                        rcList.setAdapter(adapter);
+                        txttotalpenjualan.setText("Rp0");
+
+
+                        txttotalpengeluaran.setText("Rp0");
+
+                        txttotalkeuangan.setText("Rp0");
+
                     }
 
                 } catch (JSONException e) {

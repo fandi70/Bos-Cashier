@@ -18,6 +18,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -60,17 +61,25 @@ public class Menu extends AppCompatActivity implements SwipeRefreshLayout.OnRefr
     RecyclerView rcList;
     ArrayList<Mhome> arraylist = new ArrayList<>();
     DecimalFormat rupiahFormat = (DecimalFormat) NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
-TextView lihatsemuahistory;
+    TextView lihatsemuahistory;
+    ImageView lockproduk, locklainnya, lproduk, llainnya;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
-        lihatsemuahistory=findViewById(R.id.lihatsemuahistory);
+        lihatsemuahistory = findViewById(R.id.lihatsemuahistory);
         txttotalpenjualanhariini = findViewById(R.id.txttotalpenjualanhariini);
         swipe = findViewById(R.id.swipe_refreshdata);
         txtnamapetugas = findViewById(R.id.txt_namapetugas);
         produk = findViewById(R.id.ln_produk);
+
+        lockproduk = findViewById(R.id.imgproduk);
+        locklainnya = findViewById(R.id.imglainnya);
+        lproduk = findViewById(R.id.lockproduk);
+        llainnya = findViewById(R.id.locklainnya);
+
         lainnya = findViewById(R.id.ln_lainnya);
         pegawai = findViewById(R.id.ln_pegawai);
         pengeluaran = findViewById(R.id.ln_pengeluaran);
@@ -111,7 +120,7 @@ TextView lihatsemuahistory;
         pegawai.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), Petugas.class));
+                startActivity(new Intent(getApplicationContext(), Pelanggan.class));
                 finish();
             }
         });
@@ -140,6 +149,21 @@ TextView lihatsemuahistory;
                        }
                    }
         );
+        if (xlevel.equals("Kasir")) {
+            lockproduk.setImageDrawable(getResources().getDrawable(R.drawable.ic_menu_product_lock));
+            locklainnya.setImageDrawable(getResources().getDrawable(R.drawable.ic_menu_lainnya_lock));
+            produk.setEnabled(false);
+            lainnya.setEnabled(false);
+            llainnya.setVisibility(View.VISIBLE);
+            lproduk.setVisibility(View.VISIBLE);
+        } else if (xlevel.equals("Admin")) {
+            lockproduk.setImageDrawable(getResources().getDrawable(R.drawable.ic_menu_product));
+            locklainnya.setImageDrawable(getResources().getDrawable(R.drawable.ic_menu_lainnya));
+            produk.setEnabled(true);
+            lainnya.setEnabled(true);
+            llainnya.setVisibility(View.GONE);
+            lproduk.setVisibility(View.GONE);
+        }
     }
 
     private void callData() {
@@ -169,7 +193,7 @@ TextView lihatsemuahistory;
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject data = jsonArray.getJSONObject(i);
 
-                            Mhome wp = new Mhome(data.getString("id"), data.getString("idpetugas"),data.getString("nota"), data.getString("totalbayar"), data.getString("tanggal"),
+                            Mhome wp = new Mhome(data.getString("id"), data.getString("idpetugas"), data.getString("nota"), data.getString("totalbayar"), data.getString("tanggal"),
                                     data.getString("statusbayar"), data.getString("idtoko"));
                             arraylist.add(wp);
                         }
@@ -283,7 +307,6 @@ TextView lihatsemuahistory;
         dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimasi;
         dialog.getWindow().setGravity(Gravity.BOTTOM);
     }
-
 
 
     @Override
