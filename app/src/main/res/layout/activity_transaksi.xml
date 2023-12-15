@@ -67,7 +67,7 @@
                     android:background="@drawable/bg_notif"
                     android:gravity="center"
                     android:padding="1dp"
-                    android:text="99"
+                    android:text="0"
                     android:textColor="@color/putih_tetap"
                     android:textSize="10dp"
                     android:textStyle="bold" />
@@ -77,7 +77,7 @@
                     android:layout_width="28dp"
                     android:layout_height="28dp"
                     android:layout_alignParentEnd="true"
-                    android:layout_centerInParent="true"
+                    android:layout_centerHorizontal="true"
                     android:background="@drawable/selector_transparan"
                     android:clickable="true"></RelativeLayout>
 
