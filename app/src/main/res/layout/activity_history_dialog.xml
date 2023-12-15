@@ -64,11 +64,10 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginRight="16dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
                         android:background="@drawable/bg_edittext_white"
-                        android:orientation="vertical"
-                        android:padding="16dp">
+                        android:orientation="vertical">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -114,9 +113,8 @@
                             android:padding="10dp">
 
 
-
                             <RadioGroup
-                                android:id="@+id/opsihariAdd"
+                                android:id="@+id/opsistatuspembayaranAdd"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal">
@@ -142,7 +140,7 @@
                                     android:textSize="10sp" />
 
                                 <RadioButton
-                                    android:id="@+id/Utang"
+                                    android:id="@+id/utang"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
@@ -150,8 +148,6 @@
                                     android:text="Utang"
                                     android:textColor="@color/textcolor"
                                     android:textSize="10sp" />
-
-
 
 
                             </RadioGroup>
@@ -170,7 +166,7 @@
                     android:clickable="true"
                     android:gravity="center"
                     android:padding="18dp"
-                    android:text="Cari"
+                    android:text="Terapkan"
                     android:textColor="@color/putih_tetap"
                     android:textSize="14dp"
                     android:textStyle="bold" />

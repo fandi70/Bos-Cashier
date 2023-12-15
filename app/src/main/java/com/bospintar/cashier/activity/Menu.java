@@ -60,13 +60,13 @@ public class Menu extends AppCompatActivity implements SwipeRefreshLayout.OnRefr
     RecyclerView rcList;
     ArrayList<Mhome> arraylist = new ArrayList<>();
     DecimalFormat rupiahFormat = (DecimalFormat) NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
-
+TextView lihatsemuahistory;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
-
+        lihatsemuahistory=findViewById(R.id.lihatsemuahistory);
         txttotalpenjualanhariini = findViewById(R.id.txttotalpenjualanhariini);
         swipe = findViewById(R.id.swipe_refreshdata);
         txtnamapetugas = findViewById(R.id.txt_namapetugas);
@@ -93,7 +93,13 @@ public class Menu extends AppCompatActivity implements SwipeRefreshLayout.OnRefr
 
             }
         });
-
+        lihatsemuahistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), Histori.class));
+                finish();
+            }
+        });
         produk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -43,6 +43,7 @@
             android:name=".activity.TransaksiCetakActivity"
             android:exported="false" />
 
+
         <activity
             android:name=".activity.Petugas_Add"
             android:exported="false" />
@@ -59,7 +60,7 @@
             android:theme="@style/themeutamabg"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".activity.Laporan"
+            android:name=".activity.Histori"
             android:theme="@style/themeutamabg"
             android:windowSoftInputMode="adjustResize" />
         <activity
