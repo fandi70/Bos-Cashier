@@ -14,8 +14,10 @@ public class URL_SERVER {
     public static final String CADDTEM  = link+"addtemp.php";
     public static final String CTCUSTOMER  = link+"getpelanggan.php";
     public static final String CPELANGGANADD  = link+"addpelanggan.php";
+    public static final String CPELANGGANEDIT  = link+"editpelanggan.php";
 //
     public static final String CPELANGGAN  = link+"getpelanggan.php";
+
 
     public static final String Ctimp  = link+"gettemp.php";
     public static final String CTAMBAHKERANJANG  = link+"addtemp_plus.php";

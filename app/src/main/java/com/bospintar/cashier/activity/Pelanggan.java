@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
@@ -89,18 +91,38 @@ public class Pelanggan extends AppCompatActivity implements SwipeRefreshLayout.O
                        }
                    }
         );
+        EditText yourEditText = findViewById(R.id.edt_cari);
 
+        yourEditText.addTextChangedListener(new TextWatcher() {
+
+            public void afterTextChanged(Editable s) {
+
+            }
+
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                String text = s.toString().toLowerCase(Locale.getDefault());
+                TextView txt = findViewById(R.id.txtpesan);
+                adapter.filter(text, txt);
+
+            }
+        });
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 android.app.AlertDialog.Builder dialog = new android.app.AlertDialog.Builder(Pelanggan.this);
-                View dialogView = getLayoutInflater().inflate(R.layout.activity_pengeluaranadd, null);
+                View dialogView = getLayoutInflater().inflate(R.layout.activity_add_pelanggan, null);
                 dialog.setView(dialogView);
                 dialog.setCancelable(false);
-                final EditText ddket= dialogView.findViewById(R.id.etxt_keterangan);
-                final EditText ddnominAL= dialogView.findViewById(R.id.etxt_nominal);
+                final EditText nama= dialogView.findViewById(R.id.etxt_namacustomer);
+                final EditText alamat= dialogView.findViewById(R.id.etxt_alamatcustomer);
+
+                final EditText nohp= dialogView.findViewById(R.id.etxt_nohpcustomer);
                 final TextView judul= dialogView.findViewById(R.id.txt_judul);
-                ddnominAL.addTextChangedListener(new RupiahTextWatcher(ddnominAL));
+
 
                 final TextView dialogBtnSubmit = dialogView.findViewById(R.id.btlogin);
                 dialogBtnSubmit.setText("Simpan");
@@ -120,7 +142,7 @@ public class Pelanggan extends AppCompatActivity implements SwipeRefreshLayout.O
                     public void onClick(View v) {
 
                         alertDialog.dismiss();
-//                        simpancustomerData(ddket.getText().toString(),ddnominAL.getText().toString());
+                        simpanData(nama.getText().toString(),alamat.getText().toString(),nohp.getText().toString());
 
                     }
                 });
@@ -138,98 +160,98 @@ public class Pelanggan extends AppCompatActivity implements SwipeRefreshLayout.O
 
     }
 
-//    public void simpancustomerData(final String _keterangan,final String _nominal) {
-//        pDialog = new ProgressDialog(Pengeluaran.this);
-//        pDialog.setCancelable(false);
-//        pDialog.setMessage("Loading...");
-//        pDialog.show();
-//        StringRequest strReq = new StringRequest(Request.Method.POST, URL_SERVER.CPENGELUARANADD, new Response.Listener<String>() {
-//            @Override
-//            public void onResponse(String response) {
-//                Log.e("Response: ", response.toString());
-//                try {
-//                    JSONObject jObj = new JSONObject(response);
-//                    int value = jObj.getInt("success");
-//                    if (value == 1) {
-//                        Toast.makeText(Pengeluaran.this, "Sukses", Toast.LENGTH_SHORT).show();
-//                        callData(Tanggalfrom.getText().toString(),Tanggalto.getText().toString());
-//
-//                    } else {
-//                        Toast.makeText(Pengeluaran.this, "Gagal", Toast.LENGTH_SHORT).show();
-//                        callData(Tanggalfrom.getText().toString(),Tanggalto.getText().toString());
-//                    }
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//                pDialog.dismiss();
-//            }
-//        }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                Toast.makeText(Pengeluaran.this, error.getMessage(), Toast.LENGTH_SHORT).show();
-//                pDialog.dismiss();
-//            }
-//        }) {
-//            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-//            @Override
-//            protected Map<String, String> getParams() {
-//                Map<String, String> params = new HashMap<String, String>();
-//                BigDecimal hargabeli = RupiahTextWatcher.parseCurrencyValue(_nominal);
-//
-//                params.put("keterangan", _keterangan);
-//                params.put("nominal", hargabeli.toString());
-//                params.put("idtoko",xidtoko);
-//                return params;
-//            }
-//        };
-//        AppController.getInstance().addToRequestQueue(strReq, tag_json_obj);
-//    }
-//    public void editdata(final String _id,final String _keterangan,final String _nominal) {
-//        pDialog = new ProgressDialog(Pengeluaran.this);
-//        pDialog.setCancelable(false);
-//        pDialog.setMessage("Loading...");
-//        pDialog.show();
-//        StringRequest strReq = new StringRequest(Request.Method.POST, URL_SERVER.CPENGELUARANEDIT, new Response.Listener<String>() {
-//            @Override
-//            public void onResponse(String response) {
-//                Log.e("Response: ", response.toString());
-//                try {
-//                    JSONObject jObj = new JSONObject(response);
-//                    int value = jObj.getInt("success");
-//                    if (value == 1) {
-//                        Toast.makeText(Pelanggan.this, "Sukses", Toast.LENGTH_SHORT).show();
-//                        callData(T);
-//
-//                    } else {
-//                        Toast.makeText(Pelanggan.this, "Gagal", Toast.LENGTH_SHORT).show();
-//                        callData();
-//                    }
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//                pDialog.dismiss();
-//            }
-//        }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                Toast.makeText(Pengeluaran.this, error.getMessage(), Toast.LENGTH_SHORT).show();
-//                pDialog.dismiss();
-//            }
-//        }) {
-//            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-//            @Override
-//            protected Map<String, String> getParams() {
-//                Map<String, String> params = new HashMap<String, String>();
-//                BigDecimal nominal = RupiahTextWatcher.parseCurrencyValue(_nominal);
-//
-//                params.put("idpengeluaran", _id);
-//                params.put("keterangan", _keterangan);
-//                params.put("nominal", nominal.toString());
-//                return params;
-//            }
-//        };
-//        AppController.getInstance().addToRequestQueue(strReq, tag_json_obj);
-//    }
+    public void simpanData(final String _nama,final String _alamat,final String _nohp) {
+        pDialog = new ProgressDialog(Pelanggan.this);
+        pDialog.setCancelable(false);
+        pDialog.setMessage("Loading...");
+        pDialog.show();
+        StringRequest strReq = new StringRequest(Request.Method.POST, URL_SERVER.CPELANGGANADD, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.e("Response: ", response.toString());
+                try {
+                    JSONObject jObj = new JSONObject(response);
+                    int value = jObj.getInt("success");
+                    if (value == 1) {
+                        Toast.makeText(Pelanggan.this, "Sukses", Toast.LENGTH_SHORT).show();
+                        callData();
+
+                    } else {
+                        Toast.makeText(Pelanggan.this, "Gagal", Toast.LENGTH_SHORT).show();
+                        callData();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                pDialog.dismiss();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(Pelanggan.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                pDialog.dismiss();
+            }
+        }) {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+
+                params.put("nama", _nama);
+                params.put("alamat", _alamat);
+                params.put("nohp", _nohp);
+                params.put("idtoko",xidtoko);
+                return params;
+            }
+        };
+        AppController.getInstance().addToRequestQueue(strReq, tag_json_obj);
+    }
+    public void editdata(final String _id,final String _nama,final String _alamat,final  String _nohp) {
+        pDialog = new ProgressDialog(Pelanggan.this);
+        pDialog.setCancelable(false);
+        pDialog.setMessage("Loading...");
+        pDialog.show();
+        StringRequest strReq = new StringRequest(Request.Method.POST, URL_SERVER.CPELANGGANEDIT, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.e("Response: ", response.toString());
+                try {
+                    JSONObject jObj = new JSONObject(response);
+                    int value = jObj.getInt("success");
+                    if (value == 1) {
+                        Toast.makeText(Pelanggan.this, "Sukses", Toast.LENGTH_SHORT).show();
+                        callData();
+
+                    } else {
+                        Toast.makeText(Pelanggan.this, "Gagal", Toast.LENGTH_SHORT).show();
+                        callData();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                pDialog.dismiss();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(Pelanggan.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                pDialog.dismiss();
+            }
+        }) {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+
+                params.put("id", _id);
+                params.put("nama", _nama);
+                params.put("alamat", _alamat);
+                params.put("nohp", _nohp);
+                return params;
+            }
+        };
+        AppController.getInstance().addToRequestQueue(strReq, tag_json_obj);
+    }
 //    public void hapusitem(String xidpengeluaran) {
 //        pDialog = new ProgressDialog(Pengeluaran.this);
 //        pDialog.setCancelable(false);
@@ -355,40 +377,44 @@ public class Pelanggan extends AppCompatActivity implements SwipeRefreshLayout.O
         xnohp_toko=pref.getString("nohp_toko","0");
 
     }
-    public void onClick(String _id, String _ket, String _nominal) {
-//        android.app.AlertDialog.Builder dialog = new android.app.AlertDialog.Builder(Pengeluaran.this);
-//        View dialogView = getLayoutInflater().inflate(R.layout.activity_pengeluaranadd, null);
-//        dialog.setView(dialogView);
-//        dialog.setCancelable(false);
-//        final EditText ddket= dialogView.findViewById(R.id.etxt_keterangan);
-//        final EditText ddnominAL= dialogView.findViewById(R.id.etxt_nominal);
-//        final TextView judul= dialogView.findViewById(R.id.txt_judul);
-//
-//        ddnominAL.addTextChangedListener(new RupiahTextWatcher(ddnominAL));
-//        final TextView dialogBtnSubmit = dialogView.findViewById(R.id.btlogin);
-//        ddket.setText(_ket);
-//        ddnominAL.setText(_nominal);
-//        dialogBtnSubmit.setText("Simpan");
-//        judul.setText("Edit");
-//        final ImageView dialogBtnClose = dialogView.findViewById(R.id.bt_back);
-//        final android.app.AlertDialog alertDialog = dialog.create();
-//        alertDialog.show();
-//        dialogBtnClose.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                alertDialog.dismiss();
-//            }
-//        });
-//        dialogBtnSubmit.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                alertDialog.dismiss();
-//                editdata(_id,ddket.getText().toString(),ddnominAL.getText().toString());
-//
-//            }
-//        });
+    public void onClick(String _id, String _nama, String _alamat,String _nohp) {
+        android.app.AlertDialog.Builder dialog = new android.app.AlertDialog.Builder(Pelanggan.this);
+        View dialogView = getLayoutInflater().inflate(R.layout.activity_pelanggan_dialog, null);
+        dialog.setView(dialogView);
+        dialog.setCancelable(false);
+        final EditText gnama= dialogView.findViewById(R.id.etxt_namacustomer);
+        final EditText galamat= dialogView.findViewById(R.id.etxt_alamatcustomer);
+
+        final EditText gnohp= dialogView.findViewById(R.id.etxt_nohpcustomer);
+        final TextView judul= dialogView.findViewById(R.id.txt_judul);
+
+
+        final TextView dialogBtnSubmit = dialogView.findViewById(R.id.btlogin);
+        gnama.setText(_nama);
+        galamat.setText(_alamat);
+        gnohp.setText(_nohp);
+
+        dialogBtnSubmit.setText("Simpan");
+        judul.setText("Edit Pelanggan");
+        final ImageView dialogBtnClose = dialogView.findViewById(R.id.bt_back);
+        final android.app.AlertDialog alertDialog = dialog.create();
+        alertDialog.show();
+        dialogBtnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                alertDialog.dismiss();
+            }
+        });
+        dialogBtnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                alertDialog.dismiss();
+                editdata(_id,gnama.getText().toString(),galamat.getText().toString(),gnohp.getText().toString());
+
+            }
+        });
 
     }
     @Override
