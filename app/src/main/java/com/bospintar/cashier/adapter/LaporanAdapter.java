@@ -75,8 +75,9 @@ public class LaporanAdapter extends RecyclerView.Adapter<LaporanAdapter.MyViewHo
 
         holder.nmpegawai.setText(arrayJenis.get(position).getNama_petugas());
         holder.level.setText(arrayJenis.get(position).getLevel());
-        holder.totaltransaksi.setText(arrayJenis.get(position).getTotal_transaksi()+"Transaksi");
+        holder.totaltransaksi.setText(arrayJenis.get(position).getTotal_transaksi()+" Transaksi");
         holder.totalpenjualan.setText("Rp"+formattedRupiah);
+
 
     }
 
