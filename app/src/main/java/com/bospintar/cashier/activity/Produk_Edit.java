@@ -27,6 +27,8 @@ import com.android.volley.toolbox.StringRequest;
 import com.bospintar.cashier.R;
 import com.bospintar.cashier.app.AppController;
 import com.bospintar.cashier.convert.RupiahTextWatcher;
+import com.bospintar.cashier.server.URL_SERVER;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -175,7 +177,7 @@ public class Produk_Edit extends AppCompatActivity {
 
 
     private void callData() {
-        AppController.getInstance().addToRequestQueue(new StringRequest(1, "https://anikgrosir.majujayaelt.com/getprodukdetail.php", new Response.Listener<String>() {
+        AppController.getInstance().addToRequestQueue(new StringRequest(1, URL_SERVER.link+"getprodukdetail.php", new Response.Listener<String>() {
             public void onResponse(String response) {
                 Log.e("Response: ", response.toString());
                 try {

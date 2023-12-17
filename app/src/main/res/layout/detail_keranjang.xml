@@ -234,53 +234,6 @@
 
                         </LinearLayout>
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:padding="4dp">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
-                                android:layout_marginBottom="8dp"
-                                android:text="Diskon"
-                                android:textColor="@color/textcolor"
-                                android:textSize="14dp"
-                                android:textStyle="bold" />
-
-                            <RadioGroup
-                                android:id="@+id/opsistatuspembayaranAdd"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-                                <RadioButton
-                                    android:id="@+id/diskon"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:buttonTint="@color/utama"
-                                    android:text="Diskon"
-                                    android:textColor="@color/textcolor"
-                                    android:textSize="14dp" />
-
-                                <RadioButton
-                                    android:id="@+id/tanpadiskon"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:buttonTint="@color/utama"
-                                    android:text="Tanpa Diskon"
-                                    android:textColor="@color/textcolor"
-                                    android:textSize="14dp" />
-
-
-                            </RadioGroup>
-
-
-                        </LinearLayout>
 
                     </LinearLayout>
 

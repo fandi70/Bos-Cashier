@@ -31,6 +31,7 @@ import com.bospintar.cashier.adapter.PendingDetailAdapter;
 import com.bospintar.cashier.app.AppController;
 import com.bospintar.cashier.model.Mpending;
 import com.bospintar.cashier.model.MpendingDetail;
+import com.bospintar.cashier.server.URL_SERVER;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -111,7 +112,7 @@ public class PendingActivity extends AppCompatActivity {
     public void callData() {
         this.arraylist.clear();
 //        this.swipe.setRefreshing(true);
-        AppController.getInstance().addToRequestQueue(new StringRequest(1, "https://anikgrosir.majujayaelt.com/getpending.php", new Response.Listener<String>() {
+        AppController.getInstance().addToRequestQueue(new StringRequest(1, URL_SERVER.link+"getpending.php", new Response.Listener<String>() {
             public void onResponse(String response) {
                 Log.e("Response: ", response.toString());
                 try {
@@ -193,7 +194,7 @@ public class PendingActivity extends AppCompatActivity {
         this.arraylistDetail.clear();
         //this.swipe.setRefreshing(true);
         final String str = idtransaksi;
-        AppController.getInstance().addToRequestQueue(new StringRequest(1, "https://anikgrosir.majujayaelt.com/getdetailpending.php", new Response.Listener<String>() {
+        AppController.getInstance().addToRequestQueue(new StringRequest(1, URL_SERVER.link+"getdetailpending.php", new Response.Listener<String>() {
             public void onResponse(String response) {
                 Log.e("Response: ", response.toString());
                 try {
