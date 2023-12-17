@@ -61,6 +61,11 @@
 
             android:exported="false" />
         <activity
+            android:name=".activity.Produk_Edit"
+            android:theme="@style/themeutamabg"
+
+            android:exported="false" />
+        <activity
             android:name=".activity.ProdukTransaksi"
             android:theme="@style/themeutamawhite"
             android:exported="false" />

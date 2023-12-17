@@ -2,7 +2,6 @@ package com.bospintar.cashier.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bospintar.cashier.R;
-import com.bospintar.cashier.activity.TransaksiCetakActivity;
 import com.bospintar.cashier.model.Mlaporan;
 
 import java.text.DecimalFormat;
@@ -77,19 +75,10 @@ public class LaporanAdapter extends RecyclerView.Adapter<LaporanAdapter.MyViewHo
 
         holder.nmpegawai.setText(arrayJenis.get(position).getNama_petugas());
         holder.level.setText(arrayJenis.get(position).getLevel());
-        holder.totaltransaksi.setText(arrayJenis.get(position).getTotal_transaksi()+"Transaksi");
+        holder.totaltransaksi.setText(arrayJenis.get(position).getTotal_transaksi()+" Transaksi");
         holder.totalpenjualan.setText("Rp"+formattedRupiah);
-        holder.btpindah.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent kotak = new Intent(mContext, TransaksiCetakActivity.class);
-                kotak.putExtra("idpetugas",arrayJenis.get(position).getIdpetugas());
-                kotak.putExtra("dari","1");
-                kotak.putExtra("sampai","1");
-                mContext.startActivity(kotak);
 
-            }
-        });
+
     }
 
 

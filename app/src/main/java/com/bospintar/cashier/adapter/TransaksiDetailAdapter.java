@@ -5,9 +5,12 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -30,8 +33,9 @@ public class TransaksiDetailAdapter extends RecyclerView.Adapter<TransaksiDetail
     private Context mContext;
 
     static class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView txtnamaproduk, txtharga,txtjumlah,txttotal;
+        TextView txtnamaproduk, txtharga,txttotal;
         ImageView minus,plus;
+        EditText txtjumlah;
         LinearLayout btpindah;
 
 
@@ -47,6 +51,18 @@ public class TransaksiDetailAdapter extends RecyclerView.Adapter<TransaksiDetail
             minus=view.findViewById(R.id.minus);
             txttotal=view.findViewById(R.id.txttotal);
             btpindah = view.findViewById(R.id.btpindah);
+
+            //tombol enter di keyboard
+            txtjumlah.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+                @Override
+                public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                    if(actionId == EditorInfo.IME_ACTION_DONE){
+                        //do stuff
+                        return true;
+                    }
+                    return false;
+                }
+            });
 
         }
     }

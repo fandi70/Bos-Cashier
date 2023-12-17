@@ -46,9 +46,9 @@
                     android:textSize="14dp" />
 
                 <LinearLayout
-                    android:background="@drawable/bg_stroke_white_round"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/bg_stroke_white_round"
                     android:orientation="horizontal">
 
                     <ImageView
@@ -58,13 +58,17 @@
                         android:clickable="true"
                         android:src="@drawable/selector_minus" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/txtjumlah"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
+                        android:background="@color/transparans"
                         android:gravity="center"
+                        android:inputType="number"
                         android:paddingLeft="16dp"
+                        android:lines="1"
                         android:paddingRight="16dp"
+                        android:imeOptions="actionDone"
                         android:text="5"
                         android:textColor="@color/textcolor"
                         android:textSize="14dp" />
@@ -72,11 +76,12 @@
                     <ImageView
                         android:id="@+id/plus"
                         android:layout_width="wrap_content"
-                        android:clickable="true"
                         android:layout_height="wrap_content"
+                        android:clickable="true"
                         android:src="@drawable/selector_plus" />
 
                 </LinearLayout>
+
 
             </LinearLayout>
 

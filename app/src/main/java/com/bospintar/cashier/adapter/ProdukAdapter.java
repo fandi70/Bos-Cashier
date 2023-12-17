@@ -2,6 +2,7 @@ package com.bospintar.cashier.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
@@ -17,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bospintar.cashier.R;
+import com.bospintar.cashier.activity.Produk_Edit;
 import com.bospintar.cashier.model.Mproduk;
 
 import java.text.DecimalFormat;
@@ -91,7 +93,9 @@ public class ProdukAdapter extends RecyclerView.Adapter<ProdukAdapter.MyViewHold
         holder.btpindah.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(mContext, arrayJenis.get(position).getGrosir(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(mContext, Produk_Edit.class);
+                intent.putExtra("idproduk",arrayJenis.get(position).getId());
+                mContext.startActivity(intent);
 
             }
         });
