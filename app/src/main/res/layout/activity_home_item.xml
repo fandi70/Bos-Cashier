@@ -93,6 +93,6 @@
         android:layout_marginTop="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
-        android:background="@color/stroke_edittext" />
+        android:background="@color/hint0" />
 
 </LinearLayout>

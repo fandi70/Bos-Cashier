@@ -49,20 +49,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:paddingLeft="16dp"
-                    android:paddingRight="16dp"
+                    android:padding="2dp"
                     android:text="X 5"
                     android:textColor="@color/textcolor"
                     android:textSize="12dp" />
 
 
             </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_margin="4dp"
-                android:background="@color/background" />
 
             <LinearLayout
 
@@ -101,7 +94,10 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_margin="8dp"
-        android:background="@color/background" />
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@color/hint0" />
 
 </LinearLayout>
