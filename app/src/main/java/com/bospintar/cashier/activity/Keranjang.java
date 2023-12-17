@@ -70,7 +70,7 @@ public class Keranjang extends AppCompatActivity{
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             public void onTextChanged(CharSequence s, int start,
                                       int before, int count) {
-                if (Integer.parseInt(s.toString())<=0 || s.toString().equals("")){
+                if (s.toString().equals("Rp0") || s.toString().equals("")){
                     edharga.setText("Rp888478");
                 }else {
                     edharga.setText(edbayarpenjuan.getText());
