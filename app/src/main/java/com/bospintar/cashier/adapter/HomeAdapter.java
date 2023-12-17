@@ -92,7 +92,6 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> 
                 Intent kotak = new Intent(mContext, TransaksiCetakActivity.class);
                 kotak.putExtra("id",arrayJenis.get(position).getId());
                 mContext.startActivity(kotak);
-                ((Menu)mContext).finish();
 
             }
         });

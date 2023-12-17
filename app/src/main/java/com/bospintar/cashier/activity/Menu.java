@@ -272,6 +272,13 @@ public class Menu extends AppCompatActivity implements SwipeRefreshLayout.OnRefr
         pengeluaran = dialog.findViewById(R.id.ln_pengeluaran);
         pelanggan = dialog.findViewById(R.id.ln_pelanggan);
         laporan = dialog.findViewById(R.id.ln_laporan);
+        laporan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Menu.this, Laporan.class));
+                finish();
+            }
+        });
         produk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
