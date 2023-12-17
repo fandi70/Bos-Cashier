@@ -75,7 +75,8 @@ public class Histori extends AppCompatActivity implements SwipeRefreshLayout.OnR
         swipe = findViewById(R.id.swipe_refreshdata);
         _dari=sdcurrentdate.format(new Date());
         _sampai=sdcurrentdate.format(new Date());
-        callData("semua",_dari,_sampai);
+        stspembayaran="semua";
+        callData(stspembayaran,_dari,_sampai);
 
         caribydate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,8 +107,15 @@ public class Histori extends AppCompatActivity implements SwipeRefreshLayout.OnR
                         }
                     }
                 });
-                dari.setText(sdcurrentdate.format(new Date()));
-                sampai.setText(sdcurrentdate.format(new Date()));
+                if (stspembayaran.toString().equals("lunas")){
+                    rlunas.setChecked(true);
+                }else if (stspembayaran.toString().equals("hutang")){
+                    rutang.setChecked(true);
+                }else if (stspembayaran.toString().equals("semua")){
+                    rsemua.setChecked(true);
+                }
+                dari.setText(_dari);
+                sampai.setText(_sampai);
                 dari.setFocusableInTouchMode(false);
                 dari.setFocusable(false);
                 sampai.setFocusableInTouchMode(false);

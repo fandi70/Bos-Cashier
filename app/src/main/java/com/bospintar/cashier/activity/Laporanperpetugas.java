@@ -91,8 +91,8 @@ public class Laporanperpetugas extends AppCompatActivity implements SwipeRefresh
 
                 final TextView judul= dialogView.findViewById(R.id.txt_judul);
                 judul.setText("Cari Transaksi");
-                dari.setText(sdcurrentdate.format(new Date()));
-                sampai.setText(sdcurrentdate.format(new Date()));
+                dari.setText(E_dari);
+                sampai.setText(E_sampai);
                 dari.setFocusableInTouchMode(false);
                 dari.setFocusable(false);
                 sampai.setFocusableInTouchMode(false);

@@ -86,8 +86,8 @@ public class Laporan extends AppCompatActivity implements SwipeRefreshLayout.OnR
 
                 final TextView judul= dialogView.findViewById(R.id.txt_judul);
                 judul.setText("Cari Tanggal Transaksi Pegawai");
-                dari.setText(sdcurrentdate.format(new Date()));
-                sampai.setText(sdcurrentdate.format(new Date()));
+                dari.setText(_dari);
+                sampai.setText(_sampai);
                 dari.setFocusableInTouchMode(false);
                 dari.setFocusable(false);
                 sampai.setFocusableInTouchMode(false);
