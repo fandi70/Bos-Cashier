@@ -10,6 +10,7 @@ import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,6 +39,7 @@ public class ProdukAdapter extends RecyclerView.Adapter<ProdukAdapter.MyViewHold
 
     static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView txt_nm, txt_hrg,txt_status;
+        ImageView btedit,btdelete;
         LinearLayout btpindah;
 
 
@@ -46,6 +48,8 @@ public class ProdukAdapter extends RecyclerView.Adapter<ProdukAdapter.MyViewHold
             super(view);
             txt_nm = view.findViewById(R.id.txtnamabarang);
             txt_hrg = view.findViewById(R.id.txtharga);
+            btdelete = view.findViewById(R.id.btdelete);
+            btedit = view.findViewById(R.id.btedit);
 
             txt_status=view.findViewById(R.id.txtstatusgrosir);
             btpindah = view.findViewById(R.id.btpindah);
@@ -90,7 +94,7 @@ public class ProdukAdapter extends RecyclerView.Adapter<ProdukAdapter.MyViewHold
         }
 
 
-        holder.btpindah.setOnClickListener(new View.OnClickListener() {
+        holder.btedit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, Produk_Edit.class);

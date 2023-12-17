@@ -1,14 +1,20 @@
 package com.bospintar.cashier.activity;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -76,13 +82,19 @@ public class ProdukTransaksi extends AppCompatActivity implements SwipeRefreshLa
                 startActivity(intent);
             }
         });
-
+        RelativeLayout bttambahmanual = findViewById(R.id.bttambahmanual);
         RelativeLayout btpending = findViewById(R.id.btpending);
         btpending.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ProdukTransaksi.this, PendingActivity.class);
                 startActivity(intent);
+            }
+        });
+        bttambahmanual.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showhdialog();
             }
         });
 
@@ -279,4 +291,31 @@ public class ProdukTransaksi extends AppCompatActivity implements SwipeRefreshLa
     public void onRefresh() {
         callData();
     }
+
+
+    private void showhdialog() {
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_tambah_manual);
+
+        TextView cancelButton = dialog.findViewById(R.id.cancelButton);
+        TextView okButton = dialog.findViewById(R.id.okButton);
+
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.setCancelable(false);
+
+
+        dialog.show();
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+/*        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimasi;
+        dialog.getWindow().setGravity(Gravity.BOTTOM);*/
+    }
+
 }

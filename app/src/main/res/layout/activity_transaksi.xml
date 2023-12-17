@@ -7,12 +7,12 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_weight="1"
         android:orientation="vertical">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -20,15 +20,6 @@
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:padding="16dp"
-                android:text="Transaksi"
-                android:textColor="@color/putih_tetap"
-                android:textSize="14dp"
-                android:textStyle="bold" />
 
             <ImageView
                 android:id="@+id/bt_back"
@@ -41,51 +32,95 @@
                 android:padding="16dp"
                 android:src="@drawable/ic_arrow" />
 
-            <RelativeLayout
-                android:layout_width="28dp"
-                android:layout_height="28dp"
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="16dp"
+                android:text="Transaksi"
+                android:textColor="@color/putih_tetap"
+                android:textSize="14dp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_centerInParent="true"
                 android:layout_marginRight="16dp"
-                android:clickable="true">
-
-                <ImageView
-                    android:id="@+id/btsave"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_centerInParent="true"
-                    android:clickable="true"
-                    android:src="@drawable/ic_save" />
-
-                <TextView
-                    android:id="@+id/txtnotif"
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:layout_alignParentEnd="true"
-                    android:background="@drawable/bg_notif"
-                    android:gravity="center"
-                    android:padding="1dp"
-                    android:text="0"
-                    android:textColor="@color/putih_tetap"
-                    android:textSize="10dp"
-                    android:textStyle="bold" />
+                android:orientation="horizontal">
 
                 <RelativeLayout
-                    android:id="@+id/btpending"
                     android:layout_width="28dp"
                     android:layout_height="28dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerHorizontal="true"
-                    android:background="@drawable/selector_transparan"
-                    android:clickable="true"></RelativeLayout>
+                    android:layout_marginRight="8dp"
+                    android:clickable="true">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerInParent="true"
+                        android:clickable="true"
+                        android:src="@drawable/ic_tambah_manual" />
 
 
-            </RelativeLayout>
+                    <RelativeLayout
+                        android:id="@+id/bttambahmanual"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerHorizontal="true"
+                        android:background="@drawable/selector_transparan"
+                        android:clickable="true"></RelativeLayout>
 
 
-        </RelativeLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:clickable="true">
+
+                    <ImageView
+                        android:id="@+id/btsave"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerInParent="true"
+                        android:clickable="true"
+                        android:src="@drawable/ic_save" />
+
+                    <TextView
+                        android:id="@+id/txtnotif"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_alignParentEnd="true"
+                        android:background="@drawable/bg_notif"
+                        android:gravity="center"
+                        android:padding="1dp"
+                        android:text="0"
+                        android:textColor="@color/putih_tetap"
+                        android:textSize="10dp"
+                        android:textStyle="bold" />
+
+                    <RelativeLayout
+                        android:id="@+id/btpending"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerHorizontal="true"
+                        android:background="@drawable/selector_transparan"
+                        android:clickable="true"></RelativeLayout>
+
+
+                </RelativeLayout>
+            </LinearLayout>
+
+
+        </LinearLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -135,15 +170,17 @@
                     android:background="@drawable/bg_list_white"
                     android:orientation="vertical"
                     android:padding="16dp">
+
                     <TextView
-                        android:visibility="gone"
                         android:id="@+id/txtpesan"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:padding="5dp"
                         android:textSize="14dp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:visibility="gone" />
+
                     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
                         android:id="@+id/swipe_refreshdatahistorykegiatan"
                         android:layout_width="match_parent"

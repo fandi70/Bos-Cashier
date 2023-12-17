@@ -62,7 +62,7 @@ public class ProdukTransaksiAdapter extends RecyclerView.Adapter<ProdukTransaksi
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.activity_produk_item, parent, false);
+                .inflate(R.layout.activity_transaksi_item, parent, false);
         return new MyViewHolder(itemView);
     }
 

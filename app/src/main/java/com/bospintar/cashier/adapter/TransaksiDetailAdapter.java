@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -20,6 +21,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bospintar.cashier.R;
+import com.bospintar.cashier.activity.Keranjang;
+import com.bospintar.cashier.activity.Produk_Edit;
 import com.bospintar.cashier.activity.TransaksiDetailActivity;
 import com.bospintar.cashier.model.MtransaksiDetail;
 
@@ -125,16 +128,12 @@ public class TransaksiDetailAdapter extends RecyclerView.Adapter<TransaksiDetail
                 notifyDataSetChanged();
             }
         });
-        holder.btpindah.setOnLongClickListener(new View.OnLongClickListener() {
+        holder.btpindah.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onLongClick(View v) {
-                int position = holder.getAdapterPosition();
-                if (position != RecyclerView.NO_POSITION) {
-//                    Log.d("Adapter", "Long click position: " + position);
-                    showDeleteDialog(position,arrayJenis.get(position).getIdb());
-                    return true;
-                }
-                return false;
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, Keranjang.class);
+                mContext.startActivity(intent);
+
             }
         });
 

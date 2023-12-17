@@ -4,17 +4,17 @@
 
     <item android:state_pressed="true">
         <shape>
-            <solid android:color="@color/red2" /> />
+            <solid android:color="@color/red2" />
         </shape>
     </item> <!-- pressed -->
     <item android:state_focused="true">
         <shape>
-            <solid android:color="@color/red2" /> />
+            <solid android:color="@color/red2" />
         </shape>
     </item> <!-- focused -->
     <item>
         <shape>
-            <solid android:color="@color/red" /> />
+            <solid android:color="@color/red" />
         </shape>
     </item> <!-- default -->
 </selector>
