@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bospintar.cashier.R;
+import com.bospintar.cashier.activity.TransaksiCetakActivity;
 import com.bospintar.cashier.model.Mlaporanpetugas;
 
 import java.text.DecimalFormat;
@@ -80,9 +81,9 @@ public class LaporanperpetugasAdapter extends RecyclerView.Adapter<Laporanperpet
         holder.btpindah.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent kotak = new Intent(mContext, TransaksiCetakActivity.class);
-//                kotak.putExtra("id",arrayJenis.get(position).getId());
-//                mContext.startActivity(kotak);
+                Intent kotak = new Intent(mContext, TransaksiCetakActivity.class);
+                kotak.putExtra("id",arrayJenis.get(position).getId());
+                mContext.startActivity(kotak);
 
             }
         });

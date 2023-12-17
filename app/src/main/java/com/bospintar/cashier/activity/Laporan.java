@@ -85,6 +85,7 @@ public class Laporan extends AppCompatActivity implements SwipeRefreshLayout.OnR
                 final EditText sampai= dialogView.findViewById(R.id.edt_sampai);
 
                 final TextView judul= dialogView.findViewById(R.id.txt_judul);
+                judul.setText("Cari Tanggal Transaksi Pegawai");
                 dari.setText(sdcurrentdate.format(new Date()));
                 sampai.setText(sdcurrentdate.format(new Date()));
                 dari.setFocusableInTouchMode(false);
@@ -136,7 +137,6 @@ public class Laporan extends AppCompatActivity implements SwipeRefreshLayout.OnR
 
                 final TextView dialogBtnSubmit = dialogView.findViewById(R.id.btlogin);
                 dialogBtnSubmit.setText("Terapkan");
-                judul.setText("cari by date");
                 final ImageView dialogBtnClose = dialogView.findViewById(R.id.bt_back);
                 final android.app.AlertDialog alertDialog = dialog.create();
                 alertDialog.show();
@@ -158,7 +158,8 @@ public class Laporan extends AppCompatActivity implements SwipeRefreshLayout.OnR
                 });
             }
         });
-        adapter = new LaporanAdapter(arraylist, this);
+//        adapter = new LaporanAdapter(arraylist, this);
+        adapter = new LaporanAdapter(arraylist,_dari,_sampai, this);
         rcList = findViewById(R.id.rcList);
         final GridLayoutManager mLayoutManager = new GridLayoutManager(this, 1);
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -216,7 +217,7 @@ public class Laporan extends AppCompatActivity implements SwipeRefreshLayout.OnR
                                     data.getString("total_penjualan"), data.getString("idtoko"));
                             arraylist.add(wp);
                         }
-                        adapter = new LaporanAdapter(arraylist, Laporan.this);
+                        adapter = new LaporanAdapter(arraylist,_dari,_sampai, Laporan.this);
                         rcList.setAdapter(adapter);
                         rupiahFormat.setParseBigDecimal(true);
                         rupiahFormat.applyPattern("#,##0");
