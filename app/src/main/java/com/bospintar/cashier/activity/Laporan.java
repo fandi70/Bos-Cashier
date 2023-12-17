@@ -46,7 +46,7 @@ import java.util.Map;
 public class Laporan extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
     String xidpetugas,xnama_petugas,xalamat_petugas,xnohp,xlevel,xidtoko,xnama_toko,xalamat_toko,xstatus_toko,xketnota,xnohp_toko;
 
-    TextView caribydate,txtdari,txtsampai;
+    TextView caribydate,txtdari,txtsampai,txttotalpenjualan;
     String _dari,_sampai;
     ArrayList<Mlaporan> arraylist = new ArrayList<>();
     public static final String TAG_RESULTS = "omset";
@@ -67,6 +67,7 @@ public class Laporan extends AppCompatActivity implements SwipeRefreshLayout.OnR
         caribydate=findViewById(R.id.caribydate);
         txtsampai= findViewById(R.id.txtsampai);
         txtdari= findViewById(R.id.txtdari);
+        txttotalpenjualan= findViewById(R.id.txttotalPenjualan);
         swipe = findViewById(R.id.swipe_refreshdata);
         _dari=sdcurrentdate.format(new Date());
         _sampai=sdcurrentdate.format(new Date());
@@ -217,7 +218,10 @@ public class Laporan extends AppCompatActivity implements SwipeRefreshLayout.OnR
                         }
                         adapter = new LaporanAdapter(arraylist, Laporan.this);
                         rcList.setAdapter(adapter);
-
+                        rupiahFormat.setParseBigDecimal(true);
+                        rupiahFormat.applyPattern("#,##0");
+                        Double xtotal = Double.parseDouble(jObj.getString("total_penjualan"));
+                        txttotalpenjualan.setText("Rp" + rupiahFormat.format(xtotal));
                         txtdari.setText(xdari);
                         txtsampai.setText(xsampai);
 

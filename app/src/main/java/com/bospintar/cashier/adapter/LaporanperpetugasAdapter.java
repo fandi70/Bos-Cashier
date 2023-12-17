@@ -13,83 +13,80 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bospintar.cashier.R;
-import com.bospintar.cashier.activity.TransaksiCetakActivity;
-import com.bospintar.cashier.model.Mlaporan;
+import com.bospintar.cashier.model.Mlaporanpetugas;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Locale;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-public class LaporanAdapter extends RecyclerView.Adapter<LaporanAdapter.MyViewHolder> {
-    private ArrayList<Mlaporan> arrayJenis;
+public class LaporanperpetugasAdapter extends RecyclerView.Adapter<LaporanperpetugasAdapter.MyViewHolder> {
+    private ArrayList<Mlaporanpetugas> arrayJenis;
     private Context mContext;
-    private ArrayList<Mlaporan> arraylist;
+    private ArrayList<Mlaporanpetugas> arraylist;
     private String baru = "";
 
     static class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView nmpegawai,level,totalpenjualan,totaltransaksi;
+        TextView nota,total,tgl,status;
         LinearLayout btpindah;
 
 
 
         MyViewHolder(View view) {
             super(view);
-            nmpegawai = view.findViewById(R.id.txt_namapegawai);
-            level = view.findViewById(R.id.txt_level);
+            nota = view.findViewById(R.id.txt_nota);
+            total = view.findViewById(R.id.txt_totalbayar);
 
-            totalpenjualan = view.findViewById(R.id.txt_totalpenjualan);
-            totaltransaksi = view.findViewById(R.id.txt_totaltransaksi);
+            tgl = view.findViewById(R.id.txt_tanggal);
+            status = view.findViewById(R.id.txt_status);
             btpindah = view.findViewById(R.id.btpindah);
 
         }
     }
 
-    public LaporanAdapter(ArrayList<Mlaporan> arrayJenis, Context context) {
+    public LaporanperpetugasAdapter(ArrayList<Mlaporanpetugas> arrayJenis, Context context) {
         this.arrayJenis = arrayJenis;
         this.mContext = context;
         this.arraylist = new ArrayList<>();
         this.arraylist.addAll(arrayJenis);
     }
-    public void setItemList(ArrayList<Mlaporan> arrayJenis) {
+    public void setItemList(ArrayList<Mlaporanpetugas> arrayJenis) {
         this.arrayJenis = arrayJenis;
         notifyDataSetChanged();
     }
 
     @NonNull
     @Override
-    public LaporanAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public LaporanperpetugasAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.activity_laporan_item, parent, false);
-        return new LaporanAdapter.MyViewHolder(itemView);
+                .inflate(R.layout.activity_laporanperpetugas_item, parent, false);
+        return new LaporanperpetugasAdapter.MyViewHolder(itemView);
     }
 
     @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(@NonNull final LaporanAdapter.MyViewHolder holder, @SuppressLint("RecyclerView") final int position) {
-        double amount =Double.parseDouble(arrayJenis.get(position).getTotal_penjualan());
+    public void onBindViewHolder(@NonNull final LaporanperpetugasAdapter.MyViewHolder holder, @SuppressLint("RecyclerView") final int position) {
+        double amount =Double.parseDouble(arrayJenis.get(position).getTotalbayar());
         DecimalFormat rupiahFormat = (DecimalFormat) NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
         rupiahFormat.setParseBigDecimal(true);
         rupiahFormat.applyPattern("#,##0");
         String formattedRupiah = rupiahFormat.format(amount);
 
-        holder.nmpegawai.setText(arrayJenis.get(position).getNama_petugas());
-        holder.level.setText(arrayJenis.get(position).getLevel());
-        holder.totaltransaksi.setText(arrayJenis.get(position).getTotal_transaksi()+"Transaksi");
-        holder.totalpenjualan.setText("Rp"+formattedRupiah);
+        holder.nota.setText(arrayJenis.get(position).getNota());
+        holder.tgl.setText(arrayJenis.get(position).getTanggal());
+        holder.total.setText("Rp"+formattedRupiah);
+        holder.status.setText(arrayJenis.get(position).getJbayar());
+
         holder.btpindah.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent kotak = new Intent(mContext, TransaksiCetakActivity.class);
-                kotak.putExtra("idpetugas",arrayJenis.get(position).getIdpetugas());
-                kotak.putExtra("dari","1");
-                kotak.putExtra("sampai","1");
-                mContext.startActivity(kotak);
+//                Intent kotak = new Intent(mContext, TransaksiCetakActivity.class);
+//                kotak.putExtra("id",arrayJenis.get(position).getId());
+//                mContext.startActivity(kotak);
 
             }
         });
+
     }
 
 
