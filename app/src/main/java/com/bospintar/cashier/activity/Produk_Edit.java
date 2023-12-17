@@ -186,8 +186,10 @@ public class Produk_Edit extends AppCompatActivity {
                         Produk_Edit.this.hjual.setText(jObj.getString("hargajual"));
                         if (jObj.getString("s_grosir").equals("Y")) {
                             Produk_Edit.this.toggleButton.setChecked(true);
+                            recyclerView.setVisibility(View.VISIBLE);
                         } else {
                             Produk_Edit.this.toggleButton.setChecked(false);
+                            recyclerView.setVisibility(View.GONE);
                         }
                         if (jObj.getString("s_stok").equals("Y")) {
                             Produk_Edit.this.toggleButtonstok.setChecked(true);
