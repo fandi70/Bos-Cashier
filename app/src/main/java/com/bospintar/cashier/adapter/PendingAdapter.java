@@ -16,6 +16,7 @@ import com.bospintar.cashier.R;
 import com.bospintar.cashier.activity.PendingActivity;
 import com.bospintar.cashier.model.Mpending;
 
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -59,10 +60,15 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
     }
 
     public void onBindViewHolder(MyViewHolder holder, @SuppressLint("RecyclerView") final int position) {
-        String formattedRupiah = NumberFormat.getCurrencyInstance(new Locale("id", "ID")).format(Double.parseDouble(this.arrayJenis.get(position).getTotalbayar()));
+        double amount =Double.parseDouble(arrayJenis.get(position).getTotalbayar());
+        DecimalFormat rupiahFormat = (DecimalFormat) NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
+        rupiahFormat.setParseBigDecimal(true);
+        rupiahFormat.applyPattern("#,##0");
+        String formattedRupiah = rupiahFormat.format(amount);
         holder.txtnama.setText(this.arrayJenis.get(position).getIdtrnasaksi());
-        holder.txtharga.setText(formattedRupiah);
+        holder.txtharga.setText("Rp"+formattedRupiah);
         holder.txttgl.setText(this.arrayJenis.get(position).getTanggal());
+
         holder.btpindah.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 ((PendingActivity) mContext).showDialogPending((arrayJenis.get(position)).getIdtrnasaksi());

@@ -24,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:padding="16dp"
-                android:text="Histori"
+                android:text="Laporan By Date"
                 android:textColor="@color/putih_tetap"
                 android:textSize="14dp"
                 android:textStyle="bold" />
