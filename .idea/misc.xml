@@ -17,12 +17,15 @@
         <entry key="..\:/kara/MyCashier/app/src/main/res/drawable/selector_switch.xml" value="0.1" />
         <entry key="..\:/kara/MyCashier/app/src/main/res/drawable/selector_transparan.xml" value="0.1" />
         <entry key="..\:/kara/MyCashier/app/src/main/res/layout/activity_add_pelanggan.xml" value="0.20416666666666666" />
+        <entry key="..\:/kara/MyCashier/app/src/main/res/layout/activity_history.xml" value="0.25" />
         <entry key="..\:/kara/MyCashier/app/src/main/res/layout/activity_history_dialog.xml" value="0.33650793650793653" />
         <entry key="..\:/kara/MyCashier/app/src/main/res/layout/activity_historydialog_dialog.xml" value="0.5" />
         <entry key="..\:/kara/MyCashier/app/src/main/res/layout/activity_home_item.xml" value="0.33" />
         <entry key="..\:/kara/MyCashier/app/src/main/res/layout/activity_laporan.xml" value="0.33" />
         <entry key="..\:/kara/MyCashier/app/src/main/res/layout/activity_laporan_dialog.xml" value="0.25" />
         <entry key="..\:/kara/MyCashier/app/src/main/res/layout/activity_laporan_item.xml" value="0.25" />
+        <entry key="..\:/kara/MyCashier/app/src/main/res/layout/activity_laporanperpetugas_item.xml" value="0.25" />
+        <entry key="..\:/kara/MyCashier/app/src/main/res/layout/activity_laporanperppetugas.xml" value="0.25" />
         <entry key="..\:/kara/MyCashier/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/kara/MyCashier/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/kara/MyCashier/app/src/main/res/layout/activity_menu.xml" value="0.25" />
