@@ -84,7 +84,7 @@ public class LaporanAdapter extends RecyclerView.Adapter<LaporanAdapter.MyViewHo
         holder.btpindah.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(mContext,"dari:"+xdari+" sampai:"+xsampai, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(mContext,"dari:"+xdari+" sampai:"+xsampai, Toast.LENGTH_SHORT).show();
                 Intent kotak = new Intent(mContext, Laporanperpetugas.class);
                 kotak.putExtra("idpetugas",arrayJenis.get(position).getIdpetugas());
                 kotak.putExtra("dari",xdari);
