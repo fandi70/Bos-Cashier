@@ -140,7 +140,7 @@ public class TransaksiCetakActivity extends AppCompatActivity {
                             JSONObject data = jsonArray.getJSONObject(i);
 
 
-                            arraylist.add(new MpendingDetail(data.getString("nama"), data.getString("qty"), data.getString("hargajual")));
+                            arraylist.add(new MpendingDetail(data.getString("nama"), data.getString("qty"), data.getString("hargajual"),data.getString("harganego")));
 //                            totalbarang+=Integer.parseInt(data.getString("qty"))*Integer.parseInt(data.getString("hargajual"));
 
                         }

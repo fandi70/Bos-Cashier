@@ -5,6 +5,7 @@ import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,12 +26,18 @@ public class PendingDetailAdapter extends RecyclerView.Adapter<PendingDetailAdap
         TextView txtharga;
         TextView txthargax;
         TextView txtnama;
+        TextView txtharganego;
+        LinearLayout liNego;
+        LinearLayout liSatuan;
 
         MyViewHolder(View view) {
             super(view);
             this.txtnama = (TextView) view.findViewById(R.id.txtnama);
             this.txtharga = (TextView) view.findViewById(R.id.txtharga);
             this.txthargax = (TextView) view.findViewById(R.id.txthargax);
+            this.liNego =  view.findViewById(R.id.liNego);
+            this.liSatuan =  view.findViewById(R.id.liSatuan);
+            this.txtharganego =  view.findViewById(R.id.txtharganego);
         }
     }
 
@@ -51,10 +58,20 @@ public class PendingDetailAdapter extends RecyclerView.Adapter<PendingDetailAdap
         NumberFormat rupiahFormat = NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
         String formattedRupiah = rupiahFormat.format(amount);
         String harga = rupiahFormat.format(Double.parseDouble(this.arrayJenis.get(position).getHargajual()));
+        String harganego = rupiahFormat.format(Double.parseDouble(this.arrayJenis.get(position).getHarganego()));
         holder.txtnama.setText(this.arrayJenis.get(position).getNama() + " x" + this.arrayJenis.get(position).getQty());
         holder.txtharga.setText(formattedRupiah);
-        holder.txthargax.setText(harga );
-        holder.txthargax.setPaintFlags(holder.txthargax.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        if (!arrayJenis.get(position).getHarganego().equals("0")){
+            holder.txthargax.setText(harga );
+            holder.txtharganego.setText(harganego );
+            holder.txthargax.setPaintFlags(holder.txthargax.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            holder.liNego.setVisibility(View.VISIBLE);
+            holder.liSatuan.setVisibility(View.VISIBLE);
+        }else {
+            holder.liNego.setVisibility(View.GONE);
+            holder.liSatuan.setVisibility(View.GONE);
+        }
+
     }
 
     public int getItemCount() {

@@ -4,9 +4,13 @@ import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
@@ -18,12 +22,17 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.bospintar.cashier.R;
 import com.bospintar.cashier.app.AppController;
+import com.bospintar.cashier.convert.RupiahTextWatcher;
 import com.bospintar.cashier.server.URL_SERVER;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class Keranjang extends AppCompatActivity{
@@ -31,17 +40,46 @@ public class Keranjang extends AppCompatActivity{
     public static final String TAG_VALUE = "status";
     String tag_json_obj = "json_obj_req";
     LinearLayout bthapus;
+    TextView edharga,edtotal;
+    EditText txtjumlah,edbayarpenjuan;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detail_keranjang);
         bacaPreferensi();
         bthapus = findViewById(R.id.bthapus);
+        edharga = findViewById(R.id.edharga);
+        edtotal = findViewById(R.id.edtotal);
+        txtjumlah = findViewById(R.id.txtjumlah);
+        edbayarpenjuan = findViewById(R.id.edbayarpenjuan);
         bthapus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 hapusitem();
             }
+        });
+        edbayarpenjuan.addTextChangedListener(new RupiahTextWatcher(edbayarpenjuan));
+        edbayarpenjuan.addTextChangedListener(new TextWatcher() {
+
+            public void afterTextChanged(Editable s) {}
+
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+                if (Integer.parseInt(s.toString())<=0 || s.toString().equals("")){
+                    edharga.setText("Rp888478");
+                }else {
+                    edharga.setText(edbayarpenjuan.getText());
+                }
+
+                }
+
+
+
         });
     }
     public void hapusitem() {

@@ -91,7 +91,7 @@
                                 android:textSize="14dp" />
 
                             <TextView
-                                android:id="@+id/harga"
+                                android:id="@+id/edharga"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="8dp"
@@ -181,7 +181,7 @@
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/total"
+                                android:id="@+id/edtotal"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="8dp"
@@ -222,7 +222,7 @@
                                 android:textStyle="bold" />
 
                             <EditText
-                                android:id="@+id/bayarpenjuan"
+                                android:id="@+id/edbayarpenjuan"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/bg_edittext_white2"

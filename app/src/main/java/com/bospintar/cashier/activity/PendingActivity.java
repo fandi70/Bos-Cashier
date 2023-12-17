@@ -204,7 +204,7 @@ public class PendingActivity extends AppCompatActivity {
                         JSONArray jsonArray = new JSONArray(jObj.getString(TAG_RESULTS));
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject data = jsonArray.getJSONObject(i);
-                            arraylistDetail.add(new MpendingDetail(data.getString("nama"), data.getString("qty"), data.getString("hargajual")));
+                            arraylistDetail.add(new MpendingDetail(data.getString("nama"), data.getString("qty"), data.getString("hargajual"),data.getString("harganego")));
                         }
                         adapterDetail = new PendingDetailAdapter(arraylistDetail, PendingActivity.this);
                         rcList2.setAdapter(adapterDetail);
