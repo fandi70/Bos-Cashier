@@ -13,6 +13,9 @@
     <color name="transparans2">#0F000000</color>
     <color name="red">#F16850</color>
     <color name="red2">#AF2810</color>
+    <color name="listbackground">#171751</color>
+    <color name="listbackground2">#0D0D39</color>
+    <color name="avatar">#4F5259</color>
 
     //text
     <color name="hint0">#3D4149</color>

@@ -87,8 +87,13 @@
         <activity
             android:name=".activity.Histori"
             android:theme="@style/themeutamabg"
-            android:windowSoftInputMode="adjustResize" />        <activity
+            android:windowSoftInputMode="adjustResize" />
+        <activity
             android:name=".activity.Keranjang"
+            android:theme="@style/themeutamabg"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".activity.Profil"
             android:theme="@style/themeutamabg"
             android:windowSoftInputMode="adjustResize" />
         <activity

@@ -62,7 +62,7 @@ public class Menu extends AppCompatActivity implements SwipeRefreshLayout.OnRefr
     ArrayList<Mhome> arraylist = new ArrayList<>();
     DecimalFormat rupiahFormat = (DecimalFormat) NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
     TextView lihatsemuahistory;
-    ImageView lockproduk, locklainnya, lproduk, llainnya;
+    ImageView lockproduk, locklainnya, lproduk, llainnya,profile_image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +79,7 @@ public class Menu extends AppCompatActivity implements SwipeRefreshLayout.OnRefr
         locklainnya = findViewById(R.id.imglainnya);
         lproduk = findViewById(R.id.lockproduk);
         llainnya = findViewById(R.id.locklainnya);
+        profile_image = findViewById(R.id.profile_image);
 
         lainnya = findViewById(R.id.ln_lainnya);
         pegawai = findViewById(R.id.ln_pegawai);
@@ -102,7 +103,12 @@ public class Menu extends AppCompatActivity implements SwipeRefreshLayout.OnRefr
 
             }
         });
-        lihatsemuahistory.setOnClickListener(new View.OnClickListener() {
+        profile_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), Profil.class));
+            }
+        }); lihatsemuahistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), Histori.class));

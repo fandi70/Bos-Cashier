@@ -4,12 +4,12 @@
     android:viewportWidth="800"
     android:viewportHeight="800">
     <path
-        android:fillColor="#C8C8C8"
+        android:fillColor="@color/avatar"
         android:pathData="M0,0h800v800h-800z" />
     <path
-        android:fillColor="#FFFFFF"
+        android:fillColor="@color/putih"
         android:pathData="M300,291.7a100,91.7 0,1 0,200 0a100,91.7 0,1 0,-200 0z" />
     <path
-        android:fillColor="#FFFFFF"
+        android:fillColor="@color/putih"
         android:pathData="M300,433.3h200c46,0 83.3,37.3 83.3,83.3l0,0c0,46 -37.3,83.3 -83.3,83.3L300,599.9c-46,0 -83.3,-37.3 -83.3,-83.3l0,0C216.7,470.6 254,433.3 300,433.3z" />
 </vector>
