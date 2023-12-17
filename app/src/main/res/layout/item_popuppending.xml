@@ -12,32 +12,22 @@
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:orientation="vertical"
-        android:padding="10dp">
-
-        <TextView
-            android:id="@+id/txtnama"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:text="Nama Barang"
-            android:textColor="@color/textcolor"
-            android:textSize="14dp" />
+        android:padding="8dp">
 
         <LinearLayout
-            android:paddingRight="8dp"
-            android:paddingBottom="8dp"
-            android:paddingLeft="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingBottom="8dp">
 
             <TextView
-                android:id="@+id/txthargax"
+                android:id="@+id/txtnama"
                 android:layout_width="match_parent"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="x0"
-                android:textColor="@color/hint"
+                android:layout_weight="1"
+                android:padding="8dp"
+                android:text="Nama Barang"
+                android:textColor="@color/textcolor"
                 android:textSize="14dp" />
 
             <TextView
@@ -47,6 +37,56 @@
                 android:text="Rp0"
                 android:textColor="@color/textcolor"
                 android:textSize="14dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="8dp"
+            android:paddingBottom="8dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Harga satuan"
+                android:textColor="@color/hint"
+                android:textSize="14dp" />
+
+            <TextView
+                android:id="@+id/txthargax"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rp0"
+                android:textColor="@color/hint"
+                android:textSize="14dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="8dp"
+            android:paddingBottom="8dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Harga nego"
+                android:textColor="@color/hint"
+                android:textSize="14dp" />
+
+            <TextView
+                android:id="@+id/txtharganego"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rp0"
+                android:textColor="@color/hint"
+                android:textSize="14dp" />
+
         </LinearLayout>
 
     </LinearLayout>

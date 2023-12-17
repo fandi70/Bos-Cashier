@@ -1,6 +1,7 @@
 package com.bospintar.cashier.adapter;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,9 +51,10 @@ public class PendingDetailAdapter extends RecyclerView.Adapter<PendingDetailAdap
         NumberFormat rupiahFormat = NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
         String formattedRupiah = rupiahFormat.format(amount);
         String harga = rupiahFormat.format(Double.parseDouble(this.arrayJenis.get(position).getHargajual()));
-        holder.txtnama.setText(this.arrayJenis.get(position).getNama());
+        holder.txtnama.setText(this.arrayJenis.get(position).getNama() + " x" + this.arrayJenis.get(position).getQty());
         holder.txtharga.setText(formattedRupiah);
-        holder.txthargax.setText(harga + " X " + this.arrayJenis.get(position).getQty());
+        holder.txthargax.setText(harga );
+        holder.txthargax.setPaintFlags(holder.txthargax.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
     }
 
     public int getItemCount() {

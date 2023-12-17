@@ -43,10 +43,10 @@
         </RelativeLayout>
 
         <ScrollView
-            android:scrollbars="none"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fillViewport="true">
+            android:fillViewport="true"
+            android:scrollbars="none">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -84,21 +84,23 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="16dp"
                     android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
                     android:layout_marginBottom="48dp"
+                    android:padding="8dp"
                     android:background="@drawable/bg_list_white"
-                    android:orientation="vertical"
-                    android:padding="16dp">
+                    android:orientation="vertical">
+
                     <TextView
-                        android:visibility="gone"
                         android:id="@+id/txtpesan"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:padding="5dp"
+                        android:padding="8dp"
                         android:textSize="14dp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:visibility="gone" />
+
                     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
                         android:id="@+id/swipe_refreshdatahistorykegiatan"
                         android:layout_width="match_parent"
