@@ -61,4 +61,12 @@ public class Mhome {
     public void setIdtoko(String idtoko) {
         this.idtoko = idtoko;
     }
+
+    public String getIdpetugas() {
+        return idpetugas;
+    }
+
+    public void setIdpetugas(String idpetugas) {
+        this.idpetugas = idpetugas;
+    }
 }
