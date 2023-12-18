@@ -144,6 +144,7 @@ public class TransaksiDetailActivity extends AppCompatActivity {
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rcList.setLayoutManager(mLayoutManager);
         rcList.setAdapter(adapter);
+
         callData();
 
         ed_namaPelanggan.setFocusableInTouchMode(false);

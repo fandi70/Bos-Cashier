@@ -94,7 +94,9 @@ public class Produk extends AppCompatActivity implements SwipeRefreshLayout.OnRe
 
                 String text = s.toString().toLowerCase(Locale.getDefault());
                 TextView txt = findViewById(R.id.txtpesan);
-                adapter.filter(text, txt);
+                if (adapter != null) {
+                    adapter.filter(text, txt);
+                }
 
             }
         });

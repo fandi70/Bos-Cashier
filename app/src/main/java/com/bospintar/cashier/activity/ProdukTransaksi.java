@@ -66,6 +66,7 @@ public class ProdukTransaksi extends AppCompatActivity implements SwipeRefreshLa
     ImageView btBack;
     DecimalFormat rupiahFormat = (DecimalFormat) NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
     TextView txtnotif;
+    TextView txt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,9 +135,10 @@ public class ProdukTransaksi extends AppCompatActivity implements SwipeRefreshLa
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
                 String text = s.toString().toLowerCase(Locale.getDefault());
-                TextView txt = findViewById(R.id.txtpesan);
-                adapter.filter(text, txt);
-
+                txt = findViewById(R.id.txtpesan);
+                if (adapter != null) {
+                    adapter.filter(text, txt);
+                }
             }
         });
 

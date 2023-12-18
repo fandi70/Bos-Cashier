@@ -102,7 +102,10 @@ public class PendingActivity extends AppCompatActivity {
             }
 
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                adapter.filter(s.toString().toLowerCase(Locale.getDefault()), (TextView) PendingActivity.this.findViewById(R.id.txtpesan));
+                if (adapter != null) {
+                    adapter.filter(s.toString().toLowerCase(Locale.getDefault()), (TextView) PendingActivity.this.findViewById(R.id.txtpesan));
+
+                }
             }
         });
         callData();
