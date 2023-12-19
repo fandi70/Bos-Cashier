@@ -62,7 +62,7 @@ public class Menu extends AppCompatActivity implements SwipeRefreshLayout.OnRefr
     ArrayList<Mhome> arraylist = new ArrayList<>();
     DecimalFormat rupiahFormat = (DecimalFormat) NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
     TextView lihatsemuahistory;
-    ImageView lockproduk, locklainnya, lproduk, llainnya,profile_image;
+    ImageView lockproduk, locklainnya, lproduk, llainnya,profile_image,img_kosong;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +80,7 @@ public class Menu extends AppCompatActivity implements SwipeRefreshLayout.OnRefr
         lproduk = findViewById(R.id.lockproduk);
         llainnya = findViewById(R.id.locklainnya);
         profile_image = findViewById(R.id.profile_image);
+        img_kosong = findViewById(R.id.img_kosong);
 
         lainnya = findViewById(R.id.ln_lainnya);
         pegawai = findViewById(R.id.ln_pegawai);
@@ -173,6 +174,7 @@ public class Menu extends AppCompatActivity implements SwipeRefreshLayout.OnRefr
     private void callData() {
         arraylist.clear();
         swipe.setRefreshing(true);
+        img_kosong.setVisibility(View.GONE);
 
         // Creating volley request obj
         StringRequest jArr = new StringRequest(Request.Method.POST, URL_SERVER.CHOME, new Response.Listener<String>() {
@@ -206,16 +208,17 @@ public class Menu extends AppCompatActivity implements SwipeRefreshLayout.OnRefr
                         rupiahFormat.setParseBigDecimal(true);
                         rupiahFormat.applyPattern("#,##0");
                         Double xtotal = Double.parseDouble(jObj.getString("total_penjualan"));
-                        txttotalpenjualanhariini.setText("Rp" + rupiahFormat.format(xtotal));
-
+                        txttotalpenjualanhariini.setText("Rp " + rupiahFormat.format(xtotal));
+                        img_kosong.setVisibility(View.GONE);
 
                     } else {
-                        Toast.makeText(Menu.this, "Kosong", Toast.LENGTH_SHORT).show();
+                        img_kosong.setVisibility(View.VISIBLE);
                     }
 
                 } catch (JSONException e) {
                     // JSON error
                     e.printStackTrace();
+                    img_kosong.setVisibility(View.VISIBLE);
                 }
 
 //                adapter.notifyDataSetChanged();
@@ -225,7 +228,7 @@ public class Menu extends AppCompatActivity implements SwipeRefreshLayout.OnRefr
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), "Koneksi Lemah", Toast.LENGTH_SHORT).show();
+                img_kosong.setVisibility(View.VISIBLE);
                 swipe.setRefreshing(false);
             }
         }) {

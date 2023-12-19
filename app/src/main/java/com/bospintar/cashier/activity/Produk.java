@@ -41,7 +41,7 @@ import java.util.Locale;
 import java.util.Map;
 
 public class Produk extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
-    String xidpetugas,xnama_petugas,xalamat_petugas,xnohp,xlevel,xidtoko,xnama_toko,xalamat_toko,xstatus_toko,xketnota,xnohp_toko;
+    String xidpetugas, xnama_petugas, xalamat_petugas, xnohp, xlevel, xidtoko, xnama_toko, xalamat_toko, xstatus_toko, xketnota, xnohp_toko;
     public static final String TAG_RESULTS = "produk";
     public static final String TAG_VALUE = "status";
 
@@ -51,18 +51,20 @@ public class Produk extends AppCompatActivity implements SwipeRefreshLayout.OnRe
     RecyclerView rcList;
     ArrayList<Mproduk> arraylist = new ArrayList<>();
     TextView addproduk;
-    ImageView btBack;
+    ImageView btBack, img_kosong;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_produk);
         bacaPreferensi();
         swipe = (SwipeRefreshLayout) findViewById(R.id.swipe_refreshdatahistorykegiatan);
-        addproduk=(TextView) findViewById(R.id.bt_tambah);
+        addproduk = (TextView) findViewById(R.id.bt_tambah);
 
 
         adapter = new ProdukAdapter(arraylist, this);
         rcList = findViewById(R.id.rcList);
+        img_kosong = findViewById(R.id.img_kosong);
         final GridLayoutManager mLayoutManager = new GridLayoutManager(this, 1);
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rcList.setLayoutManager(mLayoutManager);
@@ -94,7 +96,9 @@ public class Produk extends AppCompatActivity implements SwipeRefreshLayout.OnRe
 
                 String text = s.toString().toLowerCase(Locale.getDefault());
                 TextView txt = findViewById(R.id.txtpesan);
-                adapter.filter(text, txt);
+                if (adapter != null) {
+                    adapter.filter(text, txt,img_kosong);
+                }
 
             }
         });
@@ -104,7 +108,7 @@ public class Produk extends AppCompatActivity implements SwipeRefreshLayout.OnRe
                 startActivity(new Intent(getApplicationContext(), Produk_Add.class));
             }
         });
-        btBack=findViewById(R.id.bt_back);
+        btBack = findViewById(R.id.bt_back);
         btBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -113,10 +117,12 @@ public class Produk extends AppCompatActivity implements SwipeRefreshLayout.OnRe
         });
 
     }
+
     private void callData() {
         arraylist.clear();
 //        adapter.notifyDataSetChanged();
         swipe.setRefreshing(true);
+        img_kosong.setVisibility(View.GONE);
 
         // Creating volley request obj
         StringRequest jArr = new StringRequest(Request.Method.POST, URL_SERVER.CPRODUK, new Response.Listener<String>() {
@@ -142,19 +148,21 @@ public class Produk extends AppCompatActivity implements SwipeRefreshLayout.OnRe
                             JSONObject data = jsonArray.getJSONObject(i);
 
                             Mproduk wp = new Mproduk(data.getString("id"), data.getString("nama"), data.getString("hargajual"),
-                                    data.getString("hargabeli"), data.getString("grosir"),data.getString("stok"),data.getString("satuan"),data.getString("isi_stok"));
+                                    data.getString("hargabeli"), data.getString("grosir"), data.getString("stok"), data.getString("satuan"), data.getString("isi_stok"));
                             arraylist.add(wp);
                         }
                         adapter = new ProdukAdapter(arraylist, Produk.this);
                         rcList.setAdapter(adapter);
+                        img_kosong.setVisibility(View.GONE);
 
                     } else {
-                        Toast.makeText(Produk.this, "Kosong", Toast.LENGTH_SHORT).show();
+                        img_kosong.setVisibility(View.VISIBLE);
                     }
 
                 } catch (JSONException e) {
                     // JSON error
                     e.printStackTrace();
+                    img_kosong.setVisibility(View.VISIBLE);
                 }
 
                 adapter.notifyDataSetChanged();
@@ -164,7 +172,7 @@ public class Produk extends AppCompatActivity implements SwipeRefreshLayout.OnRe
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(),"Koneksi Lemah", Toast.LENGTH_SHORT).show();
+                img_kosong.setVisibility(View.VISIBLE);
                 swipe.setRefreshing(false);
             }
         }) {
@@ -186,27 +194,28 @@ public class Produk extends AppCompatActivity implements SwipeRefreshLayout.OnRe
     }
 
     private void bacaPreferensi() {
-
         SharedPreferences pref = getSharedPreferences("akun", MODE_PRIVATE);
         xidpetugas = pref.getString("idpetugas", "0");
         xnama_petugas = pref.getString("nama_petugas", "0");
         xalamat_petugas = pref.getString("alamat_petugas", "0");
-        xnohp= pref.getString("nohp", "0");
-        xlevel= pref.getString("level", "0");
-        xidtoko= pref.getString("idtoko", "0");
-        xnama_toko= pref.getString("nama_toko", "0");
-        xalamat_toko= pref.getString("alamat_toko", "0");
-        xstatus_toko= pref.getString("status_toko", "0");
-        xketnota= pref.getString("ketnota", "0");
-        xnohp_toko=pref.getString("nohp_toko","0");
+        xnohp = pref.getString("nohp", "0");
+        xlevel = pref.getString("level", "0");
+        xidtoko = pref.getString("idtoko", "0");
+        xnama_toko = pref.getString("nama_toko", "0");
+        xalamat_toko = pref.getString("alamat_toko", "0");
+        xstatus_toko = pref.getString("status_toko", "0");
+        xketnota = pref.getString("ketnota", "0");
+        xnohp_toko = pref.getString("nohp_toko", "0");
 
     }
+
     @Override
     public void onBackPressed() {
         startActivity(new Intent(getApplicationContext(), Menu.class));
 
         finish();
     }
+
     @Override
     public void onRefresh() {
         callData();

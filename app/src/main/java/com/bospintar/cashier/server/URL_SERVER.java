@@ -11,6 +11,7 @@ public class URL_SERVER {
     public static final String CPETUGAS        = link+"getpetugas.php";
     public static final String CPETUGASADD        = link+"addpetugas.php";
     public static final String CPRODUKTRANSAKSI         = link+"getproduktrans.php";
+    public static final String CPRODUKMANUAL         = link+"addmanual_produk.php";
     public static final String CADDTEM  = link+"addtemp.php";
     public static final String CTCUSTOMER  = link+"getpelanggan.php";
     public static final String CPELANGGANADD  = link+"addpelanggan.php";

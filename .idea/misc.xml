@@ -7,28 +7,15 @@
         <entry key="..\:/kara/MyCashier/app/src/main/res/drawable/bg_edittext.xml" value="0.1" />
         <entry key="..\:/kara/MyCashier/app/src/main/res/drawable/bg_list_white.xml" value="0.1" />
         <entry key="..\:/kara/MyCashier/app/src/main/res/drawable/bg_stroke_white.xml" value="0.1" />
-        <entry key="..\:/kara/MyCashier/app/src/main/res/drawable/button_error_background.xml" value="0.159" />
-        <entry key="..\:/kara/MyCashier/app/src/main/res/drawable/button_neutral_background.xml" value="0.159" />
-        <entry key="..\:/kara/MyCashier/app/src/main/res/drawable/button_success_background.xml" value="0.159" />
-        <entry key="..\:/kara/MyCashier/app/src/main/res/drawable/button_warning_background.xml" value="0.159" />
-        <entry key="..\:/kara/MyCashier/app/src/main/res/drawable/dashed_line.xml" value="0.1" />
-        <entry key="..\:/kara/MyCashier/app/src/main/res/drawable/dialog_background.xml" value="0.159" />
-        <entry key="..\:/kara/MyCashier/app/src/main/res/drawable/edittext_bg.xml" value="0.1" />
-        <entry key="..\:/kara/MyCashier/app/src/main/res/drawable/error_background.xml" value="0.159" />
         <entry key="..\:/kara/MyCashier/app/src/main/res/drawable/ic_arrow.xml" value="0.1635" />
         <entry key="..\:/kara/MyCashier/app/src/main/res/drawable/ic_bg_card_ts_bawah.xml" value="0.1635" />
         <entry key="..\:/kara/MyCashier/app/src/main/res/drawable/ic_done.xml" value="0.1645" />
-        <entry key="..\:/kara/MyCashier/app/src/main/res/drawable/ic_empty.xml" value="0.128" />
         <entry key="..\:/kara/MyCashier/app/src/main/res/drawable/ic_switch_off.xml" value="0.1635" />
-        <entry key="..\:/kara/MyCashier/app/src/main/res/drawable/oval_shimer.xml" value="0.128" />
-        <entry key="..\:/kara/MyCashier/app/src/main/res/drawable/radius_shimer1.xml" value="0.129" />
         <entry key="..\:/kara/MyCashier/app/src/main/res/drawable/selector_checkout.xml" value="0.116" />
         <entry key="..\:/kara/MyCashier/app/src/main/res/drawable/selector_radio.xml" value="0.1" />
         <entry key="..\:/kara/MyCashier/app/src/main/res/drawable/selector_stroke.xml" value="0.104" />
         <entry key="..\:/kara/MyCashier/app/src/main/res/drawable/selector_switch.xml" value="0.1" />
         <entry key="..\:/kara/MyCashier/app/src/main/res/drawable/selector_transparan.xml" value="0.1" />
-        <entry key="..\:/kara/MyCashier/app/src/main/res/drawable/success_background.xml" value="0.159" />
-        <entry key="..\:/kara/MyCashier/app/src/main/res/drawable/warning_background.xml" value="0.159" />
         <entry key="..\:/kara/MyCashier/app/src/main/res/layout/activity_add_pelanggan.xml" value="0.20416666666666666" />
         <entry key="..\:/kara/MyCashier/app/src/main/res/layout/activity_history.xml" value="0.25" />
         <entry key="..\:/kara/MyCashier/app/src/main/res/layout/activity_history_dialog.xml" value="0.33650793650793653" />
@@ -48,12 +35,11 @@
         <entry key="..\:/kara/MyCashier/app/src/main/res/layout/activity_pelanggan.xml" value="0.1" />
         <entry key="..\:/kara/MyCashier/app/src/main/res/layout/activity_pelanggan_dialog.xml" value="0.25" />
         <entry key="..\:/kara/MyCashier/app/src/main/res/layout/activity_pelanggan_item.xml" value="0.25" />
-        <entry key="..\:/kara/MyCashier/app/src/main/res/layout/activity_pending.xml" value="0.10104166666666667" />
-        <entry key="..\:/kara/MyCashier/app/src/main/res/layout/activity_pengeluaran.xml" value="0.14" />
+        <entry key="..\:/kara/MyCashier/app/src/main/res/layout/activity_pengeluaran.xml" value="0.33" />
         <entry key="..\:/kara/MyCashier/app/src/main/res/layout/activity_pengeluaran_item.xml" value="0.25" />
         <entry key="..\:/kara/MyCashier/app/src/main/res/layout/activity_pengeluaranadd.xml" value="0.25" />
         <entry key="..\:/kara/MyCashier/app/src/main/res/layout/activity_petugas.xml" value="0.20416666666666666" />
-        <entry key="..\:/kara/MyCashier/app/src/main/res/layout/activity_petugas_add.xml" value="0.5" />
+        <entry key="..\:/kara/MyCashier/app/src/main/res/layout/activity_petugas_add.xml" value="0.20102564102564102" />
         <entry key="..\:/kara/MyCashier/app/src/main/res/layout/activity_petugas_item.xml" value="0.25" />
         <entry key="..\:/kara/MyCashier/app/src/main/res/layout/activity_produk.xml" value="0.33" />
         <entry key="..\:/kara/MyCashier/app/src/main/res/layout/activity_produk_add.xml" value="0.33" />
@@ -61,9 +47,7 @@
         <entry key="..\:/kara/MyCashier/app/src/main/res/layout/activity_splash.xml" value="0.16614583333333333" />
         <entry key="..\:/kara/MyCashier/app/src/main/res/layout/activity_transaksi.xml" value="0.25" />
         <entry key="..\:/kara/MyCashier/app/src/main/res/layout/activity_transaksi_detail.xml" value="0.33" />
-        <entry key="..\:/kara/MyCashier/app/src/main/res/layout/detail_keranjang.xml" value="0.10104166666666667" />
         <entry key="..\:/kara/MyCashier/app/src/main/res/layout/detail_transaksi.xml" value="0.25" />
-        <entry key="..\:/kara/MyCashier/app/src/main/res/layout/dialog_bulan_picker.xml" value="0.25" />
         <entry key="..\:/kara/MyCashier/app/src/main/res/layout/dialog_search_customer.xml" value="0.33" />
         <entry key="..\:/kara/MyCashier/app/src/main/res/layout/fragment_dialog.xml" value="0.33" />
         <entry key="..\:/kara/MyCashier/app/src/main/res/layout/item_add_grosir.xml" value="0.33" />
@@ -74,11 +58,7 @@
         <entry key="..\:/kara/MyCashier/app/src/main/res/layout/item_pending.xml" value="0.20416666666666666" />
         <entry key="..\:/kara/MyCashier/app/src/main/res/layout/item_popuppending.xml" value="0.20416666666666666" />
         <entry key="..\:/kara/MyCashier/app/src/main/res/layout/item_transaksi_detail.xml" value="0.20416666666666666" />
-        <entry key="..\:/kara/MyCashier/app/src/main/res/layout/layout_error_dialog.xml" value="0.25" />
-        <entry key="..\:/kara/MyCashier/app/src/main/res/layout/layout_success_dialog.xml" value="0.22" />
-        <entry key="..\:/kara/MyCashier/app/src/main/res/layout/layout_warning_dialog.xml" value="0.22" />
         <entry key="..\:/kara/MyCashier/app/src/main/res/layout/list_item_card_details.xml" value="0.115625" />
-        <entry key="..\:/kara/MyCashier/app/src/main/res/layout/shimmer_loading_pengeluaran.xml" value="0.33" />
       </map>
     </option>
   </component>

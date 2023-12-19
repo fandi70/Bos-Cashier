@@ -77,7 +77,7 @@
                         <ImageView
                             android:layout_width="100dp"
                             android:layout_height="100dp"
-                            android:src="@drawable/ic_avatar" />
+                            android:src="@drawable/ic_logo" />
 
                     </androidx.cardview.widget.CardView>
 
@@ -99,8 +99,8 @@
                             android:id="@+id/txtnama"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginRight="8dp"
                             android:layout_marginLeft="30dp"
+                            android:layout_marginRight="8dp"
                             android:padding="2dp"
                             android:text="Nama"
                             android:textColor="@color/textcolor"
@@ -123,9 +123,10 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:layout_marginLeft="30dp"
+                            android:id="@+id/txtnohp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginLeft="30dp"
                             android:layout_marginRight="8dp"
                             android:padding="2dp"
                             android:text="085299001200"
@@ -150,12 +151,13 @@
                     android:layout_marginRight="16dp"
                     android:background="@drawable/bg_edittext_white"
                     android:orientation="vertical"
-                    android:padding="16dp">
+                    android:padding="20dp">
 
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
                         android:layout_marginBottom="8dp"
                         android:padding="2dp"
                         android:text="Profil Akun"
@@ -164,6 +166,61 @@
                         android:textStyle="bold" />
 
                     <LinearLayout
+                        android:id="@+id/ln_ubahnama"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        android:background="@drawable/selector_list"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:padding="16dp">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_profil_map" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/txtnamaprofile"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingLeft="16dp"
+                                android:text="Nama Anda"
+                                android:textColor="@color/textcolor"
+                                android:textSize="14dp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:paddingLeft="16dp"
+                                android:paddingTop="2dp"
+                                android:paddingRight="16dp"
+                                android:text="Perbaharui Nama Lengkap Anda"
+                                android:textColor="@color/hint"
+                                android:textSize="14dp" />
+
+                        </LinearLayout>
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_panahlist" />
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/ln_ubahpassword"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="12dp"
@@ -214,6 +271,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/ln_ubahalamat"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="12dp"
@@ -236,6 +294,7 @@
                             android:orientation="vertical">
 
                             <TextView
+                                android:id="@+id/txtalamat"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:paddingLeft="16dp"
@@ -341,8 +400,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="12dp"
-                        android:background="@drawable/bg_edittext"
-                        android:clickable="true"
+                        android:background="@drawable/selector_list"
+                        android:clickable="false"
                         android:orientation="horizontal"
                         android:padding="16dp">
 
@@ -368,6 +427,7 @@
                                 android:textStyle="bold" />
 
                             <TextView
+                                android:id="@+id/txtversi"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:paddingLeft="16dp"
@@ -383,6 +443,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/btKeluar"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="12dp"

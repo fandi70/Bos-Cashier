@@ -10,7 +10,7 @@ android {
         minSdk 16
         targetSdk 33
         versionCode 1
-        versionName "1.0"
+        versionName "1.2.1"
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -40,4 +40,5 @@ dependencies {
     implementation 'com.github.f0ris.sweetalert:library:1.5.6'
     implementation 'com.github.DantSu:ESCPOS-ThermalPrinter-Android:3.3.0'
 //    implementation 'com.github.dantsu:escposprinter:4.0.1'
+
 }

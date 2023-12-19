@@ -77,7 +77,7 @@ public class ProdukCoba extends AppCompatActivity implements SwipeRefreshLayout.
                 loadMoreData();
                 String text = s.toString().toLowerCase(Locale.getDefault());
                 TextView txt = findViewById(R.id.txtpesan);
-                adaptercoba.filter(text, txt);
+                adaptercoba.filter(text, txt,btBack);
 
             }
         });

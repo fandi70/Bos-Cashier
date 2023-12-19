@@ -106,6 +106,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="8dp"
                             android:layout_weight="1"
+                            android:inputType="number"
                             android:background="@drawable/bg_edittext_white2"
                             android:hint="Contoh : 0852 xxxx xxxx"
                             android:padding="16dp"

@@ -32,12 +32,12 @@
                 android:id="@+id/bt_back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
                 android:layout_centerInParent="true"
                 android:background="@drawable/selector_transparan"
                 android:clickable="true"
                 android:padding="16dp"
-                android:src="@drawable/ic_arrow" />
+                android:src="@drawable/ic_arrow"
+                android:layout_alignParentLeft="true" />
 
         </RelativeLayout>
 
@@ -134,6 +134,43 @@
                             android:textColorHint="@color/hint"
                             android:textSize="14dp" />
 
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:text="Hak Akses"
+                            android:textColor="@color/textcolor"
+                            android:textSize="14dp" />
+
+                        <RadioGroup
+                            android:id="@+id/opsistatuspembayaranAdd"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/radmin"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:buttonTint="@color/utama"
+                                android:text="Admin"
+                                android:textColor="@color/textcolor"
+                                android:textSize="14dp" />
+
+                            <RadioButton
+                                android:id="@+id/rkasir"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:buttonTint="@color/utama"
+                                android:text="Kasir"
+                                android:checked="true"
+                                android:textColor="@color/textcolor"
+                                android:textSize="14dp" />
+
+                        </RadioGroup>
 
 
                         <TextView
@@ -145,28 +182,48 @@
                             android:textColor="@color/textcolor"
                             android:textSize="14dp" />
 
-                        <EditText
-                            android:id="@+id/edt_password"
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="8dp"
-                            android:layout_weight="1"
-                            android:background="@drawable/bg_edittext_white2"
-                            android:hint="Masukkan password anda"
-                            android:inputType="textPassword"
-                            android:padding="16dp"
-                            android:textColorHint="@color/hint"
-                            android:textSize="14dp" />
+                            android:layout_marginBottom="16dp"
+                            android:gravity="center"
+                            android:background="@drawable/bg_edittext"
+                            android:orientation="horizontal">
+
+                            <EditText
+                                android:id="@+id/passwordEditText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="@color/transparans"
+                                android:hint="Ketik password disini..."
+                                android:inputType="textPassword"
+                                android:padding="18dp"
+                                android:textColor="@color/textcolor"
+                                android:textColorHint="@color/hint"
+                                android:textSize="14dp" />
+
+                            <ImageView
+                                android:id="@+id/passwordVisibilityToggle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:contentDescription="Toggle Password Visibility"
+                                android:padding="18dp"
+                                android:src="@drawable/ic_visible_pass" />
+
+                        </LinearLayout>
+
 
                         <TextView
                             android:id="@+id/btsimpan"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_margin="16dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginBottom="16dp"
                             android:background="@drawable/selector_login"
                             android:clickable="true"
                             android:gravity="center"
-                            android:padding="18dp"
+                            android:padding="16dp"
                             android:text="Simpan"
                             android:textColor="@color/putih_tetap"
                             android:textSize="14dp"

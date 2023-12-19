@@ -100,7 +100,7 @@ public class TransaksiDetailAdapter extends RecyclerView.Adapter<TransaksiDetail
 
         holder.txtnamaproduk.setText(arrayJenis.get(position).getNamabarang());
         holder.txtharga.setText("Rp"+formattedRupiah);
-        holder.txtjumlah.setText(arrayJenis.get(position).getJumlah_penjualan());
+        holder.txtjumlah.setText("x"+arrayJenis.get(position).getJumlah_penjualan());
         holder.txttotal.setText("Rp"+formattedRupiah2);
         holder.minus.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,7 +134,6 @@ public class TransaksiDetailAdapter extends RecyclerView.Adapter<TransaksiDetail
                 Intent intent = new Intent(mContext, Keranjang.class);
                 intent.putExtra("idproduk",arrayJenis.get(position).getIdb());
                 mContext.startActivity(intent);
-
             }
         });
 

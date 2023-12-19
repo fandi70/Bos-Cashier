@@ -144,6 +144,7 @@ public class TransaksiDetailActivity extends AppCompatActivity {
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rcList.setLayoutManager(mLayoutManager);
         rcList.setAdapter(adapter);
+
         callData();
 
         ed_namaPelanggan.setFocusableInTouchMode(false);
@@ -435,7 +436,7 @@ public class TransaksiDetailActivity extends AppCompatActivity {
         };
         AppController.getInstance().addToRequestQueue(jArr, tag_json_obj);
     }
-    private void callData() {
+    public void callData() {
         arraylist.clear();
        // adapter.notifyDataSetChanged();
 //        swipe.setRefreshing(true);
