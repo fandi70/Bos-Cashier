@@ -65,7 +65,7 @@ public class Pengeluaran extends AppCompatActivity implements SwipeRefreshLayout
     RecyclerView rcList;
     ArrayList<Mpengeluaran> arraylist = new ArrayList<>();
     TextView add;
-    ImageView btBack;
+    ImageView btBack,img_kosong;
 
     EditText Tanggalfrom,Tanggalto;
     String tanggalpjfrom,tanggalpjto;
@@ -79,7 +79,7 @@ public class Pengeluaran extends AppCompatActivity implements SwipeRefreshLayout
         bacaPreferensi();
         swipe = (SwipeRefreshLayout) findViewById(R.id.swipe_refreshdata);
         add=(TextView) findViewById(R.id.bt_tambah);
-
+        img_kosong = findViewById(R.id.img_kosong);
 
         adapter = new PengeluaranAdapter(arraylist, this, rcList);
         rcList = findViewById(R.id.rcList);
@@ -353,6 +353,7 @@ public class Pengeluaran extends AppCompatActivity implements SwipeRefreshLayout
         arraylist.clear();
 //        adapter.notifyDataSetChanged();
         swipe.setRefreshing(true);
+        img_kosong.setVisibility(View.GONE);
 
         // Creating volley request obj
         StringRequest jArr = new StringRequest(Request.Method.POST, URL_SERVER.CPENGELUARAN, new Response.Listener<String>() {
@@ -389,14 +390,15 @@ public class Pengeluaran extends AppCompatActivity implements SwipeRefreshLayout
                         rupiahFormat.setParseBigDecimal(true);
                         rupiahFormat.applyPattern("#,##0");
                         txtTotalpengeluaran.setText("Rp"+rupiahFormat.format(totalp));
-
+                        img_kosong.setVisibility(View.GONE);
                     } else {
-                        Toast.makeText(Pengeluaran.this, "Kosong", Toast.LENGTH_SHORT).show();
+                        img_kosong.setVisibility(View.VISIBLE);
                     }
 
                 } catch (JSONException e) {
                     // JSON error
                     e.printStackTrace();
+                    img_kosong.setVisibility(View.VISIBLE);
                 }
 
                 adapter.notifyDataSetChanged();
@@ -406,7 +408,7 @@ public class Pengeluaran extends AppCompatActivity implements SwipeRefreshLayout
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(),"Koneksi Lemah", Toast.LENGTH_SHORT).show();
+                img_kosong.setVisibility(View.VISIBLE);
                 swipe.setRefreshing(false);
             }
         }) {

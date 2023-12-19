@@ -127,7 +127,7 @@
                                     android:buttonTint="@color/utama"
                                     android:text="Semua"
                                     android:textColor="@color/textcolor"
-                                    android:textSize="10sp" />
+                                    android:textSize="14dp" />
 
                                 <RadioButton
                                     android:id="@+id/lunas"
@@ -137,7 +137,7 @@
                                     android:buttonTint="@color/utama"
                                     android:text="Lunas"
                                     android:textColor="@color/textcolor"
-                                    android:textSize="10sp" />
+                                    android:textSize="14dp" />
 
                                 <RadioButton
                                     android:id="@+id/utang"
@@ -147,7 +147,7 @@
                                     android:buttonTint="@color/utama"
                                     android:text="Utang"
                                     android:textColor="@color/textcolor"
-                                    android:textSize="10sp" />
+                                    android:textSize="14dp" />
 
 
                             </RadioGroup>

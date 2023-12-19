@@ -3,9 +3,13 @@ package com.bospintar.cashier.activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +24,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.bospintar.cashier.R;
+import com.bospintar.cashier.adapter.PelangganAdapter;
 import com.bospintar.cashier.adapter.PetugasAdapter;
 import com.bospintar.cashier.app.AppController;
 import com.bospintar.cashier.model.Mpetugas;
@@ -31,6 +36,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class Petugas extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
@@ -45,6 +51,7 @@ public class Petugas extends AppCompatActivity implements SwipeRefreshLayout.OnR
     ArrayList<Mpetugas> arraylist = new ArrayList<>();
     EditText etxtcarinama;
     TextView addpegawai;
+    ImageView img_kosong;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,12 +63,12 @@ public class Petugas extends AppCompatActivity implements SwipeRefreshLayout.OnR
 
 
 
-        adapter = new PetugasAdapter(arraylist, this);
         rcList = findViewById(R.id.rcList);
+        img_kosong = findViewById(R.id.img_kosong);
         final GridLayoutManager mLayoutManager = new GridLayoutManager(this, 1);
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rcList.setLayoutManager(mLayoutManager);
-        rcList.setAdapter(adapter);
+
 
 
         swipe.setOnRefreshListener(this);
@@ -80,13 +87,36 @@ public class Petugas extends AppCompatActivity implements SwipeRefreshLayout.OnR
             public void onClick(View v) {
                 Intent intent = new Intent(Petugas.this, Petugas_Add.class);
                 startActivity(intent);
+                finish();
+            }
+        });
+        EditText yourEditText = findViewById(R.id.edt_cari);
+
+        yourEditText.addTextChangedListener(new TextWatcher() {
+
+            public void afterTextChanged(Editable s) {
+
+            }
+
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                String text = s.toString().toLowerCase(Locale.getDefault());
+                TextView txt = findViewById(R.id.txtpesan);
+                if (adapter != null) {
+                    adapter.filter(text, txt,img_kosong);
+                }
+
             }
         });
     }
     private void callData() {
         arraylist.clear();
-        adapter.notifyDataSetChanged();
+        //adapter.notifyDataSetChanged();
         swipe.setRefreshing(true);
+        img_kosong.setVisibility(View.GONE);
 
         // Creating volley request obj
         StringRequest jArr = new StringRequest(Request.Method.POST, URL_SERVER.CPETUGAS, new Response.Listener<String>() {
@@ -103,7 +133,7 @@ public class Petugas extends AppCompatActivity implements SwipeRefreshLayout.OnR
 
                     if (value.equals("ada")) {
                         arraylist.clear();
-                        adapter.notifyDataSetChanged();
+                       // adapter.notifyDataSetChanged();
 
                         String getObject = jObj.getString(TAG_RESULTS);
                         JSONArray jsonArray = new JSONArray(getObject);
@@ -115,24 +145,27 @@ public class Petugas extends AppCompatActivity implements SwipeRefreshLayout.OnR
                                     data.getString("alamat_petugas"), data.getString("nohp"),data.getString("idtoko"),data.getString("nama_toko"),data.getString("alamat_toko"),data.getString("status_toko"));
                             arraylist.add(wp);
                         }
-
+                        adapter = new PetugasAdapter(arraylist, Petugas.this);
+                        rcList.setAdapter(adapter);
+                        img_kosong.setVisibility(View.GONE);
                     } else {
-                        Toast.makeText(Petugas.this, "Kosong", Toast.LENGTH_SHORT).show();
+                        img_kosong.setVisibility(View.VISIBLE);
                     }
 
                 } catch (JSONException e) {
                     // JSON error
                     e.printStackTrace();
+                    img_kosong.setVisibility(View.VISIBLE);
                 }
 
-                adapter.notifyDataSetChanged();
+                //adapter.notifyDataSetChanged();
                 swipe.setRefreshing(false);
             }
         }, new Response.ErrorListener() {
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(),"Koneksi Lemah", Toast.LENGTH_SHORT).show();
+                img_kosong.setVisibility(View.VISIBLE);
                 swipe.setRefreshing(false);
             }
         }) {

@@ -87,9 +87,9 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginBottom="48dp"
-                    android:padding="8dp"
                     android:background="@drawable/bg_list_white"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:padding="8dp">
 
                     <TextView
                         android:id="@+id/txtpesan"
@@ -100,6 +100,13 @@
                         android:textSize="14dp"
                         android:textStyle="bold"
                         android:visibility="gone" />
+                    <ImageView
+                        android:id="@+id/img_kosong"
+                        android:layout_width="170dp"
+                        android:layout_height="170dp"
+                        android:layout_gravity="center"
+                        android:layout_margin="24dp"
+                        android:src="@drawable/ic_search_empty" />
 
                     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
                         android:id="@+id/swipe_refreshdatahistorykegiatan"

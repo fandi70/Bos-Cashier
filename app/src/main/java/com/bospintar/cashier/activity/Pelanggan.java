@@ -59,7 +59,7 @@ public class Pelanggan extends AppCompatActivity implements SwipeRefreshLayout.O
     RecyclerView rcList;
     ArrayList<Mpelanggan> arraylist = new ArrayList<>();
     TextView add;
-    ImageView btBack;
+    ImageView btBack,img_kosong;
 
 
     SimpleDateFormat sdcurrentdate = new SimpleDateFormat("yyyy-MM-dd", new Locale("id", "ID"));
@@ -74,6 +74,7 @@ public class Pelanggan extends AppCompatActivity implements SwipeRefreshLayout.O
 
         adapter = new PelangganAdapter(arraylist, this, rcList);
         rcList = findViewById(R.id.rcList);
+        img_kosong = findViewById(R.id.img_kosong);
         final GridLayoutManager mLayoutManager = new GridLayoutManager(this, 1);
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rcList.setLayoutManager(mLayoutManager);
@@ -106,7 +107,9 @@ public class Pelanggan extends AppCompatActivity implements SwipeRefreshLayout.O
 
                 String text = s.toString().toLowerCase(Locale.getDefault());
                 TextView txt = findViewById(R.id.txtpesan);
-                adapter.filter(text, txt);
+                if (adapter != null) {
+                    adapter.filter(text, txt,img_kosong);
+                }
 
             }
         });
@@ -293,7 +296,7 @@ public class Pelanggan extends AppCompatActivity implements SwipeRefreshLayout.O
     private void callData() {
         arraylist.clear();
         swipe.setRefreshing(true);
-
+        img_kosong.setVisibility(View.GONE);
         StringRequest jArr = new StringRequest(Request.Method.POST, URL_SERVER.CPELANGGAN, new Response.Listener<String>() {
 
             @Override
@@ -320,15 +323,16 @@ public class Pelanggan extends AppCompatActivity implements SwipeRefreshLayout.O
                         }
                         adapter = new PelangganAdapter(arraylist, Pelanggan.this,rcList);
                         rcList.setAdapter(adapter);
-
+                        img_kosong.setVisibility(View.GONE);
 
                     } else {
-                        Toast.makeText(Pelanggan.this, "Kosong", Toast.LENGTH_SHORT).show();
+                        img_kosong.setVisibility(View.VISIBLE);
                     }
 
                 } catch (JSONException e) {
                     // JSON error
                     e.printStackTrace();
+                    img_kosong.setVisibility(View.VISIBLE);
                 }
 
 //                adapter.notifyDataSetChanged();

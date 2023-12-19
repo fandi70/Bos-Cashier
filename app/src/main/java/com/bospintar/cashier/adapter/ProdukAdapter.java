@@ -113,23 +113,27 @@ public class ProdukAdapter extends RecyclerView.Adapter<ProdukAdapter.MyViewHold
         holder.txt_nm.setText(sb);
     }
     @SuppressLint("SetTextI18n")
-    public void filter(String charText, TextView itemView) {
+    public void filter(String charText, TextView itemView,ImageView img) {
         charText = charText.toLowerCase(Locale.getDefault());
         arrayJenis.clear();
         if (charText.length() == 0) {
             arrayJenis.addAll(arraylist);
             baru = "";
             itemView.setVisibility(View.GONE);
+            img.setVisibility(View.GONE);
         } else {
             for (Mproduk wp : arraylist) {
                 if (wp.getNama().toLowerCase(Locale.getDefault()).contains(charText)) {
                     arrayJenis.add(wp);
                     baru = charText;
                     itemView.setVisibility(View.GONE);
+                    img.setVisibility(View.GONE);
                 }
             }
             if (arrayJenis.isEmpty()) {
                 itemView.setVisibility(View.VISIBLE);
+                img.setVisibility(View.VISIBLE);
+                img.setImageResource(R.drawable.ic_search_empty);
                 itemView.setText("Tidak ada data untuk " + "'" + charText + "'");
             }
         }
