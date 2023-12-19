@@ -133,6 +133,7 @@ public class Menu extends AppCompatActivity implements SwipeRefreshLayout.OnRefr
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), ProdukTransaksi.class));
+                finish();
 
             }
         });

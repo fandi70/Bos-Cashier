@@ -209,12 +209,7 @@ public class Produk extends AppCompatActivity implements SwipeRefreshLayout.OnRe
 
     }
 
-    @Override
-    public void onBackPressed() {
-        startActivity(new Intent(getApplicationContext(), Menu.class));
 
-        finish();
-    }
 
     @Override
     public void onRefresh() {

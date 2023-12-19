@@ -176,7 +176,7 @@ public class Pengeluaran extends AppCompatActivity implements SwipeRefreshLayout
                             TextView okButton = dialog.findViewById(R.id.okButton);
                             TextView txtjudul = dialog.findViewById(R.id.txtjudul);
                             TextView txtsubjudul = dialog.findViewById(R.id.txtsubjudul);
-                            txtjudul.setText("Tambah data Pelanggan");
+                            txtjudul.setText("Tambah data Pengeluaran");
                             txtsubjudul.setText("Apakah anda sudah yakin semua data yang diinputkan sudah benar?");
                             okButton.setText("Yakin");
                             cancelButton.setText("Cek lagi");
@@ -537,7 +537,7 @@ public class Pengeluaran extends AppCompatActivity implements SwipeRefreshLayout
                     TextView okButton = dialog.findViewById(R.id.okButton);
                     TextView txtjudul = dialog.findViewById(R.id.txtjudul);
                     TextView txtsubjudul = dialog.findViewById(R.id.txtsubjudul);
-                    txtjudul.setText("Tambah data Pelanggan");
+                    txtjudul.setText("Tambah data Pengeluaran");
                     txtsubjudul.setText("Apakah anda sudah yakin semua data yang diinputkan sudah benar?");
                     okButton.setText("Yakin");
                     cancelButton.setText("Cek lagi");

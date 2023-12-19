@@ -24,7 +24,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.bospintar.cashier.R;
-import com.bospintar.cashier.adapter.PelangganAdapter;
+import com.bospintar.cashier.adapter.PetugasAdapter;
 import com.bospintar.cashier.adapter.PetugasAdapter;
 import com.bospintar.cashier.app.AppController;
 import com.bospintar.cashier.model.Mpetugas;
