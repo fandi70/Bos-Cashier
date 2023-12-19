@@ -134,7 +134,6 @@ public class TransaksiDetailAdapter extends RecyclerView.Adapter<TransaksiDetail
                 Intent intent = new Intent(mContext, Keranjang.class);
                 intent.putExtra("idproduk",arrayJenis.get(position).getIdb());
                 mContext.startActivity(intent);
-
             }
         });
 

@@ -1,7 +1,9 @@
 package com.bospintar.cashier.activity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Paint;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
@@ -45,11 +47,11 @@ public class Keranjang extends AppCompatActivity {
     public static final String TAG_VALUE = "status";
     String tag_json_obj = "json_obj_req";
     LinearLayout bthapus;
-    TextView edharga, edtotal, txtnamaproduk;
+    TextView edharga, edtotal, txtnamaproduk,edhargasatuan;
     EditText txtjumlah, edbayarpenjuan;
     double hargaJual = 0;
-    int jumlah = 0;
-    int total = 0;
+    double jumlah = 0;
+    double total = 0;
     ImageView btminus, btplus;
 
     @Override
@@ -62,14 +64,23 @@ public class Keranjang extends AppCompatActivity {
         bthapus = findViewById(R.id.bthapus);
         edharga = findViewById(R.id.edharga);
         edtotal = findViewById(R.id.edtotal);
+        edhargasatuan = findViewById(R.id.edhargasatuan);
         txtjumlah = findViewById(R.id.txtjumlah);
         txtnamaproduk = findViewById(R.id.txtnamaproduk);
         edbayarpenjuan = findViewById(R.id.edbayarpenjuan);
+
         ImageView btnClear = findViewById(R.id.btnClear);
+        ImageView bt_back = findViewById(R.id.bt_back);
         bthapus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 hapusitem();
+            }
+        });
+        bt_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
             }
         });
         edbayarpenjuan.addTextChangedListener(new RupiahTextWatcher(edbayarpenjuan));
@@ -86,13 +97,14 @@ public class Keranjang extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start,
                                       int before, int count) {
                 BigDecimal harga = RupiahTextWatcher.parseCurrencyValue(s.toString());
-                if (Integer.parseInt(String.valueOf(harga)) <= 0) {
+                if (Double.parseDouble(String.valueOf(harga)) <= 0) {
                     DecimalFormat rupiahFormat = (DecimalFormat) NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
                     rupiahFormat.setParseBigDecimal(true);
                     rupiahFormat.applyPattern("#,##0");
                     String formattedRupiah = rupiahFormat.format(hargaJual);
                     edharga.setText("Rp" + String.valueOf(formattedRupiah));
                     btnClear.setVisibility(View.GONE);
+                    edhargasatuan.setPaintFlags(0);
 
                 } else {
                     DecimalFormat rupiahFormat = (DecimalFormat) NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
@@ -100,16 +112,23 @@ public class Keranjang extends AppCompatActivity {
                     rupiahFormat.applyPattern("#,##0");
                     String formattedRupiah = rupiahFormat.format(Double.parseDouble(String.valueOf(harga)));
                     edharga.setText("Rp" + String.valueOf(formattedRupiah));
-                    if (Integer.parseInt(String.valueOf(harga)) >= hargaJual) {
+                    if (Double.parseDouble(String.valueOf(harga)) >= hargaJual) {
                         edbayarpenjuan.setError("Tidak boleh lebih/sama dari harga jual");
-                        btnClear.setVisibility(View.GONE);
 
-                    }
-                    else if (Integer.parseInt(String.valueOf(harga)) > 0 && Integer.parseInt(String.valueOf(harga)) <= hargaJual) {
+
+                    } else if (Double.parseDouble(String.valueOf(harga)) > 0 && Double.parseDouble(String.valueOf(harga)) <= hargaJual) {
                         btnClear.setVisibility(View.VISIBLE);
                     }
+                    edhargasatuan.setPaintFlags(edhargasatuan.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
                 }
-
+                BigDecimal _hargajual = RupiahTextWatcher.parseCurrencyValue(edharga.getText().toString());
+                jumlah= Double.parseDouble(txtjumlah.getText().toString());
+                DecimalFormat rupiahFormat = (DecimalFormat) NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
+                rupiahFormat.setParseBigDecimal(true);
+                rupiahFormat.applyPattern("#,##0");
+                total = (Double.parseDouble(String.valueOf(_hargajual)) * jumlah);
+                String _total = rupiahFormat.format(total);
+                edtotal.setText("Rp" + String.valueOf(_total));
             }
 
 
@@ -124,6 +143,11 @@ public class Keranjang extends AppCompatActivity {
         txtjumlah.addTextChangedListener(new TextWatcher() {
 
             public void afterTextChanged(Editable s) {
+                String input = s.toString();
+                if (input.length() > 1 && input.startsWith("0")) {
+                    s.replace(0, 1, "");
+                }
+
             }
 
             public void beforeTextChanged(CharSequence s, int start,
@@ -133,11 +157,21 @@ public class Keranjang extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             public void onTextChanged(CharSequence s, int start,
                                       int before, int count) {
-                if (s.toString().equals("")||s.toString().equals("0")){
-                    txtjumlah.setText("1");
+                if (s.toString().equals("")) {
+                    txtjumlah.setText("0");
+
                     txtjumlah.setGravity(View.TEXT_ALIGNMENT_TEXT_END);
                     txtjumlah.setSelection(txtjumlah.getText().length()); // Pindahkan kursor ke akhir teks
                 }
+                BigDecimal _hargajual = RupiahTextWatcher.parseCurrencyValue(edharga.getText().toString());
+                jumlah= Double.parseDouble(txtjumlah.getText().toString());
+                DecimalFormat rupiahFormat = (DecimalFormat) NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
+                rupiahFormat.setParseBigDecimal(true);
+                rupiahFormat.applyPattern("#,##0");
+                total = (Double.parseDouble(String.valueOf(_hargajual)) * jumlah);
+                String _total = rupiahFormat.format(total);
+                edtotal.setText("Rp" + String.valueOf(_total));
+
             }
 
 
@@ -145,28 +179,54 @@ public class Keranjang extends AppCompatActivity {
         callData();
 
         btminus.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View v) {
 
                 if (jumlah > 1) {
-                    jumlah--;
-                    txtjumlah.setText(String.valueOf(jumlah));
+                    jumlah = Double.parseDouble(txtjumlah.getText().toString()) - 1;
+                    txtjumlah.setText(String.valueOf((int)jumlah));
                     txtjumlah.setGravity(View.TEXT_ALIGNMENT_TEXT_END);
                     txtjumlah.setSelection(txtjumlah.getText().length());
-                    // ((TransaksiDetailActivity)mContext).tambahDataplusmin(arrayJenis.get(position).getIdb(),"kurang");
-                    // Toast.makeText(mContext, arrayJenis.get(position).getIdb()+" takutang", Toast.LENGTH_SHORT).show();
+                    jumlah= Double.parseDouble(txtjumlah.getText().toString());
+                    DecimalFormat rupiahFormat = (DecimalFormat) NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
+                    rupiahFormat.setParseBigDecimal(true);
+                    rupiahFormat.applyPattern("#,##0");
+
+
+                    BigDecimal _hargajual = RupiahTextWatcher.parseCurrencyValue(edharga.getText().toString());
+                    jumlah= Double.parseDouble(txtjumlah.getText().toString());
+               //     DecimalFormat rupiahFormat = (DecimalFormat) NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
+                    rupiahFormat.setParseBigDecimal(true);
+                    rupiahFormat.applyPattern("#,##0");
+                    total = (Double.parseDouble(String.valueOf(_hargajual)) * jumlah);
+                    String _total = rupiahFormat.format(total);
+                    edtotal.setText("Rp" + String.valueOf(_total));
 
                 }
             }
         });
 
         btplus.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View v) {
-                jumlah = jumlah + 1;
-                txtjumlah.setText(String.valueOf(jumlah));
+                jumlah = Double.parseDouble(txtjumlah.getText().toString()) + 1;
+                txtjumlah.setText(String.valueOf((int)jumlah));
                 txtjumlah.setGravity(View.TEXT_ALIGNMENT_TEXT_END);
                 txtjumlah.setSelection(txtjumlah.getText().length());
+                jumlah= Double.parseDouble(txtjumlah.getText().toString());
+                DecimalFormat rupiahFormat = (DecimalFormat) NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
+                rupiahFormat.setParseBigDecimal(true);
+                rupiahFormat.applyPattern("#,##0");
+                BigDecimal _hargajual = RupiahTextWatcher.parseCurrencyValue(edharga.getText().toString());
+                jumlah= Double.parseDouble(txtjumlah.getText().toString());
+                //     DecimalFormat rupiahFormat = (DecimalFormat) NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
+                rupiahFormat.setParseBigDecimal(true);
+                rupiahFormat.applyPattern("#,##0");
+                total = (Double.parseDouble(String.valueOf(_hargajual)) * jumlah);
+                String _total = rupiahFormat.format(total);
+                edtotal.setText("Rp" + String.valueOf(_total));
 
             }
         });
@@ -234,11 +294,13 @@ public class Keranjang extends AppCompatActivity {
                         rupiahFormat.applyPattern("#,##0");
                         String formattedRupiah = rupiahFormat.format(hargaJual);
                         edharga.setText("Rp" + String.valueOf(formattedRupiah));
+                        edhargasatuan.setText("Rp" + String.valueOf(formattedRupiah));
                         txtnamaproduk.setText(jObj.getString("nama"));
                         txtjumlah.setText(jObj.getString("jumlah_penjualan"));
-                        jumlah = Integer.parseInt(jObj.getString("jumlah_penjualan"));
+                        jumlah = Double.parseDouble(jObj.getString("jumlah_penjualan"));
                         total = (int) (hargaJual * jumlah);
-                        edtotal.setText(String.valueOf(total));
+                        String _total = rupiahFormat.format(total);
+                        edtotal.setText("Rp" + String.valueOf(_total));
 
                     } else {
                         Toast.makeText(Keranjang.this, "Kosong", Toast.LENGTH_SHORT).show();
@@ -293,5 +355,10 @@ public class Keranjang extends AppCompatActivity {
         xketnota = pref.getString("ketnota", "0");
         xnohp_toko = pref.getString("nohp_toko", "0");
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
     }
 }

@@ -206,7 +206,7 @@ public class Menu extends AppCompatActivity implements SwipeRefreshLayout.OnRefr
                         rupiahFormat.setParseBigDecimal(true);
                         rupiahFormat.applyPattern("#,##0");
                         Double xtotal = Double.parseDouble(jObj.getString("total_penjualan"));
-                        txttotalpenjualanhariini.setText("Rp" + rupiahFormat.format(xtotal));
+                        txttotalpenjualanhariini.setText("Rp " + rupiahFormat.format(xtotal));
 
 
                     } else {
