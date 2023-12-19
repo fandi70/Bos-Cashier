@@ -5,11 +5,13 @@ import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -23,6 +25,7 @@ import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -229,7 +232,7 @@ public class Pengeluaran extends AppCompatActivity implements SwipeRefreshLayout
                     JSONObject jObj = new JSONObject(response);
                     int value = jObj.getInt("success");
                     if (value == 1) {
-                        Toast.makeText(Pengeluaran.this, "Sukses", Toast.LENGTH_SHORT).show();
+                        showSuccessDialog("Pengeluaran Berhasil Ditambah");
                         callData(Tanggalfrom.getText().toString(),Tanggalto.getText().toString());
 
                     } else {
@@ -276,8 +279,8 @@ public class Pengeluaran extends AppCompatActivity implements SwipeRefreshLayout
                     JSONObject jObj = new JSONObject(response);
                     int value = jObj.getInt("success");
                     if (value == 1) {
-                        Toast.makeText(Pengeluaran.this, "Sukses", Toast.LENGTH_SHORT).show();
                         callData(Tanggalfrom.getText().toString(),Tanggalto.getText().toString());
+                        showSuccessDialog("Pengeluaran Berhasil Diubah");
 
                     } else {
                         Toast.makeText(Pengeluaran.this, "Gagal", Toast.LENGTH_SHORT).show();
@@ -322,7 +325,7 @@ public class Pengeluaran extends AppCompatActivity implements SwipeRefreshLayout
                     JSONObject jObj = new JSONObject(response);
                     int value = jObj.getInt(TAG_VALUE);
                     if (value == 1) {
-                        Toast.makeText(Pengeluaran.this, "Pengeluaran dihapus", Toast.LENGTH_SHORT).show();
+                       showSuccessDialog("Pengeluaran Terhapus");
                     } else {
                         Toast.makeText(Pengeluaran.this, "Pengeluaran Gagal", Toast.LENGTH_SHORT).show();
                     }
@@ -491,5 +494,40 @@ public class Pengeluaran extends AppCompatActivity implements SwipeRefreshLayout
     public void onRefresh() {
 
         callData(Tanggalfrom.getText().toString(),Tanggalto.getText().toString());
+    }
+    private void showSuccessDialog(final String pesan){
+        AlertDialog.Builder builder =
+                new AlertDialog.Builder
+                        (Pengeluaran.this);
+        View view = LayoutInflater.from(Pengeluaran.this).inflate(
+                R.layout.layout_success_dialog,
+                (ConstraintLayout)findViewById(R.id.layoutDialogContainer)
+        );
+        builder.setView(view);
+        ((TextView) view.findViewById(R.id.textTitle))
+                .setText("Sukses");
+        ((TextView) view.findViewById(R.id.textMessage))
+                .setText(pesan);
+        ((Button) view.findViewById(R.id.buttonAction))
+                .setText("Oke");
+        ((ImageView) view.findViewById(R.id.imageIcon))
+                .setImageResource(R.drawable.ic_baseline_close_24);
+        final AlertDialog alertDialog = builder.create();
+        view.findViewById(R.id.buttonAction).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog.dismiss();
+            }
+        });
+        view.findViewById(R.id.imageIcon).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog.dismiss();
+            }
+        });
+        if (alertDialog.getWindow() != null){
+            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        }
+        alertDialog.show();
     }
 }
