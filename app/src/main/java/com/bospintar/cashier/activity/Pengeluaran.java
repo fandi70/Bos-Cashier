@@ -2,15 +2,20 @@ package com.bospintar.cashier.activity;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -156,9 +161,50 @@ public class Pengeluaran extends AppCompatActivity implements SwipeRefreshLayout
                     @Override
                     public void onClick(View v) {
 
-                        alertDialog.dismiss();
-                        simpancustomerData(ddket.getText().toString(),ddnominAL.getText().toString());
+                        if (ddket.getText().toString().equals("")){
+                            ddket.setError("Tidak boleh kosong");
+                            ddket.requestFocus();
+                        }else if (ddnominAL.getText().toString().equals("")){
+                            ddnominAL.setError("Tidak boleh kosong");
+                            ddnominAL.requestFocus();
+                        }else {
+                            final Dialog dialog = new Dialog(Pengeluaran.this);
+                            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                            dialog.setContentView(R.layout.dialog_informasi);
 
+                            TextView cancelButton = dialog.findViewById(R.id.cancelButton);
+                            TextView okButton = dialog.findViewById(R.id.okButton);
+                            TextView txtjudul = dialog.findViewById(R.id.txtjudul);
+                            TextView txtsubjudul = dialog.findViewById(R.id.txtsubjudul);
+                            txtjudul.setText("Tambah data Pelanggan");
+                            txtsubjudul.setText("Apakah anda sudah yakin semua data yang diinputkan sudah benar?");
+                            okButton.setText("Yakin");
+                            cancelButton.setText("Cek lagi");
+
+                            cancelButton.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.dismiss();
+                                }
+                            });
+                            okButton.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    simpancustomerData(ddket.getText().toString(), ddnominAL.getText().toString());
+                                    dialog.dismiss();
+
+                                    alertDialog.dismiss();
+                                }
+                            });
+
+                            dialog.setCancelable(false);
+
+
+                            dialog.show();
+                            dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+                        }
                     }
                 });
             }
@@ -167,7 +213,7 @@ public class Pengeluaran extends AppCompatActivity implements SwipeRefreshLayout
         btBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onBackPressed();
+                finish();
             }
         });
 
@@ -277,8 +323,7 @@ public class Pengeluaran extends AppCompatActivity implements SwipeRefreshLayout
                     JSONObject jObj = new JSONObject(response);
                     int value = jObj.getInt("success");
                     if (value == 1) {
-                        Toast.makeText(Pengeluaran.this, "Sukses", Toast.LENGTH_SHORT).show();
-                        callData(Tanggalfrom.getText().toString(),Tanggalto.getText().toString());
+                          callData(Tanggalfrom.getText().toString(),Tanggalto.getText().toString());
 
                     } else {
                         Toast.makeText(Pengeluaran.this, "Gagal", Toast.LENGTH_SHORT).show();
@@ -323,7 +368,7 @@ public class Pengeluaran extends AppCompatActivity implements SwipeRefreshLayout
                     JSONObject jObj = new JSONObject(response);
                     int value = jObj.getInt(TAG_VALUE);
                     if (value == 1) {
-                        Toast.makeText(Pengeluaran.this, "Pengeluaran dihapus", Toast.LENGTH_SHORT).show();
+                        callData(Tanggalfrom.getText().toString(),Tanggalto.getText().toString());
                     } else {
                         Toast.makeText(Pengeluaran.this, "Pengeluaran Gagal", Toast.LENGTH_SHORT).show();
                     }
@@ -477,18 +522,52 @@ public class Pengeluaran extends AppCompatActivity implements SwipeRefreshLayout
             @Override
             public void onClick(View v) {
 
-                alertDialog.dismiss();
-                editdata(_id,ddket.getText().toString(),ddnominAL.getText().toString());
+                if (ddket.getText().toString().equals("")){
+                    ddket.setError("Tidak boleh kosong");
+                    ddket.requestFocus();
+                }else if (ddnominAL.getText().toString().equals("")){
+                    ddnominAL.setError("Tidak boleh kosong");
+                    ddnominAL.requestFocus();
+                }else {
+                    final Dialog dialog = new Dialog(Pengeluaran.this);
+                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                    dialog.setContentView(R.layout.dialog_informasi);
 
+                    TextView cancelButton = dialog.findViewById(R.id.cancelButton);
+                    TextView okButton = dialog.findViewById(R.id.okButton);
+                    TextView txtjudul = dialog.findViewById(R.id.txtjudul);
+                    TextView txtsubjudul = dialog.findViewById(R.id.txtsubjudul);
+                    txtjudul.setText("Tambah data Pelanggan");
+                    txtsubjudul.setText("Apakah anda sudah yakin semua data yang diinputkan sudah benar?");
+                    okButton.setText("Yakin");
+                    cancelButton.setText("Cek lagi");
+
+                    cancelButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                        }
+                    });
+                    okButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            editdata(_id, ddket.getText().toString(), ddnominAL.getText().toString());
+                            dialog.dismiss();
+
+                            alertDialog.dismiss();
+                        }
+                    });
+
+                    dialog.setCancelable(false);
+
+
+                    dialog.show();
+                    dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                }
             }
         });
 
-    }
-    @Override
-    public void onBackPressed() {
-        startActivity(new Intent(getApplicationContext(), Menu.class));
-
-        finish();
     }
     @Override
     public void onRefresh() {

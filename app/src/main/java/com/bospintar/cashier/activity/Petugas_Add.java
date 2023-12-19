@@ -79,7 +79,7 @@ public class Petugas_Add extends AppCompatActivity {
                 TextView txtjudul = dialog.findViewById(R.id.txtjudul);
                 TextView txtsubjudul = dialog.findViewById(R.id.txtsubjudul);
                 txtjudul.setText("Tambah data Petugas");
-                txtsubjudul.setText("Apakah anda sudah yakin semua data yang diinputkan sudah benar>");
+                txtsubjudul.setText("Apakah anda sudah yakin semua data yang diinputkan sudah benar?");
                 okButton.setText("Yakin");
                 cancelButton.setText("Cek lagi");
 
@@ -173,8 +173,8 @@ public class Petugas_Add extends AppCompatActivity {
                 params.put("nama", namapegawai.getText().toString());
                 params.put("alamat", alamatpegawai.getText().toString());
                 params.put("nohp", nohppegawai.getText().toString());
-                params.put("password ", passwordpegawai.getText().toString());
-                params.put("status ", status);
+                params.put("password", passwordpegawai.getText().toString());
+                params.put("status", status);
 
 
                 return params;

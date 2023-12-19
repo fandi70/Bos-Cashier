@@ -1,14 +1,19 @@
 package com.bospintar.cashier.activity;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -144,9 +149,53 @@ public class Pelanggan extends AppCompatActivity implements SwipeRefreshLayout.O
                     @Override
                     public void onClick(View v) {
 
-                        alertDialog.dismiss();
-                        simpanData(nama.getText().toString(),alamat.getText().toString(),nohp.getText().toString());
+                        if (nama.getText().toString().equals("")){
+                            nama.setError("Tidak boleh kosong");
+                            nama.requestFocus();
+                        }else if (alamat.getText().toString().equals("")){
+                            alamat.setError("Tidak boleh kosong");
+                            alamat.requestFocus();
+                        }else if (nohp.getText().toString().equals("")){
+                            nohp.setError("Tidak boleh kosong");
+                            nohp.requestFocus();
+                        }else {
+                            final Dialog dialog = new Dialog(Pelanggan.this);
+                            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                            dialog.setContentView(R.layout.dialog_informasi);
 
+                            TextView cancelButton = dialog.findViewById(R.id.cancelButton);
+                            TextView okButton = dialog.findViewById(R.id.okButton);
+                            TextView txtjudul = dialog.findViewById(R.id.txtjudul);
+                            TextView txtsubjudul = dialog.findViewById(R.id.txtsubjudul);
+                            txtjudul.setText("Tambah data Pelanggan");
+                            txtsubjudul.setText("Apakah anda sudah yakin semua data yang diinputkan sudah benar?");
+                            okButton.setText("Yakin");
+                            cancelButton.setText("Cek lagi");
+
+                            cancelButton.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.dismiss();
+                                }
+                            });
+                            okButton.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    simpanData(nama.getText().toString(), alamat.getText().toString(), nohp.getText().toString());
+
+                                    dialog.dismiss();
+
+                                    alertDialog.dismiss();
+                                }
+                            });
+
+                            dialog.setCancelable(false);
+
+
+                            dialog.show();
+                            dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                         }
                     }
                 });
             }
@@ -155,7 +204,7 @@ public class Pelanggan extends AppCompatActivity implements SwipeRefreshLayout.O
         btBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               onBackPressed();
+               finish();
             }
         });
 
@@ -412,19 +461,58 @@ public class Pelanggan extends AppCompatActivity implements SwipeRefreshLayout.O
             @Override
             public void onClick(View v) {
 
-                alertDialog.dismiss();
-                editdata(_id,gnama.getText().toString(),galamat.getText().toString(),gnohp.getText().toString());
+                if (gnama.getText().toString().equals("")){
+                    gnama.setError("Tidak boleh kosong");
+                    gnama.requestFocus();
+                }else if (galamat.getText().toString().equals("")){
+                    galamat.setError("Tidak boleh kosong");
+                    galamat.requestFocus();
+                }else if (gnohp.getText().toString().equals("")){
+                    gnohp.setError("Tidak boleh kosong");
+                    gnohp.requestFocus();
+                }else {
+                    final Dialog dialog = new Dialog(Pelanggan.this);
+                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                    dialog.setContentView(R.layout.dialog_informasi);
 
+                    TextView cancelButton = dialog.findViewById(R.id.cancelButton);
+                    TextView okButton = dialog.findViewById(R.id.okButton);
+                    TextView txtjudul = dialog.findViewById(R.id.txtjudul);
+                    TextView txtsubjudul = dialog.findViewById(R.id.txtsubjudul);
+                    txtjudul.setText("Tambah data Pelanggan");
+                    txtsubjudul.setText("Apakah anda sudah yakin semua data yang diinputkan sudah benar?");
+                    okButton.setText("Yakin");
+                    cancelButton.setText("Cek lagi");
+
+                    cancelButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                        }
+                    });
+                    okButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            editdata(_id, gnama.getText().toString(), galamat.getText().toString(), gnohp.getText().toString());
+
+                            dialog.dismiss();
+
+                            alertDialog.dismiss();
+                        }
+                    });
+
+                    dialog.setCancelable(false);
+
+
+                    dialog.show();
+                    dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                 }
             }
         });
 
     }
-    @Override
-    public void onBackPressed() {
-        startActivity(new Intent(getApplicationContext(), Menu.class));
 
-        finish();
-    }
     @Override
     public void onRefresh() {
 

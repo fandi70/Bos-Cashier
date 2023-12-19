@@ -88,7 +88,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/selector_stroke"
                 android:clickable="true"
-                android:id="@+id/btlogin"
+                android:id="@+id/btBayar"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:padding="16dp">

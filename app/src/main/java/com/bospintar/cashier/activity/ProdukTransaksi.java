@@ -63,10 +63,11 @@ public class ProdukTransaksi extends AppCompatActivity implements SwipeRefreshLa
     ProgressDialog pDialog;
     ArrayList<Mproduk> arraylist = new ArrayList<>();
     double total;
-    ImageView btBack;
+    ImageView btBack,img_kosong;
     DecimalFormat rupiahFormat = (DecimalFormat) NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
     TextView txtnotif;
     TextView txt;
+    int jumitem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,12 +76,16 @@ public class ProdukTransaksi extends AppCompatActivity implements SwipeRefreshLa
         bacaPreferensi();
         swipe = (SwipeRefreshLayout) findViewById(R.id.swipe_refreshdatahistorykegiatan);
         btBack = findViewById(R.id.bt_back);
+        img_kosong = findViewById(R.id.img_kosong);
         TextView btcekout = findViewById(R.id.btcekout);
         btcekout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ProdukTransaksi.this, TransaksiDetailActivity.class);
-                startActivity(intent);
+                if (jumitem>0){
+                    Intent intent = new Intent(ProdukTransaksi.this, TransaksiDetailActivity.class);
+                    startActivity(intent);
+                }
+
             }
         });
         RelativeLayout bttambahmanual = findViewById(R.id.bttambahmanual);
@@ -137,7 +142,7 @@ public class ProdukTransaksi extends AppCompatActivity implements SwipeRefreshLa
                 String text = s.toString().toLowerCase(Locale.getDefault());
                 txt = findViewById(R.id.txtpesan);
                 if (adapter != null) {
-                    adapter.filter(text, txt);
+                    adapter.filter(text, txt,img_kosong);
                 }
             }
         });
@@ -148,6 +153,7 @@ public class ProdukTransaksi extends AppCompatActivity implements SwipeRefreshLa
     private void callData() {
         arraylist.clear();
         swipe.setRefreshing(true);
+        img_kosong.setVisibility(View.GONE);
         StringRequest jArr = new StringRequest(Request.Method.POST, URL_SERVER.CPRODUKTRANSAKSI, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -163,6 +169,7 @@ public class ProdukTransaksi extends AppCompatActivity implements SwipeRefreshLa
                         total = Double.parseDouble(jObj.getString("total"));
                         rupiahFormat.setParseBigDecimal(true);
                         rupiahFormat.applyPattern("#,##0");
+                        jumitem = Integer.parseInt(jObj.getString("totalitem"));
                         txtTotal.setText("Rp" + rupiahFormat.format(total));
                         btcekout.setText("Checkout (" + jObj.getString("totalitem") + ")");
                         txtnotif.setText(jObj.getString("pending"));
@@ -178,12 +185,16 @@ public class ProdukTransaksi extends AppCompatActivity implements SwipeRefreshLa
                         }
                         adapter = new ProdukTransaksiAdapter(arraylist, ProdukTransaksi.this);
                         rcList.setAdapter(adapter);
+
+                        img_kosong.setVisibility(View.GONE);
                     } else {
-                        Toast.makeText(ProdukTransaksi.this, "Kosong", Toast.LENGTH_SHORT).show();
+
+                        img_kosong.setVisibility(View.VISIBLE);
                     }
                 } catch (JSONException e) {
                     // JSON error
                     e.printStackTrace();
+                    img_kosong.setVisibility(View.VISIBLE);
                 }
 
 //                adapter.notifyDataSetChanged();
@@ -231,6 +242,7 @@ public class ProdukTransaksi extends AppCompatActivity implements SwipeRefreshLa
                         rupiahFormat.applyPattern("#,##0");
                         txtTotal.setText("Rp" + rupiahFormat.format(total));
                         TextView btcekout = findViewById(R.id.btcekout);
+                        jumitem = Integer.parseInt(jObj.getString("totalitem"));
                         btcekout.setText("Checkout (" + jObj.getString("totalitem") + ")");
                     } else {
                         Toast.makeText(ProdukTransaksi.this, "Gagal", Toast.LENGTH_SHORT).show();

@@ -51,7 +51,8 @@ public class Petugas extends AppCompatActivity implements SwipeRefreshLayout.OnR
     ArrayList<Mpetugas> arraylist = new ArrayList<>();
     EditText etxtcarinama;
     TextView addpegawai;
-    ImageView img_kosong;
+    ImageView img_kosong,bt_back;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,10 +66,17 @@ public class Petugas extends AppCompatActivity implements SwipeRefreshLayout.OnR
 
         rcList = findViewById(R.id.rcList);
         img_kosong = findViewById(R.id.img_kosong);
+        bt_back = findViewById(R.id.bt_back);
         final GridLayoutManager mLayoutManager = new GridLayoutManager(this, 1);
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rcList.setLayoutManager(mLayoutManager);
 
+        bt_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
 
         swipe.setOnRefreshListener(this);
@@ -207,10 +215,5 @@ public class Petugas extends AppCompatActivity implements SwipeRefreshLayout.OnR
         callData();
     }
 
-    @Override
-    public void onBackPressed() {
-        startActivity(new Intent(getApplicationContext(), Menu.class));
 
-        finish();
-    }
 }
