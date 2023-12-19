@@ -1,5 +1,6 @@
 
 package com.bospintar.cashier.activity;
+
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -44,41 +45,45 @@ import org.json.JSONObject;
 
 
 public class Produk_Add extends AppCompatActivity {
-   // ArrayList<ItemGrosir> myList = new ArrayList<>();
-   String xidpetugas,xnama_petugas,xalamat_petugas,xnohp,xlevel,xidtoko,xnama_toko,xalamat_toko,xstatus_toko,xketnota,xnohp_toko;
+    // ArrayList<ItemGrosir> myList = new ArrayList<>();
+    String xidpetugas, xnama_petugas, xalamat_petugas, xnohp, xlevel, xidtoko, xnama_toko, xalamat_toko, xstatus_toko, xketnota, xnohp_toko;
 
 
-    private ToggleButton toggleButton,toggleButtonstok;
+    private ToggleButton toggleButton, toggleButtonstok;
     private RecyclerView recyclerView;
     private TextView btnTambahGrosir;
     private List<ItemGrosir> itemGrosirList;
     private GrosirAdapter grosirAdapter;
-    EditText nmproduk,hbeli,hjual,stock,satuan;
+    EditText nmproduk, hbeli, hjual, stock, satuan;
     ImageView btBack;
     TextView bsave;
-    String status_stock="T";
-    String status_grosir="T";
+    String status_stock = "T";
+    String status_grosir = "T";
     public static final String TAG_VALUE = "success";
     ProgressDialog pDialog;
     JSONObject datalist;
     JSONArray array = new JSONArray();
     String tag_json_obj = "json_obj_req";
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_produk_add);
         bacaPreferensi();
 
+
         toggleButton = findViewById(R.id.toggleButton);
         toggleButtonstok = findViewById(R.id.toggleButtonstok);
         recyclerView = findViewById(R.id.recyclerView);
         btnTambahGrosir = findViewById(R.id.btnTambahGrosir);
-        bsave=findViewById(R.id.btsave);
+        bsave = findViewById(R.id.btsave);
         nmproduk = findViewById(R.id.edt_namaproduk);
         hbeli = findViewById(R.id.edt_hargabeli);
         hjual = findViewById(R.id.edt_hargajual);
         stock = findViewById(R.id.edt_stock);
         satuan = findViewById(R.id.edt_satuan);
+
+
 
         itemGrosirList = new ArrayList<>();
         grosirAdapter = new GrosirAdapter(itemGrosirList);
@@ -98,7 +103,7 @@ public class Produk_Add extends AppCompatActivity {
                 // Tampilkan item grosir dan tombol tambah grosir
                 recyclerView.setVisibility(View.VISIBLE);
                 btnTambahGrosir.setVisibility(View.VISIBLE);
-                status_grosir="Y";
+                status_grosir = "Y";
             } else {
                 // Jika switch OFF, hapus semua item
                 clearAllItemGrosir();
@@ -108,7 +113,7 @@ public class Produk_Add extends AppCompatActivity {
 
                 // Matikan switch secara asinkron setelah RecyclerView selesai diupdate
                 recyclerView.post(() -> toggleButton.setChecked(false));
-                status_grosir="T";
+                status_grosir = "T";
             }
         });
         toggleButtonstok.setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -116,15 +121,15 @@ public class Produk_Add extends AppCompatActivity {
 
                 satuan.setEnabled(true);
                 stock.setEnabled(true);
-                status_stock="Y";
+                status_stock = "Y";
             } else {
                 // Jika switch OFF, hapus semua item
                 satuan.setEnabled(false);
                 stock.setEnabled(false);
-                status_stock="T";
+                status_stock = "T";
             }
         });
-        btBack=findViewById(R.id.bt_back);
+        btBack = findViewById(R.id.bt_back);
         btBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -321,12 +326,12 @@ public class Produk_Add extends AppCompatActivity {
                     int value = jObj.getInt(TAG_VALUE);
                     if (value == 1) {
                         Toast.makeText(Produk_Add.this, "Sukses", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(Produk_Add.this,Produk.class));
+                        startActivity(new Intent(Produk_Add.this, Produk.class));
                         finish();
 
                     } else {
-                        Toast.makeText(Produk_Add.this,"Gagal", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(Produk_Add.this,Produk.class));
+                        Toast.makeText(Produk_Add.this, "Gagal", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(Produk_Add.this, Produk.class));
                         finish();
                     }
                 } catch (JSONException e) {
@@ -354,8 +359,8 @@ public class Produk_Add extends AppCompatActivity {
                 params.put("hargajual", hargajual.toString());
                 params.put("hargabeli", hargabeli.toString());
                 params.put("idtoko", xidtoko);
-                params.put("stok",stock.getText().toString());
-                params.put("satuan",satuan.getText().toString());
+                params.put("stok", stock.getText().toString());
+                params.put("satuan", satuan.getText().toString());
                 params.put("s_stok", status_stock);
                 params.put("s_grosir", status_grosir);
                 params.put("list", String.valueOf(array));
@@ -365,22 +370,25 @@ public class Produk_Add extends AppCompatActivity {
         };
         AppController.getInstance().addToRequestQueue(strReq, tag_json_obj);
     }
+
     private void bacaPreferensi() {
 
         SharedPreferences pref = getSharedPreferences("akun", MODE_PRIVATE);
         xidpetugas = pref.getString("idpetugas", "0");
         xnama_petugas = pref.getString("nama_petugas", "0");
         xalamat_petugas = pref.getString("alamat_petugas", "0");
-        xnohp= pref.getString("nohp", "0");
-        xlevel= pref.getString("level", "0");
-        xidtoko= pref.getString("idtoko", "0");
-        xnama_toko= pref.getString("nama_toko", "0");
-        xalamat_toko= pref.getString("alamat_toko", "0");
-        xstatus_toko= pref.getString("status_toko", "0");
-        xketnota= pref.getString("ketnota", "0");
-        xnohp_toko=pref.getString("nohp_toko","0");
+        xnohp = pref.getString("nohp", "0");
+        xlevel = pref.getString("level", "0");
+        xidtoko = pref.getString("idtoko", "0");
+        xnama_toko = pref.getString("nama_toko", "0");
+        xalamat_toko = pref.getString("alamat_toko", "0");
+        xstatus_toko = pref.getString("status_toko", "0");
+        xketnota = pref.getString("ketnota", "0");
+        xnohp_toko = pref.getString("nohp_toko", "0");
 
     }
+
+
     @Override
     public void onBackPressed() {
 

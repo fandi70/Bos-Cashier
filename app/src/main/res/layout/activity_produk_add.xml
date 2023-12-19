@@ -78,16 +78,34 @@
                             android:textColor="@color/textcolor"
                             android:textSize="14dp" />
 
-                        <EditText
-                            android:id="@+id/edt_namaproduk"
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="8dp"
+
                             android:background="@drawable/bg_edittext_white2"
-                            android:hint="Contoh : Mie Instan..."
-                            android:padding="16dp"
-                            android:textColorHint="@color/hint"
-                            android:textSize="14dp" />
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <EditText
+                                android:id="@+id/edt_namaproduk"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@color/transparans"
+                                android:hint="Contoh : Mie Instan..."
+                                android:padding="16dp"
+                                android:layout_weight="1"
+                                android:textColorHint="@color/hint"
+                                android:textSize="14dp" />
+
+
+                            <ImageView
+                                android:id="@+id/btnClearProduk"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:src="@drawable/ic_clear"
+                                android:visibility="gone" />
+                        </LinearLayout>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -100,8 +118,8 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_marginBottom="8dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginBottom="8dp"
                             android:background="@drawable/bg_edittext_white2"
                             android:gravity="center"
                             android:orientation="horizontal">
@@ -112,21 +130,21 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:background="@drawable/transparant"
-                                android:hint="0"
+                                android:hint="Rp0"
                                 android:inputType="number"
                                 android:padding="16dp"
                                 android:textColorHint="@color/hint"
                                 android:textSize="14dp" />
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="8dp"
-                                android:padding="4dp"
-                                android:text="Rp"
-                                android:textColor="@color/hint"
-                                android:textSize="12dp" />
+                            <ImageView
+                                android:id="@+id/btnClearharga"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:src="@drawable/ic_clear"
+                                android:visibility="gone" />
                         </LinearLayout>
+
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -135,11 +153,10 @@
                             android:text="Harga Jual"
                             android:textColor="@color/textcolor"
                             android:textSize="14dp" />
-
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_marginBottom="8dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginBottom="8dp"
                             android:background="@drawable/bg_edittext_white2"
                             android:gravity="center"
                             android:orientation="horizontal">
@@ -150,20 +167,19 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:background="@drawable/transparant"
-                                android:hint="0"
+                                android:hint="Rp0"
                                 android:inputType="number"
                                 android:padding="16dp"
                                 android:textColorHint="@color/hint"
                                 android:textSize="14dp" />
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="8dp"
-                                android:padding="4dp"
-                                android:text="Rp"
-                                android:textColor="@color/hint"
-                                android:textSize="12dp" />
+
+                            <ImageView
+                                android:id="@+id/btnClearhargajual"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:src="@drawable/ic_clear"
+                                android:visibility="gone" />
                         </LinearLayout>
 
 
@@ -185,10 +201,10 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
                         android:gravity="center"
                         android:orientation="horizontal"
                         android:paddingLeft="16dp"
-                        android:layout_marginTop="16dp"
                         android:paddingTop="8dp"
                         android:paddingRight="16dp"
                         android:paddingBottom="8dp">
@@ -246,11 +262,11 @@
 
                                 <EditText
                                     android:id="@+id/edt_stock"
-                                    android:enabled="false"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:background="@drawable/transparant"
+                                    android:enabled="false"
                                     android:hint="0"
                                     android:inputType="number"
                                     android:padding="16dp"
@@ -285,12 +301,12 @@
                                 android:orientation="horizontal">
 
                                 <EditText
-                                    android:enabled="false"
                                     android:id="@+id/edt_satuan"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:background="@drawable/transparant"
+                                    android:enabled="false"
                                     android:hint="0"
                                     android:padding="16dp"
                                     android:textColorHint="@color/hint"

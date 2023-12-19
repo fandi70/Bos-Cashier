@@ -88,11 +88,11 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:background="@drawable/selector_checkout_red"
+                    android:background="@drawable/selector_checkout_white"
                     android:gravity="center"
                     android:padding="16dp"
                     android:text="Batal"
-                    android:textColor="@color/putih_tetap"
+                    android:textColor="@color/textcolor"
                     android:textSize="14dp"
                     android:textStyle="bold" />
 
