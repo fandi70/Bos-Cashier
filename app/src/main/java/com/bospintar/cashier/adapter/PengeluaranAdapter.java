@@ -19,6 +19,7 @@ import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -50,6 +51,7 @@ public class PengeluaranAdapter extends RecyclerView.Adapter<PengeluaranAdapter.
     static class MyViewHolder extends RecyclerView.ViewHolder {
                 TextView txt_tanggal,keterangan,nominal;
         LinearLayout btpindah;
+        ImageView btedit,btdelete;
 
 
 
@@ -60,6 +62,8 @@ public class PengeluaranAdapter extends RecyclerView.Adapter<PengeluaranAdapter.
 
             nominal = view.findViewById(R.id.txtnominal);
             btpindah = view.findViewById(R.id.btpindah);
+            btedit = view.findViewById(R.id.btedit);
+            btdelete = view.findViewById(R.id.btdelete);
 
         }
     }
@@ -70,54 +74,6 @@ public class PengeluaranAdapter extends RecyclerView.Adapter<PengeluaranAdapter.
         this.arraylist = new ArrayList<>();
         this.arraylist.addAll(arrayJenis);
 
-        // Initialize ItemTouchHelper and attach it to your RecyclerView
-        ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
-            @Override
-            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
-                return false;
-            }
-
-            @Override
-            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                final int position = viewHolder.getAdapterPosition();
-
-                // Show confirmation dialog here
-                AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-                builder.setMessage("Anda yakin ingin menghapus data ini?")
-                        .setCancelable(false)
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                deleteItem(position,arrayJenis.get(position).getId());
-                            }
-                        })
-                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                notifyDataSetChanged(); // Notify to refresh view
-                            }
-                        });
-                AlertDialog alert = builder.create();
-                alert.show();
-            }
-
-            // Override onChildDraw to change text color on swipe
-            @Override
-            public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
-                View itemView = viewHolder.itemView;
-                if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
-                    if (dX > 0) {
-                        // Swiping to the right (swiping to delete)
-                        ((MyViewHolder) viewHolder).keterangan.setTextColor(Color.RED);
-                    } else {
-                        // Swiping to the left (swiping not to delete)
-                        ((MyViewHolder) viewHolder).keterangan.setTextColor(Color.BLACK); // Change text color back to default
-                    }
-                }
-                super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
-            }
-        };
-
-        itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
-        itemTouchHelper.attachToRecyclerView(recyclerView); // Attach ItemTouchHelper to RecyclerView
     }
     public void setItemList(ArrayList<Mpengeluaran> arrayJenis) {
         this.arrayJenis = arrayJenis;
@@ -146,12 +102,33 @@ public class PengeluaranAdapter extends RecyclerView.Adapter<PengeluaranAdapter.
         holder.keterangan.setText(arrayJenis.get(position).getKeterangan());
         holder.nominal.setText("Rp"+formattedRupiah);
 
-        holder.btpindah.setOnClickListener(new View.OnClickListener() {
+        holder.btedit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                         ((Pengeluaran)mContext).onClick(arrayJenis.get(position).getId().toString(),arrayJenis.get(position).getKeterangan().toString(),"Rp"+formattedRupiah);
 
 
+            }
+        });
+        holder.btdelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                builder.setMessage("Anda yakin ingin menghapus data ini?")
+                        .setCancelable(false)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                deleteItem(position,arrayJenis.get(position).getId());
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                notifyDataSetChanged(); // Notify to refresh view
+                            }
+                        });
+                AlertDialog alert = builder.create();
+                alert.show();
             }
         });
 

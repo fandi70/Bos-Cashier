@@ -107,6 +107,14 @@
                                 android:textSize="14dp"
                                 android:visibility="gone"
                                 android:textStyle="bold" />
+                            <ImageView
+                                android:id="@+id/img_kosong"
+                                android:layout_width="170dp"
+                                android:layout_height="170dp"
+                                android:layout_gravity="center"
+                                android:layout_margin="24dp"
+                                android:src="@drawable/ic_data_empty" />
+
                             <androidx.recyclerview.widget.RecyclerView
                                 android:id="@+id/recyclerView"
                                 android:layout_width="match_parent"

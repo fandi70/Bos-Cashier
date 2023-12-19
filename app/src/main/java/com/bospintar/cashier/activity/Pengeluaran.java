@@ -65,7 +65,7 @@ public class Pengeluaran extends AppCompatActivity implements SwipeRefreshLayout
     RecyclerView rcList;
     ArrayList<Mpengeluaran> arraylist = new ArrayList<>();
     TextView add;
-    ImageView btBack,img_kosong;
+    ImageView btBack,img_kosong,btedit,btdelete;
 
     EditText Tanggalfrom,Tanggalto;
     String tanggalpjfrom,tanggalpjto;
@@ -80,6 +80,7 @@ public class Pengeluaran extends AppCompatActivity implements SwipeRefreshLayout
         swipe = (SwipeRefreshLayout) findViewById(R.id.swipe_refreshdata);
         add=(TextView) findViewById(R.id.bt_tambah);
         img_kosong = findViewById(R.id.img_kosong);
+
 
         adapter = new PengeluaranAdapter(arraylist, this, rcList);
         rcList = findViewById(R.id.rcList);
