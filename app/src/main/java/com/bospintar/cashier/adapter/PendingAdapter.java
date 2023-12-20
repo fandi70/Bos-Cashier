@@ -8,6 +8,7 @@ import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
@@ -65,7 +66,6 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
         rupiahFormat.setParseBigDecimal(true);
         rupiahFormat.applyPattern("#,##0");
         String formattedRupiah = rupiahFormat.format(amount);
-        holder.txtnama.setText(this.arrayJenis.get(position).getIdtrnasaksi());
         holder.txtharga.setText("Rp"+formattedRupiah);
         holder.txttgl.setText(this.arrayJenis.get(position).getTanggal());
 
@@ -74,7 +74,7 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
                 ((PendingActivity) mContext).showDialogPending((arrayJenis.get(position)).getIdtrnasaksi());
             }
         });
-        String notes = this.arrayJenis.get(position).getIdtrnasaksi();
+        String notes = this.arrayJenis.get(position).getKet();
         SpannableStringBuilder sb = new SpannableStringBuilder(notes);
         Matcher m = Pattern.compile(this.baru, 2).matcher(notes);
         while (m.find()) {
@@ -83,25 +83,29 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
         holder.txtnama.setText(sb);
     }
 
-    public void filter(String charText, TextView itemView) {
+    public void filter(String charText, TextView itemView, ImageView img) {
         String charText2 = charText.toLowerCase(Locale.getDefault());
         this.arrayJenis.clear();
         if (charText2.length() == 0) {
             this.arrayJenis.addAll(this.arraylist);
             this.baru = "";
             itemView.setVisibility(View.GONE);
+            img.setVisibility(View.GONE);
         } else {
             Iterator<Mpending> it = this.arraylist.iterator();
             while (it.hasNext()) {
                 Mpending wp = it.next();
-                if (wp.getIdtrnasaksi().toLowerCase(Locale.getDefault()).contains(charText2)) {
+                if (wp.getKet().toLowerCase(Locale.getDefault()).contains(charText2)) {
                     this.arrayJenis.add(wp);
                     this.baru = charText2;
                     itemView.setVisibility(View.GONE);
+                    img.setVisibility(View.GONE);
                 }
             }
             if (this.arrayJenis.isEmpty()) {
                 itemView.setVisibility(View.VISIBLE);
+                img.setVisibility(View.VISIBLE);
+                img.setImageResource(R.drawable.ic_search_empty);
                 itemView.setText("Tidak ada data untuk '" + charText2 + "'");
             }
         }

@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bospintar.cashier.R;
 import com.bospintar.cashier.model.MpendingDetail;
 
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Locale;
@@ -55,7 +56,9 @@ public class PendingDetailAdapter extends RecyclerView.Adapter<PendingDetailAdap
 
     public void onBindViewHolder(MyViewHolder holder, int position) {
         double amount = Double.parseDouble(this.arrayJenis.get(position).getHargajual()) * Double.parseDouble(this.arrayJenis.get(position).getQty());
-        NumberFormat rupiahFormat = NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
+        DecimalFormat rupiahFormat = (DecimalFormat) NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
+        rupiahFormat.setParseBigDecimal(true);
+        rupiahFormat.applyPattern("#,##0");
         String formattedRupiah = rupiahFormat.format(amount);
         String harga = rupiahFormat.format(Double.parseDouble(this.arrayJenis.get(position).getHargajual()));
         String harganego = rupiahFormat.format(Double.parseDouble(this.arrayJenis.get(position).getHarganego()));

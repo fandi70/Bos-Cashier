@@ -147,7 +147,7 @@ public class Pengeluaran extends AppCompatActivity implements SwipeRefreshLayout
                 final TextView dialogBtnSubmit = dialogView.findViewById(R.id.btlogin);
                 dialogBtnSubmit.setText("Simpan");
                 judul.setText("Tambah");
-                final ImageView dialogBtnClose = dialogView.findViewById(R.id.bt_back);
+                final TextView dialogBtnClose = dialogView.findViewById(R.id.bt_back);
                 final android.app.AlertDialog alertDialog = dialog.create();
                 alertDialog.show();
                 dialogBtnClose.setOnClickListener(new View.OnClickListener() {
@@ -508,7 +508,7 @@ public class Pengeluaran extends AppCompatActivity implements SwipeRefreshLayout
         ddnominAL.setText(_nominal);
         dialogBtnSubmit.setText("Simpan");
         judul.setText("Edit");
-        final ImageView dialogBtnClose = dialogView.findViewById(R.id.bt_back);
+        final TextView dialogBtnClose = dialogView.findViewById(R.id.bt_back);
         final android.app.AlertDialog alertDialog = dialog.create();
         alertDialog.show();
         dialogBtnClose.setOnClickListener(new View.OnClickListener() {

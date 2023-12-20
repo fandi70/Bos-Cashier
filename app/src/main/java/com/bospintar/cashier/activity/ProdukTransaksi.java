@@ -84,6 +84,7 @@ public class ProdukTransaksi extends AppCompatActivity implements SwipeRefreshLa
                 if (jumitem>0){
                     Intent intent = new Intent(ProdukTransaksi.this, TransaksiDetailActivity.class);
                     startActivity(intent);
+                    finish();
                 }
 
             }
@@ -95,6 +96,7 @@ public class ProdukTransaksi extends AppCompatActivity implements SwipeRefreshLa
             public void onClick(View v) {
                 Intent intent = new Intent(ProdukTransaksi.this, PendingActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
         bttambahmanual.setOnClickListener(new View.OnClickListener() {

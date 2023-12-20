@@ -64,7 +64,7 @@
                 android:background="@drawable/bg_edittext_white"
                 android:drawableRight="@drawable/ic_search"
                 android:drawablePadding="18dp"
-                android:hint="Cari transaksi disini..."
+                android:hint="Cari nama disini..."
                 android:imeOptions="actionSearch"
                 android:inputType="text"
                 android:padding="18dp"

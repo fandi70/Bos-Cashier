@@ -364,26 +364,7 @@ public class TransaksiDetailActivity extends AppCompatActivity {
                             Toast.makeText(TransaksiDetailActivity.this, "Pembayaran Kurang", Toast.LENGTH_SHORT).show();
                         } else {
                             simpanserver("selesai", "");
-//                            new SweetAlertDialog(TransaksiDetailActivity.this, SweetAlertDialog.WARNING_TYPE)
-//                                    .setTitleText("Informasi")
-//                                    .setContentText("Apakah Transaksi Mau Dicetak?")
-//                                    .setConfirmText("Iya")
-//                                    .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-//                                        @Override
-//                                        public void onClick(SweetAlertDialog sDialog) {
-//                                            sDialog.dismissWithAnimation();
-//                                            simpanserver("selesai");
-//                                            printBluetooth();
-//                                        }
-//                                    }).setCancelText("Tidak")
-//                                    .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
-//                                        @Override
-//                                        public void onClick(SweetAlertDialog sweetAlertDialog) {
-//                                            sweetAlertDialog.dismissWithAnimation();
-//                                            simpanserver("selesai");
-//                                        }
-//                                    })
-//                                    .show();
+
 
                         }
                     }
@@ -532,6 +513,9 @@ public class TransaksiDetailActivity extends AppCompatActivity {
                     } else {
                         btn_tombolbayar.setEnabled(false);
                         btn_tombolsimpan.setEnabled(false);
+                        Intent intent = new Intent(TransaksiDetailActivity.this, ProdukTransaksi.class);
+                        startActivity(intent);
+                        finish();
                     }
 
                 } catch (JSONException e) {
@@ -539,6 +523,9 @@ public class TransaksiDetailActivity extends AppCompatActivity {
                     e.printStackTrace();
                     btn_tombolbayar.setEnabled(false);
                     btn_tombolsimpan.setEnabled(false);
+                    Intent intent = new Intent(TransaksiDetailActivity.this, ProdukTransaksi.class);
+                    startActivity(intent);
+                    finish();
                 }
 
                 adapter.notifyDataSetChanged();
@@ -550,6 +537,9 @@ public class TransaksiDetailActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 btn_tombolbayar.setEnabled(false);
                 btn_tombolsimpan.setEnabled(false);
+                Intent intent = new Intent(TransaksiDetailActivity.this, ProdukTransaksi.class);
+                startActivity(intent);
+                finish();
 //                swipe.setRefreshing(false);
             }
         }) {
@@ -876,6 +866,8 @@ public class TransaksiDetailActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        Intent intent = new Intent(TransaksiDetailActivity.this, ProdukTransaksi.class);
+        startActivity(intent);
         finish();
     }
 

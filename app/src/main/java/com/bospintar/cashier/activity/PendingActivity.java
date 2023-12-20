@@ -6,22 +6,26 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
@@ -71,6 +75,7 @@ public class PendingActivity extends AppCompatActivity {
     String xnohp_toko;
     String xstatus_toko;
     EditText yourEditText;
+    ImageView img_kosong;
 
 
     @Override
@@ -80,12 +85,21 @@ public class PendingActivity extends AppCompatActivity {
 
 
         bacaPreferensi();
-       // this.swipe = (SwipeRefreshLayout) findViewById(R.id.swipe_refreshdatahistorykegiatan);
-        // this.btBack = (ImageView) findViewById(R.id.bt_back);
+        img_kosong = findViewById(R.id.img_kosong);
+        // this.swipe = (SwipeRefreshLayout) findViewById(R.id.swipe_refreshdatahistorykegiatan);
+         ImageView btBack = (ImageView) findViewById(R.id.bt_back);
         this.rcList = (RecyclerView) findViewById(R.id.recyclerView);
         GridLayoutManager mLayoutManager = new GridLayoutManager(this, 1);
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         this.rcList.setLayoutManager(mLayoutManager);
+        btBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(PendingActivity.this, ProdukTransaksi.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 //
 //        this.swipe.setOnRefreshListener(this);
 //        this.swipe.post(new Runnable() {
@@ -103,7 +117,7 @@ public class PendingActivity extends AppCompatActivity {
 
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (adapter != null) {
-                    adapter.filter(s.toString().toLowerCase(Locale.getDefault()), (TextView) PendingActivity.this.findViewById(R.id.txtpesan));
+                    adapter.filter(s.toString().toLowerCase(Locale.getDefault()), (TextView) PendingActivity.this.findViewById(R.id.txtpesan), img_kosong);
 
                 }
             }
@@ -114,8 +128,9 @@ public class PendingActivity extends AppCompatActivity {
     /* access modifiers changed from: private */
     public void callData() {
         this.arraylist.clear();
+        img_kosong.setVisibility(View.GONE);
 //        this.swipe.setRefreshing(true);
-        AppController.getInstance().addToRequestQueue(new StringRequest(1, URL_SERVER.link+"getpending.php", new Response.Listener<String>() {
+        AppController.getInstance().addToRequestQueue(new StringRequest(1, URL_SERVER.link + "getpending.php", new Response.Listener<String>() {
             public void onResponse(String response) {
                 Log.e("Response: ", response.toString());
                 try {
@@ -125,22 +140,23 @@ public class PendingActivity extends AppCompatActivity {
                         JSONArray jsonArray = new JSONArray(jObj.getString(TAG_RESULTS));
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject data = jsonArray.getJSONObject(i);
-                            arraylist.add(new Mpending(data.getString("idtrnasaksi"), data.getString("totalbayar"), data.getString("tanggal")));
+                            arraylist.add(new Mpending(data.getString("idtrnasaksi"), data.getString("totalbayar"), data.getString("tanggal"),data.getString("keterangan")));
                         }
                         adapter = new PendingAdapter(arraylist, PendingActivity.this);
                         rcList.setAdapter(adapter);
+                        img_kosong.setVisibility(View.GONE);
                     } else {
-                        Toast.makeText(PendingActivity.this, "Kosong", Toast.LENGTH_SHORT).show();
+                        img_kosong.setVisibility(View.VISIBLE);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    img_kosong.setVisibility(View.VISIBLE);
                 }
                 //swipe.setRefreshing(false);
             }
         }, new Response.ErrorListener() {
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), "Koneksi Lemah", Toast.LENGTH_SHORT).show();
-                // swipe.setRefreshing(false);
+                img_kosong.setVisibility(View.VISIBLE);
             }
         }) {
             /* access modifiers changed from: protected */
@@ -169,7 +185,8 @@ public class PendingActivity extends AppCompatActivity {
     }
 
     public void onBackPressed() {
-        startActivity(new Intent(this, Menu.class));
+        Intent intent = new Intent(PendingActivity.this, ProdukTransaksi.class);
+        startActivity(intent);
         finish();
     }
 
@@ -179,10 +196,25 @@ public class PendingActivity extends AppCompatActivity {
         dialog2.requestWindowFeature(1);
         this.dialog.setContentView(R.layout.activity_popup_pending);
         RecyclerView rcList2 = (RecyclerView) this.dialog.findViewById(R.id.rcList);
+        LinearLayout btlanjut = dialog.findViewById(R.id.btlanjut);
+        LinearLayout btBayar = dialog.findViewById(R.id.btBayar);
         GridLayoutManager mLayoutManager = new GridLayoutManager(this, 1);
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rcList2.setLayoutManager(mLayoutManager);
         rcList2.setAdapter(this.adapterDetail);
+        btlanjut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tambahData(idtransaksi,"lanjut");
+            }
+        });
+        btBayar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tambahData(idtransaksi,"cetak");
+            }
+        });
+
         getPending((LinearLayout) this.dialog.findViewById(R.id.liKosong), rcList2, idtransaksi);
         this.dialog.show();
         this.dialog.getWindow().setLayout(-1, -2);
@@ -197,7 +229,7 @@ public class PendingActivity extends AppCompatActivity {
         this.arraylistDetail.clear();
         //this.swipe.setRefreshing(true);
         final String str = idtransaksi;
-        AppController.getInstance().addToRequestQueue(new StringRequest(1, URL_SERVER.link+"getdetailpending.php", new Response.Listener<String>() {
+        AppController.getInstance().addToRequestQueue(new StringRequest(1, URL_SERVER.link + "getdetailpending.php", new Response.Listener<String>() {
             public void onResponse(String response) {
                 Log.e("Response: ", response.toString());
                 try {
@@ -207,7 +239,7 @@ public class PendingActivity extends AppCompatActivity {
                         JSONArray jsonArray = new JSONArray(jObj.getString(TAG_RESULTS));
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject data = jsonArray.getJSONObject(i);
-                            arraylistDetail.add(new MpendingDetail(data.getString("nama"), data.getString("qty"), data.getString("hargajual"),data.getString("harganego")));
+                            arraylistDetail.add(new MpendingDetail(data.getString("nama"), data.getString("qty"), data.getString("hargajual"), data.getString("harganego")));
                         }
                         adapterDetail = new PendingDetailAdapter(arraylistDetail, PendingActivity.this);
                         rcList2.setAdapter(adapterDetail);
@@ -223,7 +255,7 @@ public class PendingActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(getApplicationContext(), "Koneksi Lemah", Toast.LENGTH_SHORT).show();
-               // swipe.setRefreshing(false);
+                // swipe.setRefreshing(false);
             }
         }) {
             /* access modifiers changed from: protected */
@@ -235,5 +267,59 @@ public class PendingActivity extends AppCompatActivity {
         }, this.tag_json_obj);
     }
 
+    public void tambahData(String idtransaksi, String pindah) {
+        pDialog = new ProgressDialog(PendingActivity.this);
+        pDialog.setCancelable(false);
+        pDialog.setMessage("Loading...");
+        pDialog.show();
+
+        StringRequest strReq = new StringRequest(Request.Method.POST, URL_SERVER.link+"gettemp_pending.php", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.e("Response: ", response.toString());
+                try {
+                    JSONObject jObj = new JSONObject(response);
+                    int value = jObj.getInt(TAG_VALUE);
+                    if (value == 1) {
+                        Intent intent = null;
+                        if (pindah.equals("lanjut")) {
+                             intent = new Intent(PendingActivity.this, ProdukTransaksi.class);
+                        }else if (pindah.equals("cetak")){
+                            intent = new Intent(PendingActivity.this, TransaksiDetailActivity.class);
+
+                        }
+                        startActivity(intent);
+                        finish();
+                    }  else {
+                        Toast.makeText(PendingActivity.this, "Gagal", Toast.LENGTH_SHORT).show();
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                pDialog.dismiss();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+//                VolleyLog.e(TAG, "Error: " + error.getMessage());
+                Toast.makeText(PendingActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                pDialog.dismiss();
+            }
+        }) {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+
+                params.put("idpetugas", xidpetugas);
+                params.put("idtransaksi", idtransaksi);
+
+
+                return params;
+            }
+        };
+        AppController.getInstance().addToRequestQueue(strReq, tag_json_obj);
+    }
 
 }

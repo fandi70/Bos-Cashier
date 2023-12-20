@@ -41,6 +41,7 @@ import com.bospintar.cashier.server.URL_SERVER;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
@@ -140,7 +141,7 @@ public class Pelanggan extends AppCompatActivity implements SwipeRefreshLayout.O
                 final TextView dialogBtnSubmit = dialogView.findViewById(R.id.btlogin);
                 dialogBtnSubmit.setText("Simpan");
                 judul.setText("Tambah");
-                final ImageView dialogBtnClose = dialogView.findViewById(R.id.bt_back);
+                final TextView dialogBtnClose = dialogView.findViewById(R.id.bt_back);
                 final android.app.AlertDialog alertDialog = dialog.create();
                 alertDialog.show();
                 dialogBtnClose.setOnClickListener(new View.OnClickListener() {
@@ -452,7 +453,7 @@ public class Pelanggan extends AppCompatActivity implements SwipeRefreshLayout.O
 
         dialogBtnSubmit.setText("Simpan");
         judul.setText("Edit Pelanggan");
-        final ImageView dialogBtnClose = dialogView.findViewById(R.id.bt_back);
+        final TextView dialogBtnClose = dialogView.findViewById(R.id.bt_back);
         final android.app.AlertDialog alertDialog = dialog.create();
         alertDialog.show();
 

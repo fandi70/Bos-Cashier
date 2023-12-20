@@ -1,180 +1,307 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/background">
+    android:layout_height="wrap_content"
+    android:background="@color/background"
+    android:orientation="vertical">
 
-    <LinearLayout
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/putih"
+        app:cardCornerRadius="50dp"
+        card_view:cardElevation="0dp"
+        card_view:elevation="0dp">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@color/utama"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-<!---->
-            <TextView
-                android:id="@+id/txt_judul"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:padding="16dp"
-                android:text="Cari History Penjualan"
-                android:textColor="@color/putih_tetap"
-                android:textSize="14dp"
-                android:textStyle="bold" />
-
-            <ImageView
-                android:id="@+id/bt_back"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_centerInParent="true"
-                android:background="@drawable/selector_transparan"
-                android:clickable="true"
-                android:padding="16dp"
-                android:src="@drawable/ic_baseline_close_24" />
-
-        </RelativeLayout>
-
-        <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:backgroundTint="@color/putih"
+                android:elevation="0dp"
+                app:elevation="0dp"
+                card_view:cardElevation="0dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:background="@drawable/bg_bottom_corner_utama" />
+                    <ImageView
+                        android:layout_width="240dp"
+                        android:layout_height="180dp"
+                        android:layout_alignParentEnd="true"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_bg_calender_dialog"
+                        android:visibility="gone" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"
-                        android:background="@drawable/bg_edittext_white"
+                        android:layout_centerInParent="true"
+                        android:layout_marginTop="16dp"
                         android:orientation="vertical">
 
-                        <LinearLayout
+                        <ImageView
+                            android:id="@+id/imginfo"
+                            android:layout_width="150dp"
+                            android:layout_height="150dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_alert_info" />
+
+                        <TextView
+                            android:id="@+id/filter"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="8dp"
-                            android:layout_marginRight="8dp"
-                            android:layout_marginBottom="16dp"
-                            android:orientation="horizontal">
+                            android:layout_height="wrap_content"
+                            android:text="Pilih tanggal di bawah"
+                            android:textColor="@color/putih_tetap"
+                            android:textSize="14dp"
+                            android:textStyle="bold"
+                            android:visibility="gone" />
 
-                            <EditText
-                                android:id="@+id/edt_dari"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="8dp"
-                                android:layout_weight="1"
-                                android:background="@drawable/bg_edittext_white"
-                                android:drawableRight="@drawable/ic_search"
-                                android:drawablePadding="18dp"
-                                android:hint="Dari..."
-                                android:padding="18dp"
-                                android:textColorHint="@color/hint"
-                                android:textSize="14dp" />
-
-                            <EditText
-                                android:id="@+id/edt_sampai"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="8dp"
-                                android:layout_weight="1"
-                                android:background="@drawable/bg_edittext_white"
-                                android:drawableRight="@drawable/ic_search"
-                                android:drawablePadding="18dp"
-                                android:hint="Sampai..."
-                                android:padding="18dp"
-                                android:textColorHint="@color/hint"
-                                android:textSize="14dp" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            android:padding="10dp">
-
-
-                            <RadioGroup
-                                android:id="@+id/opsistatuspembayaranAdd"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-                                <RadioButton
-                                    android:id="@+id/semua"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:buttonTint="@color/utama"
-                                    android:text="Semua"
-                                    android:textColor="@color/textcolor"
-                                    android:textSize="14dp" />
-
-                                <RadioButton
-                                    android:id="@+id/lunas"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:buttonTint="@color/utama"
-                                    android:text="Lunas"
-                                    android:textColor="@color/textcolor"
-                                    android:textSize="14dp" />
-
-                                <RadioButton
-                                    android:id="@+id/utang"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:buttonTint="@color/utama"
-                                    android:text="Utang"
-                                    android:textColor="@color/textcolor"
-                                    android:textSize="14dp" />
-
-
-                            </RadioGroup>
-
-                        </LinearLayout>
                     </LinearLayout>
 
                 </RelativeLayout>
 
+            </androidx.cardview.widget.CardView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
                 <TextView
-                    android:id="@+id/btlogin"
+                    android:id="@+id/txt_judul"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Judul"
+                    android:textColor="@color/utama"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtsubjudul"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:padding="16dp"
+                    android:text="Sub judul"
+                    android:textColor="@color/textcolor"
+                    android:textSize="14dp" />
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:background="@drawable/selector_login"
-                    android:clickable="true"
-                    android:gravity="center"
-                    android:padding="18dp"
-                    android:text="Terapkan"
-                    android:textColor="@color/putih_tetap"
-                    android:textSize="14dp"
-                    android:textStyle="bold" />
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="16dp"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:id="@+id/edt_dari"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="8dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/selector_stroke"
+                            android:hint="Dari..."
+                            android:padding="18dp"
+                            android:textColorHint="@color/hint"
+                            android:textSize="14dp" />
+
+                        <EditText
+                            android:id="@+id/edt_sampai"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/selector_stroke"
+                            android:hint="Sampai..."
+                            android:padding="18dp"
+                            android:textColorHint="@color/hint"
+                            android:textSize="14dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="10dp">
+
+
+                        <RadioGroup
+                            android:id="@+id/opsistatuspembayaranAdd"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/semua"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:buttonTint="@color/utama"
+                                android:text="Semua"
+                                android:textColor="@color/textcolor"
+                                android:textSize="14dp" />
+
+                            <RadioButton
+                                android:id="@+id/lunas"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:buttonTint="@color/utama"
+                                android:text="Lunas"
+                                android:textColor="@color/textcolor"
+                                android:textSize="14dp" />
+
+                            <RadioButton
+                                android:id="@+id/utang"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:buttonTint="@color/utama"
+                                android:text="Hutang"
+                                android:textColor="@color/textcolor"
+                                android:textSize="14dp" />
+
+
+                        </RadioGroup>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="10dp">
+
+
+                        <RadioGroup
+                            android:id="@+id/opsistatuspembayaranAdd"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/semua"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:buttonTint="@color/utama"
+                                android:text="Semua"
+                                android:textColor="@color/textcolor"
+                                android:textSize="14dp" />
+
+                            <RadioButton
+                                android:id="@+id/tunai"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:buttonTint="@color/utama"
+                                android:text="Tunai"
+                                android:textColor="@color/textcolor"
+                                android:textSize="14dp" />
+
+                            <RadioButton
+                                android:id="@+id/transfer"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:buttonTint="@color/utama"
+                                android:text="Transfer"
+                                android:textColor="@color/textcolor"
+                                android:textSize="14dp" />
+
+
+                        </RadioGroup>
+
+                    </LinearLayout>
+                </LinearLayout>
 
 
             </LinearLayout>
-        </androidx.core.widget.NestedScrollView>
-    </LinearLayout>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center"
+                    android:foregroundGravity="center"
+                    app:cardCornerRadius="50dp"
+                    app:cardElevation="0dp">
+
+                    <TextView
+                        android:id="@+id/btlogin"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/selector_login"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:paddingLeft="38dp"
+                        android:paddingTop="16dp"
+                        android:paddingRight="38dp"
+                        android:paddingBottom="16dp"
+                        android:text="OK"
+                        android:textColor="@color/putih_tetap"
+                        android:textSize="14dp"
+                        android:textStyle="bold" />
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center"
+                    android:layout_marginTop="16dp"
+                    android:backgroundTint="@color/putih"
+                    android:foregroundGravity="center"
+                    app:cardCornerRadius="50dp"
+                    app:cardElevation="0dp">
+
+                    <TextView
+                        android:id="@+id/bt_back"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/selector_transparan"
+                        android:clickable="true"
+
+                        android:gravity="center"
+                        android:paddingLeft="38dp"
+                        android:paddingTop="16dp"
+                        android:paddingRight="38dp"
+                        android:paddingBottom="16dp"
+                        android:text="Batal"
+                        android:textColor="@color/textcolor"
+                        android:textSize="14dp"
+                        android:textStyle="bold" />
+
+                </androidx.cardview.widget.CardView>
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
+</LinearLayout>
 

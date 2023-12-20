@@ -138,7 +138,7 @@ public class Laporan extends AppCompatActivity implements SwipeRefreshLayout.OnR
 
                 final TextView dialogBtnSubmit = dialogView.findViewById(R.id.btlogin);
                 dialogBtnSubmit.setText("Terapkan");
-                final ImageView dialogBtnClose = dialogView.findViewById(R.id.bt_back);
+                final TextView dialogBtnClose = dialogView.findViewById(R.id.bt_back);
                 final android.app.AlertDialog alertDialog = dialog.create();
                 alertDialog.show();
                 dialogBtnClose.setOnClickListener(new View.OnClickListener() {

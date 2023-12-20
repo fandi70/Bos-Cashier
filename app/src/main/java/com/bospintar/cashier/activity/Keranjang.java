@@ -296,6 +296,8 @@ public class Keranjang extends AppCompatActivity {
                     JSONObject jObj = new JSONObject(response);
                     int value = jObj.getInt(TAG_VALUE);
                     if (value == 1) {
+                        Intent intent = new Intent(Keranjang.this, TransaksiDetailActivity.class);
+                        startActivity(intent);
                         finish();
                         Toast.makeText(Keranjang.this, "Item dihapus", Toast.LENGTH_SHORT).show();
                     } else {
@@ -412,6 +414,8 @@ public class Keranjang extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        Intent intent = new Intent(Keranjang.this, TransaksiDetailActivity.class);
+        startActivity(intent);
         finish();
     }
 }

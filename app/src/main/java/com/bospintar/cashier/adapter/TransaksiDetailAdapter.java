@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bospintar.cashier.R;
 import com.bospintar.cashier.activity.Keranjang;
+import com.bospintar.cashier.activity.PendingActivity;
 import com.bospintar.cashier.activity.Produk_Edit;
 import com.bospintar.cashier.activity.TransaksiDetailActivity;
 import com.bospintar.cashier.model.MtransaksiDetail;
@@ -134,6 +135,7 @@ public class TransaksiDetailAdapter extends RecyclerView.Adapter<TransaksiDetail
                 Intent intent = new Intent(mContext, Keranjang.class);
                 intent.putExtra("idproduk",arrayJenis.get(position).getIdb());
                 mContext.startActivity(intent);
+                ((TransaksiDetailActivity) mContext).finish();
             }
         });
 

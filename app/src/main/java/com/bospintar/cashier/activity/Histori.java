@@ -95,6 +95,7 @@ public class Histori extends AppCompatActivity implements SwipeRefreshLayout.OnR
                 final RadioButton rlunas = dialogView.findViewById(R.id.lunas);
                 final RadioButton rutang= dialogView.findViewById(R.id.utang);
                 final TextView judul= dialogView.findViewById(R.id.txt_judul);
+                final TextView txtsubjudul= dialogView.findViewById(R.id.txtsubjudul);
                 remotePembayaran.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -167,8 +168,9 @@ public class Histori extends AppCompatActivity implements SwipeRefreshLayout.OnR
 
                 final TextView dialogBtnSubmit = dialogView.findViewById(R.id.btlogin);
                 dialogBtnSubmit.setText("Terapkan");
-                judul.setText("cari by date");
-                final ImageView dialogBtnClose = dialogView.findViewById(R.id.bt_back);
+                judul.setText("Filter histori");
+                txtsubjudul.setText("Atur filter waktu dari tanggal sampai tanggal untuk menyaring histori transaksi");
+                final TextView dialogBtnClose = dialogView.findViewById(R.id.bt_back);
                 final android.app.AlertDialog alertDialog = dialog.create();
                 alertDialog.show();
                 dialogBtnClose.setOnClickListener(new View.OnClickListener() {
