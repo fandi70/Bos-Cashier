@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bospintar.cashier.R;
+import com.bospintar.cashier.activity.LaporanCetakActivity;
 import com.bospintar.cashier.activity.TransaksiCetakActivity;
 import com.bospintar.cashier.model.Mlaporanpetugas;
 
@@ -81,7 +82,7 @@ public class LaporanperpetugasAdapter extends RecyclerView.Adapter<Laporanperpet
         holder.btpindah.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent kotak = new Intent(mContext, TransaksiCetakActivity.class);
+                Intent kotak = new Intent(mContext, LaporanCetakActivity.class);
                 kotak.putExtra("id",arrayJenis.get(position).getId());
                 mContext.startActivity(kotak);
 

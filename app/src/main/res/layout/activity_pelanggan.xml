@@ -74,7 +74,10 @@
                         android:drawableRight="@drawable/ic_search"
                         android:drawablePadding="18dp"
                         android:hint="Cari pegawai disini..."
+                        android:imeOptions="actionSearch"
+                        android:inputType="text"
                         android:padding="18dp"
+                        android:singleLine="true"
                         android:textColorHint="@color/hint"
                         android:textSize="14dp" />
 

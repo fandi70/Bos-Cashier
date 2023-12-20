@@ -1,9 +1,12 @@
 
 package com.bospintar.cashier.activity;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
@@ -11,6 +14,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -84,7 +88,6 @@ public class Produk_Add extends AppCompatActivity {
         satuan = findViewById(R.id.edt_satuan);
 
 
-
         itemGrosirList = new ArrayList<>();
         grosirAdapter = new GrosirAdapter(itemGrosirList);
 
@@ -133,25 +136,70 @@ public class Produk_Add extends AppCompatActivity {
         btBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                startActivity(new Intent(Produk_Add.this, Produk.class));
                 finish();
             }
         });
-        btnTambahGrosir.setOnClickListener(v -> addItemGrosir());
+        btnTambahGrosir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addItemGrosir();
+            }
+        }
+
+
+        );
         bsave.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View v) {
-                if (nmproduk.getText().toString().equals("")) {
+                if (nmproduk.getText().toString().trim().isEmpty()) {
                     nmproduk.setError("Belum diisi");
+                    nmproduk.setText("");
                     nmproduk.requestFocus();
-                } else if (hjual.getText().toString().equals("")) {
+                } else if (hbeli.getText().toString().trim().isEmpty()|| hbeli.getText().toString().equals("Rp0")) {
                     hjual.setError("Belum diisi");
                     hjual.requestFocus();
-                } else if (hbeli.getText().toString().equals("")) {
+                } else if (hjual.getText().toString().trim().isEmpty() || hjual.getText().toString().equals("Rp0")) {
                     hbeli.setError("Belum diisi");
                     hbeli.requestFocus();
                 } else {
-                    tambahData();
+                    final Dialog dialog = new Dialog(Produk_Add.this);
+                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                    dialog.setContentView(R.layout.dialog_informasi);
+
+                    TextView cancelButton = dialog.findViewById(R.id.cancelButton);
+                    TextView okButton = dialog.findViewById(R.id.okButton);
+                    TextView txtjudul = dialog.findViewById(R.id.txtjudul);
+                    TextView txtsubjudul = dialog.findViewById(R.id.txtsubjudul);
+                    txtjudul.setText("Tambah data Produk");
+                    txtsubjudul.setText("Apakah anda sudah yakin semua data yang diinputkan sudah benar?");
+                    okButton.setText("Yakin");
+                    cancelButton.setText("Cek lagi");
+
+                    cancelButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                        }
+                    });
+                    okButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+                            dialog.dismiss();
+
+                            tambahData();
+                        }
+                    });
+
+                    dialog.setCancelable(false);
+
+
+                    dialog.show();
+                    dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
 
                 }
 
@@ -391,7 +439,7 @@ public class Produk_Add extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-
+        startActivity(new Intent(Produk_Add.this, Produk.class));
         finish();
     }
 }

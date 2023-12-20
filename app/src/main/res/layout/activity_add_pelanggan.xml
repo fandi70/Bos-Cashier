@@ -88,6 +88,7 @@
                             android:background="@drawable/bg_edittext_white2"
                             android:hint="Contoh : reyhan..."
                             android:padding="16dp"
+                            android:singleLine="true"
                             android:textColorHint="@color/hint"
                             android:textSize="14dp" />
 
@@ -106,6 +107,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="8dp"
                             android:layout_weight="1"
+                            android:inputType="number"
                             android:background="@drawable/bg_edittext_white2"
                             android:hint="Contoh : 0852 xxxx xxxx"
                             android:padding="16dp"
@@ -127,6 +129,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:inputType="text"
                             android:background="@drawable/bg_edittext_white2"
                             android:hint="Input Alamat"
                             android:padding="16dp"

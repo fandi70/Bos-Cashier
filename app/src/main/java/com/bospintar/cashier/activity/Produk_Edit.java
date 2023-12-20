@@ -1,8 +1,11 @@
 package com.bospintar.cashier.activity;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
@@ -10,6 +13,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -21,6 +25,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
@@ -34,6 +39,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -101,12 +107,12 @@ public class Produk_Edit extends AppCompatActivity {
         toggleButton.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
                 // Jika switch ON, tambahkan satu item secara otomatis
-               // addItemGrosir();
+                // addItemGrosir();
 
                 // Tampilkan item grosir dan tombol tambah grosir
                 recyclerView.setVisibility(View.VISIBLE);
                 btnTambahGrosir.setVisibility(View.VISIBLE);
-                status_grosir="Y";
+                status_grosir = "Y";
             } else {
                 // Jika switch OFF, hapus semua item
                 //clearAllItemGrosir();
@@ -117,7 +123,7 @@ public class Produk_Edit extends AppCompatActivity {
 
                 // Matikan switch secara asinkron setelah RecyclerView selesai diupdate
                 recyclerView.post(() -> toggleButton.setChecked(false));
-                status_grosir="T";
+                status_grosir = "T";
             }
         });
         toggleButtonstok.setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -125,12 +131,12 @@ public class Produk_Edit extends AppCompatActivity {
 
                 satuan.setEnabled(true);
                 stock.setEnabled(true);
-                status_stock="Y";
+                status_stock = "Y";
             } else {
                 // Jika switch OFF, hapus semua item
                 satuan.setEnabled(false);
                 stock.setEnabled(false);
-                status_stock="T";
+                status_stock = "T";
             }
         });
         ImageView imageView = (ImageView) findViewById(R.id.bt_back);
@@ -150,17 +156,54 @@ public class Produk_Edit extends AppCompatActivity {
         this.bsave.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             public void onClick(View v) {
-                if (Produk_Edit.this.nmproduk.getText().toString().equals("")) {
-                    Produk_Edit.this.nmproduk.setError("Belum diisi");
-                    Produk_Edit.this.nmproduk.requestFocus();
-                } else if (Produk_Edit.this.hjual.getText().toString().equals("")) {
-                    Produk_Edit.this.hjual.setError("Belum diisi");
-                    Produk_Edit.this.hjual.requestFocus();
-                } else if (Produk_Edit.this.hbeli.getText().toString().equals("")) {
-                    Produk_Edit.this.hbeli.setError("Belum diisi");
-                    Produk_Edit.this.hbeli.requestFocus();
+                if (nmproduk.getText().toString().trim().isEmpty()) {
+                    nmproduk.setError("Belum diisi");
+                    nmproduk.requestFocus();
+                    nmproduk.setText("");
+                } else if (hbeli.getText().toString().trim().isEmpty() || hbeli.getText().toString().equals("Rp0")) {
+                    hbeli.setError("Belum diisi");
+                    hbeli.requestFocus();
+                } else if (hjual.getText().toString().trim().isEmpty() || hjual.getText().toString().equals("Rp0")) {
+                    hjual.setError("Belum diisi");
+                    hjual.requestFocus();
                 } else {
-                    tambahData();
+                    final Dialog dialog = new Dialog(Produk_Edit.this);
+                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                    dialog.setContentView(R.layout.dialog_informasi);
+
+                    TextView cancelButton = dialog.findViewById(R.id.cancelButton);
+                    TextView okButton = dialog.findViewById(R.id.okButton);
+                    TextView txtjudul = dialog.findViewById(R.id.txtjudul);
+                    TextView txtsubjudul = dialog.findViewById(R.id.txtsubjudul);
+                    txtjudul.setText("Edit data Produk");
+                    txtsubjudul.setText("Apakah anda sudah yakin semua data yang diinputkan sudah benar?");
+                    okButton.setText("Yakin");
+                    cancelButton.setText("Cek lagi");
+
+                    cancelButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                        }
+                    });
+                    okButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+                            dialog.dismiss();
+
+                            tambahData();
+                        }
+                    });
+
+                    dialog.setCancelable(false);
+
+
+                    dialog.show();
+                    dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+
                 }
             }
         });
@@ -175,9 +218,8 @@ public class Produk_Edit extends AppCompatActivity {
     }
 
 
-
     private void callData() {
-        AppController.getInstance().addToRequestQueue(new StringRequest(1, URL_SERVER.link+"getprodukdetail.php", new Response.Listener<String>() {
+        AppController.getInstance().addToRequestQueue(new StringRequest(1, URL_SERVER.link + "getprodukdetail.php", new Response.Listener<String>() {
             public void onResponse(String response) {
                 Log.e("Response: ", response.toString());
                 try {
@@ -434,5 +476,11 @@ public class Produk_Edit extends AppCompatActivity {
         this.xstatus_toko = pref.getString("status_toko", "0");
         this.xketnota = pref.getString("ketnota", "0");
         this.xnohp_toko = pref.getString("nohp_toko", "0");
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(Produk_Edit.this, Produk.class));
+        finish();
     }
 }

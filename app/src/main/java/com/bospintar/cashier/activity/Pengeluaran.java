@@ -323,7 +323,7 @@ public class Pengeluaran extends AppCompatActivity implements SwipeRefreshLayout
                     JSONObject jObj = new JSONObject(response);
                     int value = jObj.getInt("success");
                     if (value == 1) {
-                          callData(Tanggalfrom.getText().toString(),Tanggalto.getText().toString());
+                        callData(Tanggalfrom.getText().toString(),Tanggalto.getText().toString());
 
                     } else {
                         Toast.makeText(Pengeluaran.this, "Gagal", Toast.LENGTH_SHORT).show();

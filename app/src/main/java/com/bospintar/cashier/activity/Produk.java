@@ -1,5 +1,6 @@
 package com.bospintar.cashier.activity;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -7,8 +8,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -24,6 +27,7 @@ import com.bospintar.cashier.R;
 import com.bospintar.cashier.adapter.ProdukAdapter;
 import com.bospintar.cashier.adapter.ProdukTransaksiAdapter;
 import com.bospintar.cashier.app.AppController;
+import com.bospintar.cashier.convert.RupiahTextWatcher;
 import com.bospintar.cashier.model.Mproduk;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -34,6 +38,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -44,7 +49,7 @@ public class Produk extends AppCompatActivity implements SwipeRefreshLayout.OnRe
     String xidpetugas, xnama_petugas, xalamat_petugas, xnohp, xlevel, xidtoko, xnama_toko, xalamat_toko, xstatus_toko, xketnota, xnohp_toko;
     public static final String TAG_RESULTS = "produk";
     public static final String TAG_VALUE = "status";
-
+    ProgressDialog pDialog;
     String tag_json_obj = "json_obj_req";
     ProdukAdapter adapter;
     SwipeRefreshLayout swipe;
@@ -52,7 +57,8 @@ public class Produk extends AppCompatActivity implements SwipeRefreshLayout.OnRe
     ArrayList<Mproduk> arraylist = new ArrayList<>();
     TextView addproduk;
     ImageView btBack, img_kosong;
-
+    TextView txt;
+    EditText yourEditText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,18 +76,21 @@ public class Produk extends AppCompatActivity implements SwipeRefreshLayout.OnRe
         rcList.setLayoutManager(mLayoutManager);
         rcList.setAdapter(adapter);
 
-
+        yourEditText = findViewById(R.id.edt_cariproduk);
+        txt = findViewById(R.id.txtpesan);
         swipe.setOnRefreshListener(this);
 
         swipe.post(new Runnable() {
                        @Override
                        public void run() {
+                           txt.setVisibility(View.GONE);
+                           yourEditText.setText("");
                            swipe.setRefreshing(true);
                            callData();
                        }
                    }
         );
-        EditText yourEditText = findViewById(R.id.edt_cariproduk);
+
 
         yourEditText.addTextChangedListener(new TextWatcher() {
 
@@ -95,7 +104,7 @@ public class Produk extends AppCompatActivity implements SwipeRefreshLayout.OnRe
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
                 String text = s.toString().toLowerCase(Locale.getDefault());
-                TextView txt = findViewById(R.id.txtpesan);
+
                 if (adapter != null) {
                     adapter.filter(text, txt,img_kosong);
                 }
@@ -106,6 +115,7 @@ public class Produk extends AppCompatActivity implements SwipeRefreshLayout.OnRe
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), Produk_Add.class));
+                finish();
             }
         });
         btBack = findViewById(R.id.bt_back);
@@ -116,6 +126,52 @@ public class Produk extends AppCompatActivity implements SwipeRefreshLayout.OnRe
             }
         });
 
+    }
+
+    public void HapusData(String id) {
+        pDialog = new ProgressDialog(Produk.this);
+        pDialog.setCancelable(false);
+        pDialog.setMessage("Loading...");
+        pDialog.show();
+        StringRequest strReq = new StringRequest(Request.Method.POST, URL_SERVER.link+"hapusproduk.php", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.e("Response: ", response.toString());
+                try {
+                    JSONObject jObj = new JSONObject(response);
+                    int value = jObj.getInt(TAG_VALUE);
+                    if (value == 1) {
+                        Toast.makeText(Produk.this, "Sukses", Toast.LENGTH_SHORT).show();
+                        callData();
+
+                    } else {
+                        Toast.makeText(Produk.this, "Gagal", Toast.LENGTH_SHORT).show();
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                pDialog.dismiss();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+//                VolleyLog.e(TAG, "Error: " + error.getMessage());
+                Toast.makeText(Produk.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                pDialog.dismiss();
+            }
+        }) {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+
+                params.put("idproduk", id);
+
+                return params;
+            }
+        };
+        AppController.getInstance().addToRequestQueue(strReq, tag_json_obj);
     }
 
     private void callData() {
@@ -209,10 +265,11 @@ public class Produk extends AppCompatActivity implements SwipeRefreshLayout.OnRe
 
     }
 
-
-
     @Override
     public void onRefresh() {
+        txt.setVisibility(View.GONE);
+        yourEditText.setText("");
+        swipe.setRefreshing(true);
         callData();
     }
 }

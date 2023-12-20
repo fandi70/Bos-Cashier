@@ -65,7 +65,8 @@ public class Pelanggan extends AppCompatActivity implements SwipeRefreshLayout.O
     ArrayList<Mpelanggan> arraylist = new ArrayList<>();
     TextView add;
     ImageView btBack,img_kosong;
-
+    TextView txt;
+    EditText yourEditText;
 
     SimpleDateFormat sdcurrentdate = new SimpleDateFormat("yyyy-MM-dd", new Locale("id", "ID"));
     @Override
@@ -80,24 +81,28 @@ public class Pelanggan extends AppCompatActivity implements SwipeRefreshLayout.O
         adapter = new PelangganAdapter(arraylist, this, rcList);
         rcList = findViewById(R.id.rcList);
         img_kosong = findViewById(R.id.img_kosong);
+
         final GridLayoutManager mLayoutManager = new GridLayoutManager(this, 1);
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rcList.setLayoutManager(mLayoutManager);
         rcList.setAdapter(adapter);
 
-
+        yourEditText = findViewById(R.id.edt_cariproduk);
+        txt = findViewById(R.id.txtpesan);
 
         swipe.setOnRefreshListener(this);
 
         swipe.post(new Runnable() {
                        @Override
                        public void run() {
+                           txt.setVisibility(View.GONE);
+                           yourEditText.setText("");
                            swipe.setRefreshing(true);
                            callData();
                        }
                    }
         );
-        EditText yourEditText = findViewById(R.id.edt_cari);
+         yourEditText = findViewById(R.id.edt_cari);
 
         yourEditText.addTextChangedListener(new TextWatcher() {
 
@@ -111,7 +116,7 @@ public class Pelanggan extends AppCompatActivity implements SwipeRefreshLayout.O
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
                 String text = s.toString().toLowerCase(Locale.getDefault());
-                TextView txt = findViewById(R.id.txtpesan);
+                 txt = findViewById(R.id.txtpesan);
                 if (adapter != null) {
                     adapter.filter(text, txt,img_kosong);
                 }
@@ -149,13 +154,13 @@ public class Pelanggan extends AppCompatActivity implements SwipeRefreshLayout.O
                     @Override
                     public void onClick(View v) {
 
-                        if (nama.getText().toString().equals("")){
+                        if (nama.getText().toString().trim().isEmpty()){
                             nama.setError("Tidak boleh kosong");
                             nama.requestFocus();
-                        }else if (alamat.getText().toString().equals("")){
+                        }else if (alamat.getText().toString().trim().isEmpty()){
                             alamat.setError("Tidak boleh kosong");
                             alamat.requestFocus();
-                        }else if (nohp.getText().toString().equals("")){
+                        }else if (nohp.getText().toString().trim().isEmpty()){
                             nohp.setError("Tidak boleh kosong");
                             nohp.requestFocus();
                         }else {
@@ -450,6 +455,8 @@ public class Pelanggan extends AppCompatActivity implements SwipeRefreshLayout.O
         final ImageView dialogBtnClose = dialogView.findViewById(R.id.bt_back);
         final android.app.AlertDialog alertDialog = dialog.create();
         alertDialog.show();
+
+
         dialogBtnClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -512,10 +519,57 @@ public class Pelanggan extends AppCompatActivity implements SwipeRefreshLayout.O
         });
 
     }
+    public void HapusData(String id) {
+        pDialog = new ProgressDialog(Pelanggan.this);
+        pDialog.setCancelable(false);
+        pDialog.setMessage("Loading...");
+        pDialog.show();
+        StringRequest strReq = new StringRequest(Request.Method.POST, URL_SERVER.link+"hapuspelanggan.php", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.e("Response: ", response.toString());
+                try {
+                    JSONObject jObj = new JSONObject(response);
+                    int value = jObj.getInt(TAG_VALUE);
+                    if (value == 1) {
+                        Toast.makeText(Pelanggan.this, "Sukses", Toast.LENGTH_SHORT).show();
+                        callData();
+
+                    } else {
+                        Toast.makeText(Pelanggan.this, "Gagal", Toast.LENGTH_SHORT).show();
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                pDialog.dismiss();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+//                VolleyLog.e(TAG, "Error: " + error.getMessage());
+                Toast.makeText(Pelanggan.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                pDialog.dismiss();
+            }
+        }) {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+
+                params.put("idpelanggan", id);
+
+                return params;
+            }
+        };
+        AppController.getInstance().addToRequestQueue(strReq, tag_json_obj);
+    }
 
     @Override
     public void onRefresh() {
-
+        txt.setVisibility(View.GONE);
+        yourEditText.setText("");
+        swipe.setRefreshing(true);
         callData();
     }
 }

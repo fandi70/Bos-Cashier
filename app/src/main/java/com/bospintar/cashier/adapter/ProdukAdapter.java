@@ -1,15 +1,18 @@
 package com.bospintar.cashier.adapter;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -19,6 +22,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bospintar.cashier.R;
+import com.bospintar.cashier.activity.Pengeluaran;
+import com.bospintar.cashier.activity.Produk;
+import com.bospintar.cashier.activity.Produk_Add;
 import com.bospintar.cashier.activity.Produk_Edit;
 import com.bospintar.cashier.model.Mproduk;
 
@@ -100,6 +106,54 @@ public class ProdukAdapter extends RecyclerView.Adapter<ProdukAdapter.MyViewHold
                 Intent intent = new Intent(mContext, Produk_Edit.class);
                 intent.putExtra("idproduk",arrayJenis.get(position).getId());
                 mContext.startActivity(intent);
+                ((Produk)mContext).finish();
+
+            }
+        });
+        holder.btdelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Dialog dialog = new Dialog(mContext);
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.setContentView(R.layout.dialog_informasi);
+
+                TextView cancelButton = dialog.findViewById(R.id.cancelButton);
+                TextView okButton = dialog.findViewById(R.id.okButton);
+                TextView txtjudul = dialog.findViewById(R.id.txtjudul);
+                TextView txtsubjudul = dialog.findViewById(R.id.txtsubjudul);
+                ImageView imginfo = dialog.findViewById(R.id.imginfo);
+                imginfo.setImageResource(R.drawable.ic_alert_delete);
+                txtjudul.setText("Hapus data Produk");
+                txtsubjudul.setText("Apakah anda yakin untuk menghapus produk "+arrayJenis.get(position).getNama()+"?");
+                okButton.setText("Yakin");
+                cancelButton.setText("Tidak");
+
+                cancelButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+                okButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+
+                        ((Produk)mContext).HapusData(arrayJenis.get(position).getId());
+                        dialog.dismiss();
+                        arrayJenis.remove(position);
+                        // Notify RecyclerView about the item being removed
+                        notifyItemRemoved(position);
+
+                    }
+                });
+
+                dialog.setCancelable(false);
+
+
+                dialog.show();
+                dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
             }
         });

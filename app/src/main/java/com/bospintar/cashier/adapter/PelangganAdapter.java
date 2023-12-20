@@ -1,14 +1,17 @@
 package com.bospintar.cashier.adapter;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -17,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bospintar.cashier.R;
 import com.bospintar.cashier.activity.Pelanggan;
+import com.bospintar.cashier.activity.Produk;
 import com.bospintar.cashier.model.Mpelanggan;
 import java.util.ArrayList;
 import java.util.Locale;
@@ -32,6 +36,7 @@ public class PelangganAdapter extends RecyclerView.Adapter<PelangganAdapter.MyVi
     static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView txt_namapelanggan, txt_nohp;
         LinearLayout btpindah;
+        ImageView btedit,btdelete;
 
 
 
@@ -40,6 +45,8 @@ public class PelangganAdapter extends RecyclerView.Adapter<PelangganAdapter.MyVi
             txt_namapelanggan = view.findViewById(R.id.txt_namapelanggan);
             txt_nohp = view.findViewById(R.id.txt_nohp);
             btpindah = view.findViewById(R.id.btpindah);
+            btedit = view.findViewById(R.id.btedit);
+            btdelete = view.findViewById(R.id.btdelete);
 
         }
     }
@@ -73,11 +80,59 @@ public class PelangganAdapter extends RecyclerView.Adapter<PelangganAdapter.MyVi
 
 
 
-        holder.btpindah.setOnClickListener(new View.OnClickListener() {
+        holder.btedit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ((Pelanggan)mContext).onClick(arrayJenis.get(position).getId().toString(),arrayJenis.get(position).getNama().toString(),arrayJenis.get(position).getAlamat().toString(),arrayJenis.get(position).getNohp().toString());
 
+
+            }
+        });
+        holder.btdelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Dialog dialog = new Dialog(mContext);
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.setContentView(R.layout.dialog_informasi);
+
+                TextView cancelButton = dialog.findViewById(R.id.cancelButton);
+                TextView okButton = dialog.findViewById(R.id.okButton);
+                TextView txtjudul = dialog.findViewById(R.id.txtjudul);
+                TextView txtsubjudul = dialog.findViewById(R.id.txtsubjudul);
+                ImageView imginfo = dialog.findViewById(R.id.imginfo);
+                imginfo.setImageResource(R.drawable.ic_alert_delete);
+                txtjudul.setText("Hapus data Pelanggan");
+                txtsubjudul.setText("Apakah anda yakin untuk menghapus pelanggan "+arrayJenis.get(position).getNama()+"?");
+                okButton.setText("Yakin");
+                cancelButton.setText("Tidak");
+
+                cancelButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+                okButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+
+                        ((Pelanggan)mContext).HapusData(arrayJenis.get(position).getId());
+
+                        dialog.dismiss();
+                        arrayJenis.remove(position);
+                        // Notify RecyclerView about the item being removed
+                        notifyItemRemoved(position);
+
+                    }
+                });
+
+                dialog.setCancelable(false);
+
+
+                dialog.show();
+                dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
             }
         });

@@ -150,7 +150,7 @@ public class ProdukTransaksi extends AppCompatActivity implements SwipeRefreshLa
 
     }
 
-    private void callData() {
+    public void callData() {
         arraylist.clear();
         swipe.setRefreshing(true);
         img_kosong.setVisibility(View.GONE);
@@ -219,6 +219,62 @@ public class ProdukTransaksi extends AppCompatActivity implements SwipeRefreshLa
         };
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(jArr, tag_json_obj);
+    }
+    public void tambahmanualData(String xnamabarang, String xharga) {
+        pDialog = new ProgressDialog(ProdukTransaksi.this);
+        pDialog.setCancelable(false);
+        pDialog.setMessage("Loading...");
+        pDialog.show();
+
+        StringRequest strReq = new StringRequest(Request.Method.POST, URL_SERVER.CPRODUKMANUAL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.e("Response: ", response.toString());
+                try {
+                    JSONObject jObj = new JSONObject(response);
+                    int value = jObj.getInt(TAG_VALUE);
+                    if (value == 1) {
+                        Toast.makeText(ProdukTransaksi.this, xnamabarang, Toast.LENGTH_SHORT).show();
+                        TextView txtTotal = findViewById(R.id.txtTotal);
+                        total = Double.parseDouble(jObj.getString("total"));
+                        rupiahFormat.setParseBigDecimal(true);
+                        rupiahFormat.applyPattern("#,##0");
+                        txtTotal.setText("Rp" + rupiahFormat.format(total));
+                        TextView btcekout = findViewById(R.id.btcekout);
+                        btcekout.setText("Checkout (" + jObj.getString("totalitem") + ")");
+                    } else {
+                        Toast.makeText(ProdukTransaksi.this, "Gagal", Toast.LENGTH_SHORT).show();
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                pDialog.dismiss();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+//                VolleyLog.e(TAG, "Error: " + error.getMessage());
+                Toast.makeText(ProdukTransaksi.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                pDialog.dismiss();
+            }
+        }) {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                BigDecimal llhargajual = RupiahTextWatcher.parseCurrencyValue(xharga);
+
+                params.put("nama", xnamabarang);
+                params.put("hargajual", llhargajual.toString());
+                params.put("idtoko", xidtoko);
+                params.put("idpetugas", xidpetugas);
+
+
+                return params;
+            }
+        };
+        AppController.getInstance().addToRequestQueue(strReq, tag_json_obj);
     }
 
     public void tambahData(String idbarang, String namabarang) {
@@ -311,6 +367,9 @@ public class ProdukTransaksi extends AppCompatActivity implements SwipeRefreshLa
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_tambah_manual);
+        EditText ednama= dialog.findViewById(R.id.ednama);
+        EditText edharga=dialog.findViewById(R.id.edharga);
+        edharga.addTextChangedListener(new RupiahTextWatcher(edharga));
 
         TextView cancelButton = dialog.findViewById(R.id.cancelButton);
         TextView okButton = dialog.findViewById(R.id.okButton);
@@ -321,6 +380,13 @@ public class ProdukTransaksi extends AppCompatActivity implements SwipeRefreshLa
                 dialog.dismiss();
             }
         });
+        okButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tambahmanualData(ednama.getText().toString(),edharga.getText().toString());
+                dialog.dismiss();
+            }
+        });
 
         dialog.setCancelable(false);
 
@@ -328,8 +394,6 @@ public class ProdukTransaksi extends AppCompatActivity implements SwipeRefreshLa
         dialog.show();
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-/*        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimasi;
-        dialog.getWindow().setGravity(Gravity.BOTTOM);*/
     }
 
 }

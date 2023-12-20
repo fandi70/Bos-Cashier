@@ -57,6 +57,7 @@ public class Laporanperpetugas extends AppCompatActivity implements SwipeRefresh
     DecimalFormat rupiahFormat = (DecimalFormat) NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
     SimpleDateFormat sdcurrentdate = new SimpleDateFormat("yyyy-MM-dd", new Locale("id", "ID"));
 
+    ImageView img_kosong;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,6 +74,7 @@ public class Laporanperpetugas extends AppCompatActivity implements SwipeRefresh
         caribydate=findViewById(R.id.caribydate);
         txtsampai= findViewById(R.id.txtsampai);
         txtdari= findViewById(R.id.txtdari);
+        img_kosong= findViewById(R.id.img_kosong);
         txttotalpenjualan= findViewById(R.id.txttotalPenjualan);
         swipe = findViewById(R.id.swipe_refreshdata);
 
@@ -91,8 +93,8 @@ public class Laporanperpetugas extends AppCompatActivity implements SwipeRefresh
 
                 final TextView judul= dialogView.findViewById(R.id.txt_judul);
                 judul.setText("Cari Transaksi");
-                dari.setText(sdcurrentdate.format(new Date()));
-                sampai.setText(sdcurrentdate.format(new Date()));
+                dari.setText(E_dari);
+                sampai.setText(E_sampai);
                 dari.setFocusableInTouchMode(false);
                 dari.setFocusable(false);
                 sampai.setFocusableInTouchMode(false);
@@ -193,7 +195,7 @@ public class Laporanperpetugas extends AppCompatActivity implements SwipeRefresh
     private void callData(final String xdari, String xsampai) {
         arraylist.clear();
         swipe.setRefreshing(true);
-
+        img_kosong.setVisibility(View.GONE);
         // Creating volley request obj
         StringRequest jArr = new StringRequest(Request.Method.POST, URL_SERVER.CLAPORANPERPETUGAS, new Response.Listener<String>() {
 
@@ -230,18 +232,18 @@ public class Laporanperpetugas extends AppCompatActivity implements SwipeRefresh
                         txtdari.setText(xdari);
                         txtsampai.setText(xsampai);
 
-
+                        img_kosong.setVisibility(View.GONE);
                     } else {
-                        Toast.makeText(Laporanperpetugas.this, "Kosong", Toast.LENGTH_SHORT).show();
                         rcList.setAdapter(adapter);
                         txtdari.setText("----/--/--");
                         txtsampai.setText("----/--/--");
-
+                        img_kosong.setVisibility(View.VISIBLE);
                     }
 
                 } catch (JSONException e) {
                     // JSON error
                     e.printStackTrace();
+                    img_kosong.setVisibility(View.VISIBLE);
                 }
 
 //                adapter.notifyDataSetChanged();
@@ -251,7 +253,7 @@ public class Laporanperpetugas extends AppCompatActivity implements SwipeRefresh
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), "Koneksi Lemah", Toast.LENGTH_SHORT).show();
+                img_kosong.setVisibility(View.VISIBLE);
                 swipe.setRefreshing(false);
             }
         }) {

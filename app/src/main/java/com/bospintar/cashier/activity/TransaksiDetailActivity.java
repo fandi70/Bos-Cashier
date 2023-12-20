@@ -2,17 +2,22 @@ package com.bospintar.cashier.activity;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -63,6 +68,7 @@ import java.util.Map;
 import java.util.TimeZone;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
+
 import com.dantsu.escposprinter.connection.DeviceConnection;
 import com.dantsu.escposprinter.connection.bluetooth.BluetoothConnection;
 import com.dantsu.escposprinter.connection.bluetooth.BluetoothPrintersConnections;
@@ -72,9 +78,10 @@ import com.bospintar.cashier.async.AsyncBluetoothEscPosPrint;
 import com.bospintar.cashier.async.AsyncEscPosPrint;
 import com.bospintar.cashier.async.AsyncEscPosPrinter;
 import com.bospintar.cashier.async.AsyncUsbEscPosPrint;
+
 public class TransaksiDetailActivity extends AppCompatActivity {
-    private ToggleButton toggleButtonstok,toggleButtonmetodepembayaran;
-    String idpelanggan="0";
+    private ToggleButton toggleButtonstok, toggleButtonmetodepembayaran;
+    String idpelanggan = "0";
     EditText ed_namaPelanggan;
     TextView addpelanggan;
     List<StringWithTagPelangan> categoryNames = new ArrayList<StringWithTagPelangan>();
@@ -82,43 +89,43 @@ public class TransaksiDetailActivity extends AppCompatActivity {
     public static final String TAG_VALUE = "status";
     ProgressDialog pDialog;
     String tag_json_obj = "json_obj_req";
-    String xidpetugas,xnama_petugas,xalamat_petugas,xnohp,xlevel,xidtoko,xnama_toko,xalamat_toko,xstatus_toko,xketnota,xnohp_toko;
+    String xidpetugas, xnama_petugas, xalamat_petugas, xnohp, xlevel, xidtoko, xnama_toko, xalamat_toko, xstatus_toko, xketnota, xnohp_toko;
     TransaksiDetailAdapter adapter;
     RecyclerView rcList;
     ArrayList<MtransaksiDetail> arraylist = new ArrayList<>();
-    TextView totalpenjualan,btn_tombolbayar,btn_tombolsimpan;
-    EditText ebayar,ekembali;
-    int bayar=0;
-    int totalbarang=0;
-    JSONObject datalistkeranjang ;
+    TextView totalpenjualan, btn_tombolbayar, btn_tombolsimpan;
+    EditText ebayar, ekembali;
+    int bayar = 0;
+    int totalbarang = 0;
+    JSONObject datalistkeranjang;
     String jstatusbayar;
     JSONObject datalist;
     JSONArray array = new JSONArray();
     ImageView btBack;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        jstatusbayar="tunai";
+        jstatusbayar = "tunai";
         bacaPreferensi();
         setContentView(R.layout.activity_transaksi_detail);
 
 
-
         callDatacustomer();
-        totalpenjualan=findViewById(R.id.totalpenjualan);
-        ebayar=findViewById(R.id.bayarpenjuan);
-        ekembali=findViewById(R.id.kembalian);
-        btn_tombolbayar=findViewById(R.id.btn_tombolbayar);
-        btn_tombolsimpan=findViewById(R.id.btn_tombolsimpan);
+        totalpenjualan = findViewById(R.id.totalpenjualan);
+        ebayar = findViewById(R.id.bayarpenjuan);
+        ekembali = findViewById(R.id.kembalian);
+        btn_tombolbayar = findViewById(R.id.btn_tombolbayar);
+        btn_tombolsimpan = findViewById(R.id.btn_tombolsimpan);
         toggleButtonstok = findViewById(R.id.toggleButtonstok);
         ed_namaPelanggan = findViewById(R.id.ed_namaCustomer);
         addpelanggan = findViewById(R.id.buttonaddcustomer);
-        toggleButtonmetodepembayaran=findViewById(R.id.toggleButtonmetodebayar);
+        toggleButtonmetodepembayaran = findViewById(R.id.toggleButtonmetodebayar);
         toggleButtonmetodepembayaran.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
-                jstatusbayar="transfer";
+                jstatusbayar = "transfer";
             } else {
-                jstatusbayar="tunai";
+                jstatusbayar = "tunai";
             }
         });
         toggleButtonstok.setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -128,10 +135,10 @@ public class TransaksiDetailActivity extends AppCompatActivity {
             } else {
                 ed_namaPelanggan.setVisibility(View.GONE);
                 addpelanggan.setVisibility(View.GONE);
-                idpelanggan="0";
+                idpelanggan = "0";
             }
         });
-        btBack=findViewById(R.id.bt_back);
+        btBack = findViewById(R.id.bt_back);
         btBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -213,7 +220,7 @@ public class TransaksiDetailActivity extends AppCompatActivity {
                         Object tag2 = s.string;
                         ed_namaPelanggan.setText(tag2.toString());
                         ed_namaPelanggan.setError(null);
-                        idpelanggan=tag1.toString();
+                        idpelanggan = tag1.toString();
 
                     }
                 });
@@ -226,8 +233,8 @@ public class TransaksiDetailActivity extends AppCompatActivity {
                 View dialogView = getLayoutInflater().inflate(R.layout.activity_add_pelanggan, null);
                 dialog.setView(dialogView);
                 dialog.setCancelable(false);
-                final EditText ddnama= dialogView.findViewById(R.id.etxt_namacustomer);
-                final EditText ddalamat= dialogView.findViewById(R.id.etxt_alamatcustomer);
+                final EditText ddnama = dialogView.findViewById(R.id.etxt_namacustomer);
+                final EditText ddalamat = dialogView.findViewById(R.id.etxt_alamatcustomer);
                 final EditText ddnohp = dialogView.findViewById(R.id.etxt_nohpcustomer);
 
                 final TextView dialogBtnSubmit = dialogView.findViewById(R.id.btlogin);
@@ -246,11 +253,10 @@ public class TransaksiDetailActivity extends AppCompatActivity {
                     public void onClick(View v) {
 
                         alertDialog.dismiss();
-                        simpancustomerData(ddnama.getText().toString(),ddalamat.getText().toString(),ddnohp.getText().toString());
+                        simpancustomerData(ddnama.getText().toString(), ddalamat.getText().toString(), ddnohp.getText().toString());
 
                     }
                 });
-
 
 
             }
@@ -258,7 +264,8 @@ public class TransaksiDetailActivity extends AppCompatActivity {
         ebayar.addTextChangedListener(new RupiahTextWatcher(ebayar));
         ebayar.addTextChangedListener(new TextWatcher() {
 
-            public void afterTextChanged(Editable s) {}
+            public void afterTextChanged(Editable s) {
+            }
 
             public void beforeTextChanged(CharSequence s, int start,
                                           int count, int after) {
@@ -267,19 +274,19 @@ public class TransaksiDetailActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             public void onTextChanged(CharSequence s, int start,
                                       int before, int count) {
-                if (String.valueOf(s).equals("")){
+                if (String.valueOf(s).equals("")) {
                     ekembali.setText("");
-                }else {
+                } else {
                     BigDecimal _bayar = RupiahTextWatcher.parseCurrencyValue(String.valueOf(s));
                     BigDecimal _total = RupiahTextWatcher.parseCurrencyValue(totalpenjualan.getText().toString());
-                    int kembali=Integer.parseInt(_bayar.toString())-Integer.parseInt(_total.toString());
+                    int kembali = Integer.parseInt(_bayar.toString()) - Integer.parseInt(_total.toString());
 
-                    double amount =kembali;
+                    double amount = kembali;
                     DecimalFormat rupiahFormat = (DecimalFormat) NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
                     rupiahFormat.setParseBigDecimal(true);
                     rupiahFormat.applyPattern("#,##0");
                     String formattedRupiah = rupiahFormat.format(amount);
-                    ekembali.setText("Rp"+String.valueOf(formattedRupiah));
+                    ekembali.setText("Rp" + String.valueOf(formattedRupiah));
                 }
 
 
@@ -289,17 +296,55 @@ public class TransaksiDetailActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View v) {
-                if(ebayar.getText().toString().equals("")){
+                if (ebayar.getText().toString().equals("")) {
                     ebayar.setError("harus di isi");
                     ebayar.requestFocus();
-                }else{
+                } else {
 //                        BigDecimal kbayar = RupiahTextWatcher.parseCurrencyValue(ebayar.getText().toString());
 //                        BigDecimal ktotal = RupiahTextWatcher.parseCurrencyValue(totalpenjualan.getText().toString());
 //                        if(Integer.parseInt(String.valueOf(kbayar))<Integer.parseInt(String.valueOf(ktotal))){
 //                            Toast.makeText(TransaksiDetailActivity.this, "Pembayaran Kurang", Toast.LENGTH_SHORT).show();
 //                        }else{
-                    simpanserver("pending");
+
 //                        }
+                    final Dialog dialog = new Dialog(TransaksiDetailActivity.this);
+                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                    dialog.setContentView(R.layout.dialog_simpan);
+
+                    TextView cancelButton = dialog.findViewById(R.id.cancelButton);
+                    TextView okButton = dialog.findViewById(R.id.okButton);
+                    TextView txtjudul = dialog.findViewById(R.id.txtjudul);
+                    TextView txtsubjudul = dialog.findViewById(R.id.txtsubjudul);
+                    EditText edKet = dialog.findViewById(R.id.edKet);
+                    txtjudul.setText("Tambah Keterangan");
+                    okButton.setText("Simpan");
+                    cancelButton.setText("Tidak");
+
+                    cancelButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                        }
+                    });
+                    okButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            if (edKet.getText().toString().trim().isEmpty()){
+                                edKet.setError("Harus diisi");
+                                edKet.requestFocus();
+                            }else {
+                                simpanserver("pending", edKet.getText().toString());
+                            }
+                            dialog.dismiss();
+                        }
+                    });
+
+                    dialog.setCancelable(false);
+
+
+                    dialog.show();
+                    dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 }
             }
 
@@ -308,17 +353,17 @@ public class TransaksiDetailActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View v) {
-                if (idpelanggan.equals("0")){
-                    if(ebayar.getText().toString().equals("")){
+                if (idpelanggan.equals("0")) {
+                    if (ebayar.getText().toString().equals("")) {
                         ebayar.setError("harus di isi");
                         ebayar.requestFocus();
-                    }else{
+                    } else {
                         BigDecimal kbayar = RupiahTextWatcher.parseCurrencyValue(ebayar.getText().toString());
                         BigDecimal ktotal = RupiahTextWatcher.parseCurrencyValue(totalpenjualan.getText().toString());
-                        if(Integer.parseInt(String.valueOf(kbayar))<Integer.parseInt(String.valueOf(ktotal))){
+                        if (Integer.parseInt(String.valueOf(kbayar)) < Integer.parseInt(String.valueOf(ktotal))) {
                             Toast.makeText(TransaksiDetailActivity.this, "Pembayaran Kurang", Toast.LENGTH_SHORT).show();
-                        }else{
-                            simpanserver("selesai");
+                        } else {
+                            simpanserver("selesai", "");
 //                            new SweetAlertDialog(TransaksiDetailActivity.this, SweetAlertDialog.WARNING_TYPE)
 //                                    .setTitleText("Informasi")
 //                                    .setContentText("Apakah Transaksi Mau Dicetak?")
@@ -343,8 +388,8 @@ public class TransaksiDetailActivity extends AppCompatActivity {
                         }
                     }
 
-                }else{
-                    simpanserver("selesai");
+                } else {
+                    simpanserver("selesai", "");
                 }
             }
 
@@ -352,7 +397,8 @@ public class TransaksiDetailActivity extends AppCompatActivity {
 //        btn_tombolbayar.setOnClickListener(view -> printBluetooth());
         ekembali.setEnabled(false);
     }
-    public void simpancustomerData(final String _nama,final String _alamat,final String _nohp) {
+
+    public void simpancustomerData(final String _nama, final String _alamat, final String _nohp) {
         pDialog = new ProgressDialog(TransaksiDetailActivity.this);
         pDialog.setCancelable(false);
         pDialog.setMessage("Loading...");
@@ -390,14 +436,15 @@ public class TransaksiDetailActivity extends AppCompatActivity {
                 params.put("nama", _nama);
                 params.put("alamat", _alamat);
                 params.put("nohp", _nohp);
-                params.put("idtoko",xidtoko);
+                params.put("idtoko", xidtoko);
                 return params;
             }
         };
         AppController.getInstance().addToRequestQueue(strReq, tag_json_obj);
     }
+
     private void callDatacustomer() {
-        StringRequest jArr = new StringRequest(Request.Method.POST, URL_SERVER.CTCUSTOMER, new Response .Listener<String>() {
+        StringRequest jArr = new StringRequest(Request.Method.POST, URL_SERVER.CTCUSTOMER, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.e("Response: ", response.toString());
@@ -436,9 +483,12 @@ public class TransaksiDetailActivity extends AppCompatActivity {
         };
         AppController.getInstance().addToRequestQueue(jArr, tag_json_obj);
     }
-    private void callData() {
+
+    public void callData() {
+        btn_tombolbayar.setEnabled(false);
+        btn_tombolsimpan.setEnabled(false);
         arraylist.clear();
-       // adapter.notifyDataSetChanged();
+        // adapter.notifyDataSetChanged();
 //        swipe.setRefreshing(true);
 
         // Creating volley request obj
@@ -460,31 +510,35 @@ public class TransaksiDetailActivity extends AppCompatActivity {
 
                         String getObject = jObj.getString("produk");
                         JSONArray jsonArray = new JSONArray(getObject);
-                        totalbarang=0;
+                        totalbarang = 0;
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject data = jsonArray.getJSONObject(i);
 
                             MtransaksiDetail wp = new MtransaksiDetail(data.getString("idb"), data.getString("nama"), data.getString("jumlah_penjualan"),
                                     data.getString("idpetugas"), data.getString("harga_jual"), data.getString("harga_beli"));
                             arraylist.add(wp);
-                            totalbarang+=Integer.parseInt(data.getString("jumlah_penjualan"))*Integer.parseInt(data.getString("harga_jual"));
+                            totalbarang += Integer.parseInt(data.getString("jumlah_penjualan")) * Integer.parseInt(data.getString("harga_jual"));
 
                         }
-                        double amount =totalbarang;
+                        double amount = totalbarang;
                         DecimalFormat rupiahFormat = (DecimalFormat) NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
                         rupiahFormat.setParseBigDecimal(true);
                         rupiahFormat.applyPattern("#,##0");
                         String formattedRupiah = rupiahFormat.format(amount);
-                        totalpenjualan.setText("Rp"+String.valueOf(formattedRupiah));
-
+                        totalpenjualan.setText("Rp" + String.valueOf(formattedRupiah));
+                        btn_tombolbayar.setEnabled(true);
+                        btn_tombolsimpan.setEnabled(true);
 
                     } else {
-                        Toast.makeText(TransaksiDetailActivity.this, "Kosong", Toast.LENGTH_SHORT).show();
+                        btn_tombolbayar.setEnabled(false);
+                        btn_tombolsimpan.setEnabled(false);
                     }
 
                 } catch (JSONException e) {
                     // JSON error
                     e.printStackTrace();
+                    btn_tombolbayar.setEnabled(false);
+                    btn_tombolsimpan.setEnabled(false);
                 }
 
                 adapter.notifyDataSetChanged();
@@ -494,7 +548,8 @@ public class TransaksiDetailActivity extends AppCompatActivity {
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(),"Koneksi Lemah", Toast.LENGTH_SHORT).show();
+                btn_tombolbayar.setEnabled(false);
+                btn_tombolsimpan.setEnabled(false);
 //                swipe.setRefreshing(false);
             }
         }) {
@@ -514,7 +569,8 @@ public class TransaksiDetailActivity extends AppCompatActivity {
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(jArr, tag_json_obj);
     }
-    public void tambahDataplusmin(String xxidbarang,String xxketerangan) {
+
+    public void tambahDataplusmin(String xxidbarang, String xxketerangan) {
         pDialog = new ProgressDialog(TransaksiDetailActivity.this);
         pDialog.setCancelable(false);
         pDialog.setMessage("Loading...");
@@ -559,6 +615,7 @@ public class TransaksiDetailActivity extends AppCompatActivity {
         };
         AppController.getInstance().addToRequestQueue(strReq, tag_json_obj);
     }
+
     public void hapusitem(String xxidbarang) {
         pDialog = new ProgressDialog(TransaksiDetailActivity.this);
         pDialog.setCancelable(false);
@@ -599,21 +656,22 @@ public class TransaksiDetailActivity extends AppCompatActivity {
         };
         AppController.getInstance().addToRequestQueue(strReq, tag_json_obj);
     }
-    public void simpanserver(String statuspending) {
+
+    public void simpanserver(String statuspending, String keterangan) {
         pDialog = new ProgressDialog(TransaksiDetailActivity.this);
         pDialog.setCancelable(false);
         pDialog.setMessage("Loading...");
         pDialog.show();
-        int laba=0;
+        int laba = 0;
         for (MtransaksiDetail order : arraylist) {
             datalist = new JSONObject();
             try {
-                laba=(Integer.parseInt(order.getHarga_jual())-Integer.parseInt(order.getHarga_beli()))*Integer.parseInt(order.getJumlah_penjualan());
+                laba = (Integer.parseInt(order.getHarga_jual()) - Integer.parseInt(order.getHarga_beli())) * Integer.parseInt(order.getJumlah_penjualan());
                 datalist.put("idproduk", order.getIdb());
                 datalist.put("hargajual", order.getHarga_jual());
-                datalist.put("hargabeli",order.getHarga_beli());
-                datalist.put("laba",laba);
-                datalist.put("qty",order.getJumlah_penjualan());
+                datalist.put("hargabeli", order.getHarga_beli());
+                datalist.put("laba", laba);
+                datalist.put("qty", order.getJumlah_penjualan());
                 array.put(datalist);
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -630,12 +688,12 @@ public class TransaksiDetailActivity extends AppCompatActivity {
 
                     if (value == 1) {
                         Toast.makeText(TransaksiDetailActivity.this, "Sukses", Toast.LENGTH_SHORT).show();
-                        if (statuspending.equals("selesai") ){
+                        if (statuspending.equals("selesai")) {
                             Intent kotak = new Intent(TransaksiDetailActivity.this, TransaksiCetakActivity.class);
-                            kotak.putExtra("id",ssid);
+                            kotak.putExtra("id", ssid);
                             startActivity(kotak);
                             finish();
-                        }else if(statuspending.equals("pending")){
+                        } else if (statuspending.equals("pending")) {
                             startActivity(new Intent(TransaksiDetailActivity.this, ProdukTransaksi.class));
                             finish();
                         }
@@ -671,6 +729,7 @@ public class TransaksiDetailActivity extends AppCompatActivity {
                 params.put("idpelanggan", idpelanggan);
                 params.put("jbayar", jstatusbayar);
                 params.put("status", statuspending);
+                params.put("keterangan", keterangan);
                 params.put("list", String.valueOf(array));
 
 
@@ -686,21 +745,21 @@ public class TransaksiDetailActivity extends AppCompatActivity {
         xidpetugas = pref.getString("idpetugas", "0");
         xnama_petugas = pref.getString("nama_petugas", "0");
         xalamat_petugas = pref.getString("alamat_petugas", "0");
-        xnohp= pref.getString("nohp", "0");
-        xlevel= pref.getString("level", "0");
-        xidtoko= pref.getString("idtoko", "0");
-        xnama_toko= pref.getString("nama_toko", "0");
-        xalamat_toko= pref.getString("alamat_toko", "0");
-        xstatus_toko= pref.getString("status_toko", "0");
-        xketnota= pref.getString("ketnota", "0");
-        xnohp_toko=pref.getString("nohp_toko","0");
+        xnohp = pref.getString("nohp", "0");
+        xlevel = pref.getString("level", "0");
+        xidtoko = pref.getString("idtoko", "0");
+        xnama_toko = pref.getString("nama_toko", "0");
+        xalamat_toko = pref.getString("alamat_toko", "0");
+        xstatus_toko = pref.getString("status_toko", "0");
+        xketnota = pref.getString("ketnota", "0");
+        xnohp_toko = pref.getString("nohp_toko", "0");
 
     }
 
-//    cetak
-public interface OnBluetoothPermissionsGranted {
-    void onPermissionsGranted();
-}
+    //    cetak
+    public interface OnBluetoothPermissionsGranted {
+        void onPermissionsGranted();
+    }
 
     public static final int PERMISSION_BLUETOOTH = 1;
     public static final int PERMISSION_BLUETOOTH_ADMIN = 2;
@@ -777,8 +836,8 @@ public interface OnBluetoothPermissionsGranted {
 
         StringBuilder a = new StringBuilder();
         for (MtransaksiDetail order : arraylist) {
-                int totalprinttt=Integer.parseInt(order.getHarga_jual())*Integer.parseInt(order.getJumlah_penjualan());
-                a.append(order.getNamabarang()+"\n").append(order.getJumlah_penjualan()).append(" x ").append(rupiahFormat.format(Double.parseDouble(order.getHarga_jual()))).append("[R]").append(""+rupiahFormat.format(totalprinttt)).append("\n\n");
+            int totalprinttt = Integer.parseInt(order.getHarga_jual()) * Integer.parseInt(order.getJumlah_penjualan());
+            a.append(order.getNamabarang() + "\n").append(order.getJumlah_penjualan()).append(" x ").append(rupiahFormat.format(Double.parseDouble(order.getHarga_jual()))).append("[R]").append("" + rupiahFormat.format(totalprinttt)).append("\n\n");
         }
         // Mendapatkan waktu saat ini
         Date currentDate = new Date();
@@ -796,15 +855,15 @@ public interface OnBluetoothPermissionsGranted {
                 "[L]\n" +
 
 
-                "[L]" +"Tanggal : "+tglsekarang+"\n" +
-                "[L]" +"Kasir   : "+xnama_petugas+"\n" +
-                "[L]" +"No Hp   : 1\n" +
+                "[L]" + "Tanggal : " + tglsekarang + "\n" +
+                "[L]" + "Kasir   : " + xnama_petugas + "\n" +
+                "[L]" + "No Hp   : 1\n" +
                 "[C]================================\n" +
-                a+
+                a +
                 "[C]--------------------------------\n" +
                 "[L]Total[R]" + totalpenjualan.getText().toString() + "\n" +
                 "[L]Bayar[R]" + ebayar.getText().toString() + "\n" +
-                "[L]Kembali[R]" + ekembali.getText().toString()  + "\n" +
+                "[L]Kembali[R]" + ekembali.getText().toString() + "\n" +
 
                 "[C]--------------------------------\n" +
 
@@ -814,6 +873,7 @@ public interface OnBluetoothPermissionsGranted {
                 "[C]Bri : 058201000213562";
         return printer.addTextToPrint(text);
     }
+
     @Override
     public void onBackPressed() {
         finish();

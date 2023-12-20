@@ -101,6 +101,8 @@
                     android:layout_marginBottom="8dp"
                     android:background="@drawable/bg_edittext_white2"
                     android:hint="Contoh : Mie Instan..."
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
                     android:padding="16dp"
                     android:textColorHint="@color/hint"
                     android:textSize="14dp" />
@@ -121,6 +123,8 @@
                     android:layout_marginBottom="16dp"
                     android:background="@drawable/bg_edittext_white2"
                     android:hint="Input harga..."
+                    android:imeOptions="actionDone"
+                    android:inputType="number"
                     android:padding="16dp"
                     android:textColorHint="@color/hint"
                     android:textSize="14dp" />

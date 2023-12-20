@@ -87,6 +87,8 @@
                             android:background="@drawable/bg_edittext_white2"
                             android:hint="Contoh : Listrik..."
                             android:padding="16dp"
+                            android:inputType="text"
+                            android:imeOptions="actionNext"
                             android:textColorHint="@color/hint"
                             android:textSize="14dp" />
 
@@ -105,7 +107,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="8dp"
                             android:layout_weight="1"
-                            android:background="@drawable/bg_edittext_white2"
+                            android:imeOptions="actionDone"     android:background="@drawable/bg_edittext_white2"
                             android:hint="Contoh : 0"
                             android:padding="16dp"
                             android:inputType="number"

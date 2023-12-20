@@ -1,56 +1,366 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:sweet="http://schemas.android.com/apk/res-auto" xmlns:aapt="http://schemas.android.com/aapt" android:background="@color/background" android:layout_width="match_parent" android:layout_height="match_parent">
-    <LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent">
-        <RelativeLayout android:gravity="center_vertical" android:layout_gravity="center" android:orientation="horizontal" android:background="@color/utama" android:layout_width="match_parent" android:layout_height="wrap_content">
-            <TextView android:textSize="14dp" android:textStyle="bold" android:textColor="@color/putih_tetap" android:gravity="center" android:padding="16dp" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Edit Produk"/>
-            <ImageView android:id="@+id/bt_back" android:background="@drawable/selector_transparan" android:padding="16dp" android:clickable="true" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/ic_arrow" android:layout_centerInParent="true" android:layout_alignParentStart="true"/>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:sweet="http://schemas.android.com/apk/res-auto"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:background="@color/background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:gravity="center_vertical"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:background="@color/utama"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:textSize="14dp"
+                android:textStyle="bold"
+                android:textColor="@color/putih_tetap"
+                android:gravity="center"
+                android:padding="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Edit Produk" />
+
+            <ImageView
+                android:id="@+id/bt_back"
+                android:background="@drawable/selector_transparan"
+                android:padding="16dp"
+                android:clickable="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_arrow"
+                android:layout_centerInParent="true"
+                android:layout_alignParentStart="true" />
         </RelativeLayout>
-        <androidx.core.widget.NestedScrollView android:layout_width="match_parent" android:layout_height="match_parent">
-            <LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent">
-                <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content">
-                    <View android:background="@drawable/bg_bottom_corner_utama" android:layout_width="match_parent" android:layout_height="50dp"/>
-                    <LinearLayout android:orientation="vertical" android:background="@drawable/bg_edittext_white" android:padding="16dp" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginLeft="16dp" android:layout_marginRight="16dp">
-                        <TextView android:textSize="14dp" android:textColor="@color/textcolor" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:layout_marginBottom="8dp" android:text="Nama Produk"/>
-                        <EditText android:textSize="14dp" android:textColorHint="@color/hint" android:id="@+id/edt_namaproduk" android:background="@drawable/bg_edittext_white2" android:padding="16dp" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="8dp" android:hint="Contoh : Mie Instan..."/>
-                        <TextView android:textSize="14dp" android:textColor="@color/textcolor" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:layout_marginBottom="8dp" android:text="Harga Beli"/>
-                        <LinearLayout android:gravity="center" android:orientation="horizontal" android:background="@drawable/bg_edittext_white2" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="8dp">
-                            <EditText android:textSize="14dp" android:textColorHint="@color/hint" android:id="@+id/edt_hargabeli" android:background="@drawable/transparant" android:padding="16dp" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="0" android:layout_weight="1" android:inputType="number"/>
-                            <TextView android:textSize="12dp" android:textColor="@color/hint" android:padding="4dp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="8dp" android:text="Rp"/>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <View
+                        android:background="@drawable/bg_bottom_corner_utama"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp" />
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:background="@drawable/bg_edittext_white"
+                        android:padding="16dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp">
+
+                        <TextView
+                            android:textSize="14dp"
+                            android:textColor="@color/textcolor"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:text="Nama Produk" />
+
+                        <EditText
+                            android:textSize="14dp"
+                            android:textColorHint="@color/hint"
+                            android:id="@+id/edt_namaproduk"
+                            android:background="@drawable/bg_edittext_white2"
+                            android:padding="16dp"
+                            android:inputType="text"
+                            android:imeOptions="actionNext"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="8dp"
+                            android:hint="Contoh : Mie Instan..." />
+
+                        <TextView
+                            android:textSize="14dp"
+                            android:textColor="@color/textcolor"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:text="Harga Beli" />
+
+                        <LinearLayout
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:background="@drawable/bg_edittext_white2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="8dp">
+
+                            <EditText
+                                android:textSize="14dp"
+                                android:textColorHint="@color/hint"
+                                android:id="@+id/edt_hargabeli"
+                                android:background="@drawable/transparant"
+                                android:padding="16dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="0"
+                                android:layout_weight="1"
+                                android:inputType="number" />
+
+                            <TextView
+                                android:textSize="12dp"
+                                android:textColor="@color/hint"
+                                android:padding="4dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="8dp"
+                                android:text="Rp" />
                         </LinearLayout>
-                        <TextView android:textSize="14dp" android:textColor="@color/textcolor" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:layout_marginBottom="8dp" android:text="Harga Jual"/>
-                        <LinearLayout android:gravity="center" android:orientation="horizontal" android:background="@drawable/bg_edittext_white2" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="8dp">
-                            <EditText android:textSize="14dp" android:textColorHint="@color/hint" android:id="@+id/edt_hargajual" android:background="@drawable/transparant" android:padding="16dp" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="0" android:layout_weight="1" android:inputType="number"/>
-                            <TextView android:textSize="12dp" android:textColor="@color/hint" android:padding="4dp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="8dp" android:text="Rp"/>
+
+                        <TextView
+                            android:textSize="14dp"
+                            android:textColor="@color/textcolor"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:text="Harga Jual" />
+
+                        <LinearLayout
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:background="@drawable/bg_edittext_white2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="8dp">
+
+                            <EditText
+                                android:textSize="14dp"
+                                android:textColorHint="@color/hint"
+                                android:id="@+id/edt_hargajual"
+                                android:background="@drawable/transparant"
+                                android:padding="16dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="0"
+                                android:layout_weight="1"
+                                android:inputType="number" />
+
+                            <TextView
+                                android:textSize="12dp"
+                                android:textColor="@color/hint"
+                                android:padding="4dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="8dp"
+                                android:text="Rp" />
                         </LinearLayout>
                     </LinearLayout>
                 </RelativeLayout>
-                <LinearLayout android:orientation="vertical" android:background="@drawable/bg_edittext_white" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginLeft="16dp" android:layout_marginTop="16dp" android:layout_marginRight="16dp" android:layout_marginBottom="16dp">
-                    <LinearLayout android:gravity="center" android:orientation="horizontal" android:paddingLeft="16dp" android:paddingTop="8dp" android:paddingRight="16dp" android:paddingBottom="8dp" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="16dp">
-                        <TextView android:textSize="14dp" android:textStyle="bold" android:textColor="@color/textcolor" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Atur Stok" android:layout_weight="1"/>
-                        <androidx.appcompat.widget.AppCompatToggleButton android:id="@+id/toggleButtonstok" android:background="@drawable/selector_switch" android:padding="4dp" android:layout_width="36dp" android:layout_height="20dp" android:textOn="" android:textOff=""/>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:background="@drawable/bg_edittext_white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="16dp">
+
+                    <LinearLayout
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:paddingLeft="16dp"
+                        android:paddingTop="8dp"
+                        android:paddingRight="16dp"
+                        android:paddingBottom="8dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp">
+
+                        <TextView
+                            android:textSize="14dp"
+                            android:textStyle="bold"
+                            android:textColor="@color/textcolor"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Atur Stok"
+                            android:layout_weight="1" />
+
+                        <androidx.appcompat.widget.AppCompatToggleButton
+                            android:id="@+id/toggleButtonstok"
+                            android:background="@drawable/selector_switch"
+                            android:padding="4dp"
+                            android:layout_width="36dp"
+                            android:layout_height="20dp"
+                            android:textOn=""
+                            android:textOff="" />
                     </LinearLayout>
-                    <LinearLayout android:orientation="horizontal" android:paddingLeft="16dp" android:paddingRight="16dp" android:paddingBottom="16dp" android:layout_width="match_parent" android:layout_height="wrap_content">
-                        <LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginRight="8dp" android:layout_weight="1">
-                            <TextView android:textSize="14dp" android:textColor="@color/textcolor" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:layout_marginBottom="8dp" android:text="Stock"/>
-                            <LinearLayout android:gravity="center" android:orientation="horizontal" android:background="@drawable/bg_edittext_white2" android:layout_width="match_parent" android:layout_height="wrap_content">
-                                <EditText android:enabled="false" android:textSize="14dp" android:textColorHint="@color/hint" android:id="@+id/edt_stock" android:background="@drawable/transparant" android:padding="16dp" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="0" android:layout_weight="1" android:inputType="number"/>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp"
+                        android:paddingBottom="16dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="8dp"
+                            android:layout_weight="1">
+
+                            <TextView
+                                android:textSize="14dp"
+                                android:textColor="@color/textcolor"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginBottom="8dp"
+                                android:text="Stock" />
+
+                            <LinearLayout
+                                android:gravity="center"
+                                android:orientation="horizontal"
+                                android:background="@drawable/bg_edittext_white2"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <EditText
+                                    android:enabled="false"
+                                    android:textSize="14dp"
+                                    android:textColorHint="@color/hint"
+                                    android:id="@+id/edt_stock"
+                                    android:background="@drawable/transparant"
+                                    android:padding="16dp"
+                                    android:imeOptions="actionNext"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="0"
+                                    android:layout_weight="1"
+                                    android:inputType="number" />
                             </LinearLayout>
                         </LinearLayout>
-                        <LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginLeft="8dp" android:layout_weight="1">
-                            <TextView android:textSize="14dp" android:textColor="@color/textcolor" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:layout_marginBottom="8dp" android:text="Satuan"/>
-                            <LinearLayout android:gravity="center" android:orientation="horizontal" android:background="@drawable/bg_edittext_white2" android:layout_width="match_parent" android:layout_height="wrap_content">
-                                <EditText android:enabled="false" android:textSize="14dp" android:textColorHint="@color/hint" android:id="@+id/edt_satuan" android:background="@drawable/transparant" android:padding="16dp" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="0" android:layout_weight="1"/>
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:layout_weight="1">
+
+                            <TextView
+                                android:textSize="14dp"
+                                android:textColor="@color/textcolor"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginBottom="8dp"
+                                android:text="Satuan" />
+
+                            <LinearLayout
+                                android:gravity="center"
+                                android:orientation="horizontal"
+                                android:background="@drawable/bg_edittext_white2"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <EditText
+                                    android:enabled="false"
+                                    android:textSize="14dp"
+                                    android:textColorHint="@color/hint"
+                                    android:id="@+id/edt_satuan"
+                                    android:background="@drawable/transparant"
+                                    android:padding="16dp"
+                                    android:imeOptions="actionDone"
+                                    android:inputType="text"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="Contoh : Dos"
+                                    android:layout_weight="1" />
                             </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>
-                    <LinearLayout android:gravity="center" android:orientation="horizontal" android:paddingLeft="16dp" android:paddingTop="8dp" android:paddingRight="16dp" android:paddingBottom="8dp" android:layout_width="match_parent" android:layout_height="wrap_content">
-                        <TextView android:textSize="14dp" android:textStyle="bold" android:textColor="@color/textcolor" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Harga Grosir" android:layout_weight="1"/>
-                        <androidx.appcompat.widget.AppCompatToggleButton android:id="@+id/toggleButton" android:background="@drawable/selector_switch" android:padding="4dp" android:layout_width="36dp" android:layout_height="20dp" android:textOn="" android:textOff=""/>
+
+                    <LinearLayout
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:paddingLeft="16dp"
+                        android:paddingTop="8dp"
+                        android:paddingRight="16dp"
+                        android:paddingBottom="8dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:textSize="14dp"
+                            android:textStyle="bold"
+                            android:textColor="@color/textcolor"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Harga Grosir"
+                            android:layout_weight="1" />
+
+                        <androidx.appcompat.widget.AppCompatToggleButton
+                            android:id="@+id/toggleButton"
+                            android:background="@drawable/selector_switch"
+                            android:padding="4dp"
+                            android:layout_width="36dp"
+                            android:layout_height="20dp"
+                            android:textOn=""
+                            android:textOff="" />
                     </LinearLayout>
-                    <androidx.recyclerview.widget.RecyclerView android:id="@+id/recyclerView" android:padding="16dp" android:layout_width="match_parent" android:layout_height="wrap_content"/>
-                    <TextView android:textSize="14dp" android:textStyle="bold" android:textColor="@color/utama" android:layout_gravity="center" android:id="@+id/btnTambahGrosir" android:background="@drawable/selector_transparan" android:padding="16dp" android:visibility="gone" android:clickable="true" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="16dp" android:text="Tambah Grosir"/>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerView"
+                        android:padding="16dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:textSize="14dp"
+                        android:textStyle="bold"
+                        android:textColor="@color/utama"
+                        android:layout_gravity="center"
+                        android:id="@+id/btnTambahGrosir"
+                        android:background="@drawable/selector_transparan"
+                        android:padding="16dp"
+                        android:visibility="gone"
+                        android:clickable="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:text="Tambah Grosir" />
                 </LinearLayout>
-                <TextView android:textSize="14dp" android:textStyle="bold" android:textColor="@color/putih_tetap" android:gravity="center" android:id="@+id/btsave" android:background="@drawable/selector_login" android:padding="18dp" android:clickable="true" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_margin="16dp" android:text="Simpan Peubahan"/>
+
+                <TextView
+                    android:textSize="14dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/putih_tetap"
+                    android:gravity="center"
+                    android:id="@+id/btsave"
+                    android:background="@drawable/selector_login"
+                    android:padding="18dp"
+                    android:clickable="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:text="Simpan Perubahan" />
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
     </LinearLayout>

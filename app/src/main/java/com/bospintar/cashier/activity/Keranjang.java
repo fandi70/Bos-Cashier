@@ -71,6 +71,14 @@ public class Keranjang extends AppCompatActivity {
 
         ImageView btnClear = findViewById(R.id.btnClear);
         ImageView bt_back = findViewById(R.id.bt_back);
+        LinearLayout lanjut=findViewById(R.id.lanjut);
+
+        lanjut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                updateNego();
+            }
+        });
         bthapus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -231,7 +239,50 @@ public class Keranjang extends AppCompatActivity {
             }
         });
     }
-
+    public void updateNego() {
+        pDialog = new ProgressDialog(Keranjang.this);
+        pDialog.setCancelable(false);
+        pDialog.setMessage("Loading...");
+        pDialog.show();
+        StringRequest strReq = new StringRequest(Request.Method.POST, URL_SERVER.link + "update_nego.php", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.e("Response: ", response.toString());
+                try {
+                    JSONObject jObj = new JSONObject(response);
+                    int value = jObj.getInt(TAG_VALUE);
+                    if (value == 1) {
+                        finish();
+                        Toast.makeText(Keranjang.this, "Item dihapus", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(Keranjang.this, "Item Gagal", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                pDialog.dismiss();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(Keranjang.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                pDialog.dismiss();
+            }
+        }) {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                BigDecimal hjl = RupiahTextWatcher.parseCurrencyValue(edbayarpenjuan.getText().toString());
+                params.put("idproduk", getIntent().getStringExtra("idproduk"));
+                params.put("hargajual",hjl.toString());
+                params.put("jumlah",txtjumlah.getText().toString());
+                params.put("idpetugas", xidpetugas);
+                return params;
+            }
+        };
+        AppController.getInstance().addToRequestQueue(strReq, tag_json_obj);
+    }
     public void hapusitem() {
         pDialog = new ProgressDialog(Keranjang.this);
         pDialog.setCancelable(false);
@@ -288,12 +339,14 @@ public class Keranjang extends AppCompatActivity {
                     String value = jObj.getString("status");
 
                     if (value.equals("ada")) {
-                        hargaJual = Double.parseDouble(jObj.getString("harga_jual"));
+                        hargaJual = Double.parseDouble(jObj.getString("harga_produk"));
+                        Double harganego=Double.parseDouble(jObj.getString("harga_jual"));
                         DecimalFormat rupiahFormat = (DecimalFormat) NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
                         rupiahFormat.setParseBigDecimal(true);
                         rupiahFormat.applyPattern("#,##0");
                         String formattedRupiah = rupiahFormat.format(hargaJual);
-                        edharga.setText("Rp" + String.valueOf(formattedRupiah));
+                        String hargaformatnego = rupiahFormat.format(harganego);
+                        edharga.setText("Rp" + String.valueOf(hargaformatnego));
                         edhargasatuan.setText("Rp" + String.valueOf(formattedRupiah));
                         txtnamaproduk.setText(jObj.getString("nama"));
                         txtjumlah.setText(jObj.getString("jumlah_penjualan"));

@@ -60,7 +60,8 @@ public class Histori extends AppCompatActivity implements SwipeRefreshLayout.OnR
     RecyclerView rcList;
     DecimalFormat rupiahFormat = (DecimalFormat) NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
     SimpleDateFormat sdcurrentdate = new SimpleDateFormat("yyyy-MM-dd", new Locale("id", "ID"));
-
+//
+    ImageView img_kosong;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,10 +73,12 @@ public class Histori extends AppCompatActivity implements SwipeRefreshLayout.OnR
         txttotalpengeluaran= findViewById(R.id.txttotalpengeluaran);
         txttotalpenjualan= findViewById(R.id.txttotalpenjualan);
         txttotalhutang=findViewById(R.id.txttotalhutang);
+        img_kosong=findViewById(R.id.img_kosong);
         swipe = findViewById(R.id.swipe_refreshdata);
         _dari=sdcurrentdate.format(new Date());
         _sampai=sdcurrentdate.format(new Date());
-        callData("semua",_dari,_sampai);
+        stspembayaran="semua";
+        callData(stspembayaran,_dari,_sampai);
 
         caribydate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,8 +109,15 @@ public class Histori extends AppCompatActivity implements SwipeRefreshLayout.OnR
                         }
                     }
                 });
-                dari.setText(sdcurrentdate.format(new Date()));
-                sampai.setText(sdcurrentdate.format(new Date()));
+                if (stspembayaran.toString().equals("lunas")){
+                    rlunas.setChecked(true);
+                }else if (stspembayaran.toString().equals("hutang")){
+                    rutang.setChecked(true);
+                }else if (stspembayaran.toString().equals("semua")){
+                    rsemua.setChecked(true);
+                }
+                dari.setText(_dari);
+                sampai.setText(_sampai);
                 dari.setFocusableInTouchMode(false);
                 dari.setFocusable(false);
                 sampai.setFocusableInTouchMode(false);
@@ -209,7 +219,7 @@ public class Histori extends AppCompatActivity implements SwipeRefreshLayout.OnR
     private void callData(final String xstspembayaran, String xdari, String xsampai) {
         arraylist.clear();
         swipe.setRefreshing(true);
-
+        img_kosong.setVisibility(View.GONE);
         // Creating volley request obj
         StringRequest jArr = new StringRequest(Request.Method.POST, URL_SERVER.CHISTORYBYDATE, new Response.Listener<String>() {
 
@@ -248,10 +258,10 @@ public class Histori extends AppCompatActivity implements SwipeRefreshLayout.OnR
                         txttotalpengeluaran.setText("Rp" + rupiahFormat.format(xpengeluaran));
                         txttotalhutang.setText("Rp" + rupiahFormat.format(xutang));
                         txttotalkeuangan.setText("Rp" + rupiahFormat.format(xtotal-xpengeluaran));
-
+                        img_kosong.setVisibility(View.GONE);
 
                     } else {
-                        Toast.makeText(Histori.this, "Kosong", Toast.LENGTH_SHORT).show();
+                        img_kosong.setVisibility(View.VISIBLE);
                         rcList.setAdapter(adapter);
                         txttotalpenjualan.setText("Rp0");
 
@@ -266,6 +276,7 @@ public class Histori extends AppCompatActivity implements SwipeRefreshLayout.OnR
                 } catch (JSONException e) {
                     // JSON error
                     e.printStackTrace();
+                    img_kosong.setVisibility(View.VISIBLE);
                 }
 
 //                adapter.notifyDataSetChanged();
@@ -275,7 +286,7 @@ public class Histori extends AppCompatActivity implements SwipeRefreshLayout.OnR
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), "Koneksi Lemah", Toast.LENGTH_SHORT).show();
+                img_kosong.setVisibility(View.VISIBLE);
                 swipe.setRefreshing(false);
             }
         }) {

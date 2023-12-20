@@ -30,7 +30,7 @@
                 android:padding="16dp">
 
                 <TextView
-                    android:id="@+id/txtjudul"
+                    android:id="@+id/txt_judul"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="4dp"
@@ -52,7 +52,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/txtsubjudul"
+                    android:id="@+id/txt_judulketerangan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="16dp"
@@ -62,12 +62,11 @@
 
 
                 <EditText
-                    android:id="@+id/edKet"
+                    android:id="@+id/edt_keterangan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
-                    android:inputType="text"
-                    android:imeOptions="actionDone"  android:layout_marginRight="16dp"
+                    android:layout_marginRight="16dp"
                     android:layout_marginBottom="16dp"
                     android:background="@drawable/bg_edittext_white2"
                     android:hint="Keterangan..."

@@ -88,6 +88,8 @@
                             android:orientation="horizontal">
 
                             <EditText
+                                android:singleLine="true"
+                                android:inputType="text"
                                 android:id="@+id/edt_namaproduk"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -269,6 +271,7 @@
                                     android:enabled="false"
                                     android:hint="0"
                                     android:inputType="number"
+                                    android:imeOptions="actionNext"
                                     android:padding="16dp"
                                     android:textColorHint="@color/hint"
                                     android:textSize="14dp" />
@@ -307,7 +310,10 @@
                                     android:layout_weight="1"
                                     android:background="@drawable/transparant"
                                     android:enabled="false"
-                                    android:hint="0"
+                                    android:hint="contoh : Dos"
+                                    android:singleLine="true"
+                                    android:inputType="text"
+                                    android:imeOptions="actionDone"
                                     android:padding="16dp"
                                     android:textColorHint="@color/hint"
                                     android:textSize="14dp" />

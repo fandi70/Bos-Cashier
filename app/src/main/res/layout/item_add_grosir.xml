@@ -59,6 +59,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:inputType="numberDecimal"
+                    android:imeOptions="actionNext"
                     android:background="@drawable/transparant"
                     android:hint="0"
                     android:padding="16dp"

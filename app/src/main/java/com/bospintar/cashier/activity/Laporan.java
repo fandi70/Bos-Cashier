@@ -57,7 +57,7 @@ public class Laporan extends AppCompatActivity implements SwipeRefreshLayout.OnR
     RecyclerView rcList;
     DecimalFormat rupiahFormat = (DecimalFormat) NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
     SimpleDateFormat sdcurrentdate = new SimpleDateFormat("yyyy-MM-dd", new Locale("id", "ID"));
-
+    ImageView img_kosong;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +67,7 @@ public class Laporan extends AppCompatActivity implements SwipeRefreshLayout.OnR
         caribydate=findViewById(R.id.caribydate);
         txtsampai= findViewById(R.id.txtsampai);
         txtdari= findViewById(R.id.txtdari);
+        img_kosong= findViewById(R.id.img_kosong);
         txttotalpenjualan= findViewById(R.id.txttotalPenjualan);
         swipe = findViewById(R.id.swipe_refreshdata);
         _dari=sdcurrentdate.format(new Date());
@@ -86,8 +87,8 @@ public class Laporan extends AppCompatActivity implements SwipeRefreshLayout.OnR
 
                 final TextView judul= dialogView.findViewById(R.id.txt_judul);
                 judul.setText("Cari Tanggal Transaksi Pegawai");
-                dari.setText(sdcurrentdate.format(new Date()));
-                sampai.setText(sdcurrentdate.format(new Date()));
+                dari.setText(_dari);
+                sampai.setText(_sampai);
                 dari.setFocusableInTouchMode(false);
                 dari.setFocusable(false);
                 sampai.setFocusableInTouchMode(false);
@@ -189,7 +190,7 @@ public class Laporan extends AppCompatActivity implements SwipeRefreshLayout.OnR
     private void callData(final String xdari, String xsampai) {
         arraylist.clear();
         swipe.setRefreshing(true);
-
+        img_kosong.setVisibility(View.GONE);
         // Creating volley request obj
         StringRequest jArr = new StringRequest(Request.Method.POST, URL_SERVER.CLAPORAN, new Response.Listener<String>() {
 
@@ -225,10 +226,10 @@ public class Laporan extends AppCompatActivity implements SwipeRefreshLayout.OnR
                         txttotalpenjualan.setText("Rp" + rupiahFormat.format(xtotal));
                         txtdari.setText(xdari);
                         txtsampai.setText(xsampai);
-
+                        img_kosong.setVisibility(View.GONE);
 
                     } else {
-                        Toast.makeText(Laporan.this, "Kosong", Toast.LENGTH_SHORT).show();
+                        img_kosong.setVisibility(View.VISIBLE);
                         rcList.setAdapter(adapter);
                         txtdari.setText("----/--/--");
                         txtsampai.setText("----/--/--");
@@ -238,6 +239,7 @@ public class Laporan extends AppCompatActivity implements SwipeRefreshLayout.OnR
                 } catch (JSONException e) {
                     // JSON error
                     e.printStackTrace();
+                    img_kosong.setVisibility(View.VISIBLE);
                 }
 
 //                adapter.notifyDataSetChanged();
